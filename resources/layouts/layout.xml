@@ -4,7 +4,6 @@
         id="TextAreaFrom" 
         x="10%" 
         y="15%" 
-        text="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
         justification="Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER"
         color="Graphics.COLOR_WHITE" 
         width="80%"
@@ -18,10 +17,9 @@
         </fonts>
     </text-area> 
     <text-area 
-        id="TextAreatO" 
+        id="TextAreaTo" 
         x="10%" 
         y="55%" 
-        text="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
         justification="Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER"
         color="Graphics.COLOR_WHITE" 
         width="80%"
