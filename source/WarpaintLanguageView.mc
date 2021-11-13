@@ -2,12 +2,16 @@ import Toybox.Application;
 import Toybox.Application.Storage;
 import Toybox.Graphics;
 import Toybox.WatchUi;
+import Toybox.Timer;
 
 class WarpaintLanguageView extends WatchUi.View {
 
     var myShapes;
     var fromTextArea as TextArea;
     var toTextArea as TextArea;
+    var revealLabel as label;
+
+    var hiddenWordTo as String;
 
     function initialize() {
         View.initialize();
@@ -18,26 +22,19 @@ class WarpaintLanguageView extends WatchUi.View {
         setLayout(Rez.Layouts.MainLayout(dc));
         fromTextArea = View.findDrawableById("TextAreaFrom");
         toTextArea = View.findDrawableById("TextAreaTo");
+        revealLabel = View.findDrawableById("RevealLabel");
 
-        var myTimer = new Timer.Timer();
-        myTimer.start(method(:refreshWordsOnView), 5000, true);
+        refreshWordsOnView();
+
+        // var myTimer = new Timer.Timer();
+        // myTimer.start(method(:refreshWordsOnView), 5000, true);
 
         // to test text area sizes:
         //myShapes = new Rez.Drawables.textAreas();
     }
 
     function refreshWordsOnView() as Void {
-        WatchUi.requestUpdate();
-    }
 
-    // Called when this View is brought to the foreground. Restore
-    // the state of this View and prepare it to be shown. This includes
-    // loading resources into memory.
-    function onShow() as Void {
-    }
-
-    // Update the view
-    function onUpdate(dc as Dc) as Void {
         var words = getLastWords();
         var wordFrom = "";
         var wordTo = "";
@@ -49,9 +46,22 @@ class WarpaintLanguageView extends WatchUi.View {
             wordTo = "Then Refresh";
         }
 
+        hiddenWordTo = wordTo;
         fromTextArea.setText(wordFrom);
-        toTextArea.setText(wordTo);
-        
+        toTextArea.setText("");
+
+        WatchUi.requestUpdate();
+    }
+
+    // Called when this View is brought to the foreground. Restore
+    // the state of this View and prepare it to be shown. This includes
+    // loading resources into memory.
+    function onShow() as Void {
+    }
+
+    // Update the view
+    function onUpdate(dc as Dc) as Void {
+
         // Call the parent onUpdate function to redraw the layout
         View.onUpdate(dc);
 
