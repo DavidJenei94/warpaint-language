@@ -10,6 +10,7 @@ class WarpaintLanguageView extends WatchUi.View {
     var fromTextArea as TextArea;
     var toTextArea as TextArea;
     var revealLabel as label;
+    var revealHider as Drawable;
 
     var hiddenWordTo as String;
 
@@ -23,6 +24,7 @@ class WarpaintLanguageView extends WatchUi.View {
         fromTextArea = View.findDrawableById("TextAreaFrom");
         toTextArea = View.findDrawableById("TextAreaTo");
         revealLabel = View.findDrawableById("RevealLabel");
+        revealHider = View.findDrawableById("RevealHider");
 
         refreshWordsOnView();
 

@@ -4,25 +4,17 @@
     <drawable id="ClickAreas" />
     <label id="NextLabel" text="Next" x="50%" y="90%" color="Graphics.COLOR_WHITE" font="Graphics.FONT_SMALL" justification="Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER" />
     <label id="RevealLabel" text="R E V E A L" x="50%" y="67%" color="Graphics.COLOR_WHITE" font="Graphics.FONT_LARGE" justification="Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER" />
-    <!-- <drawable id="ClickAreas">
-        <param name="locX">10%</param>
-        <param name="locY">53%</param>
-        <param name="width">80%</param>
-        <param name="height">30%</param>
-    </drawable> -->
 
     <button x="0%" y="82%" width="100%" height="18%" background="Graphics.COLOR_BLACK" behavior="onNext" />
     <button x="10%" y="53%" width="80%" height="30%" background="Graphics.COLOR_BLACK" behavior="onReveal" />
 
-    <!-- <drawable id="blackness" x="10%" y="53%" width="80%" height="30%" color="0xFFFFFF" /> -->
-
-    <!-- <drawable id="blackness">
-        <param name="locX">10%</param>
-        <param name="locY">53%</param>
-        <param name="width">80%</param>
-        <param name="height">30%</param>
-        <param name="color">0xFFFFFF</param>
-    </drawable> -->
+    <drawable class="HiderDrawable" id="RevealHider">
+        <param name="locX">dc.getWidth() * 0.10</param>
+        <param name="locY">dc.getHeight() * 0.53</param>
+        <param name="width">dc.getWidth() * 0.80</param>
+        <param name="height">dc.getHeight() * 0.30</param>
+        <param name="color">Graphics.COLOR_TRANSPARENT</param>
+    </drawable>
 
     <text-area 
         id="TextAreaFrom" 
