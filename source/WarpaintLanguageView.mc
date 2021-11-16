@@ -12,6 +12,9 @@ class WarpaintLanguageView extends WatchUi.View {
     var revealLabel as label;
     var revealHider as Drawable;
 
+    var fromFlag as Bitmap;
+    var toFlag as Bitmap;
+
     var hiddenWordTo as String;
 
     function initialize() {
@@ -25,6 +28,17 @@ class WarpaintLanguageView extends WatchUi.View {
         toTextArea = View.findDrawableById("TextAreaTo");
         revealLabel = View.findDrawableById("RevealLabel");
         revealHider = View.findDrawableById("RevealHider");
+
+        fromFlag = new WatchUi.Bitmap({
+            :rezId=>Rez.Drawables.usFlag,
+            :locX=>dc.getWidth() * 0.31,
+            :locY=>dc.getHeight() * 0.10
+        });
+        toFlag = new WatchUi.Bitmap({
+            :rezId=>Rez.Drawables.deFlag,
+            :locX=>dc.getWidth() * 0.58,
+            :locY=>dc.getHeight() * 0.10
+        });
 
         refreshWordsOnView();
 
@@ -51,6 +65,8 @@ class WarpaintLanguageView extends WatchUi.View {
         hiddenWordTo = wordTo;
         fromTextArea.setText(wordFrom);
         toTextArea.setText("");
+        // fromTextArea.setText("I am not accepting anything else at");
+        // toTextArea.setText("Do you understand what I’m saying?");
 
         WatchUi.requestUpdate();
     }
@@ -64,11 +80,12 @@ class WarpaintLanguageView extends WatchUi.View {
     // Update the view
     function onUpdate(dc as Dc) as Void {
 
+        dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_DK_GRAY);
         // Call the parent onUpdate function to redraw the layout
         View.onUpdate(dc);
 
-        // to test text area sizes:
-        //myShapes.draw(dc);
+        fromFlag.draw(dc);
+        toFlag.draw(dc);
     }
 
     // Called when this View is removed from the screen. Save the

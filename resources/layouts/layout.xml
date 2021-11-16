@@ -1,29 +1,29 @@
 <layout id="MainLayout">
-    <!-- <bitmap id="id_monkey" x="center" y="center" filename="../drawables/monkey.png" /> -->
+
     <!-- <drawable id="TextAreas" /> -->
     <drawable id="ClickAreas" />
-    <label id="NextLabel" text="Next" x="50%" y="90%" color="Graphics.COLOR_WHITE" font="Graphics.FONT_SMALL" justification="Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER" />
-    <label id="RevealLabel" text="R E V E A L" x="50%" y="67%" color="Graphics.COLOR_WHITE" font="Graphics.FONT_LARGE" justification="Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER" />
+    <label id="NextLabel" text="Next" x="50%" y="87%" color="Graphics.COLOR_WHITE" font="Graphics.FONT_SMALL" justification="Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER" />
+    <label id="RevealLabel" text="R E V E A L" x="50%" y="62%" color="Graphics.COLOR_WHITE" font="Graphics.FONT_LARGE" justification="Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER" />
 
-    <button x="0%" y="82%" width="100%" height="18%" background="Graphics.COLOR_BLACK" behavior="onNext" />
-    <button x="10%" y="53%" width="80%" height="30%" background="Graphics.COLOR_BLACK" behavior="onReveal" />
+    <button x="0%" y="75%" width="100%" height="25%" background="Graphics.COLOR_BLACK" behavior="onNext" />
+    <button x="10%" y="50%" width="100%" height="25%" background="Graphics.COLOR_BLACK" behavior="onReveal" />
 
     <drawable class="HiderDrawable" id="RevealHider">
-        <param name="locX">dc.getWidth() * 0.10</param>
-        <param name="locY">dc.getHeight() * 0.53</param>
-        <param name="width">dc.getWidth() * 0.80</param>
-        <param name="height">dc.getHeight() * 0.30</param>
+        <param name="locX">dc.getWidth() * 0.00</param>
+        <param name="locY">dc.getHeight() * 0.50</param>
+        <param name="width">dc.getWidth() * 1.00</param>
+        <param name="height">dc.getHeight() * 0.25</param>
         <param name="color">Graphics.COLOR_TRANSPARENT</param>
     </drawable>
 
     <text-area 
         id="TextAreaFrom" 
-        x="10%" 
-        y="18%" 
+        x="5%" 
+        y="25%" 
         justification="Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER"
         color="Graphics.COLOR_WHITE" 
-        width="80%"
-        height="30%">
+        width="90%"
+        height="25%">
         <fonts>
             <font>Graphics.FONT_LARGE</font>
             <font>Graphics.FONT_MEDIUM</font>
@@ -34,12 +34,12 @@
     </text-area> 
     <text-area 
         id="TextAreaTo" 
-        x="10%" 
-        y="52%" 
+        x="5%" 
+        y="50%" 
         justification="Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER"
         color="Graphics.COLOR_WHITE" 
-        width="80%"
-        height="30%">
+        width="90%"
+        height="25%">
         <fonts>
             <font>Graphics.FONT_LARGE</font>
             <font>Graphics.FONT_MEDIUM</font>
@@ -49,5 +49,4 @@
         </fonts>
     </text-area> 
 
-    
 </layout>
