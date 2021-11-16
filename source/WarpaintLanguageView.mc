@@ -31,12 +31,12 @@ class WarpaintLanguageView extends WatchUi.View {
 
         fromFlag = new WatchUi.Bitmap({
             :rezId=>Rez.Drawables.usFlag,
-            :locX=>dc.getWidth() * 0.31,
+            :locX=>dc.getWidth() * 0.29,
             :locY=>dc.getHeight() * 0.10
         });
         toFlag = new WatchUi.Bitmap({
             :rezId=>Rez.Drawables.deFlag,
-            :locX=>dc.getWidth() * 0.58,
+            :locX=>dc.getWidth() * 0.56,
             :locY=>dc.getHeight() * 0.10
         });
 

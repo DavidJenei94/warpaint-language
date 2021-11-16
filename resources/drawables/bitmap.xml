@@ -2,7 +2,7 @@
     <!-- <bitmap id="id_us_flag" x="25%" y="9%" filename="../drawables/us-flag_med.png" dithering="none"/>
     <bitmap id="id_gm_flag" x="55%" y="9%" filename="../drawables/gm-flag_med.png" dithering="none"/> -->
     
-    <bitmap id="usFlag" filename="../images/us-flag_small.png" dithering="none" />
-    <bitmap id="deFlag" filename="../images/gm-flag_small.png" dithering="none" />
+    <bitmap id="usFlag" filename="../images/us-flag_med.png" dithering="none" />
+    <bitmap id="deFlag" filename="../images/gm-flag_med.png" dithering="none" />
 
 </resources>
