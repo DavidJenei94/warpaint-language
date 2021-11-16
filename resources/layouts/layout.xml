@@ -3,6 +3,7 @@
 
         <!-- <drawable id="TextAreas" /> -->
         <drawable id="ClickAreas" />
+        <label id="TranslateLabel" text=">>" x="50%" y="15%" color="Graphics.COLOR_WHITE" font="Graphics.FONT_XTINY" justification="Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER" />
         <label id="NextLabel" text="Next" x="50%" y="87%" color="Graphics.COLOR_WHITE" font="Graphics.FONT_SMALL" justification="Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER" />
         <label id="RevealLabel" text="R E V E A L" x="50%" y="62%" color="Graphics.COLOR_BLACK" font="Graphics.FONT_LARGE" justification="Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER" />
 

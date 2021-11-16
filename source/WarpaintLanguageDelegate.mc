@@ -37,6 +37,6 @@ class WarpaintLanguageDelegate extends WatchUi.BehaviorDelegate {
     public function onStats() as Boolean {
         var view = new $.StatisticsView();
         var delegate = new $.StatisticsDelegate();
-        WatchUi.pushView(view, delegate, WatchUi.SLIDE_IMMEDIATE);
+        WatchUi.pushView(view, delegate, WatchUi.SLIDE_BLINK);
     }
 }
