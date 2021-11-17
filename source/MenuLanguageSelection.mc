@@ -26,6 +26,10 @@ class MenuLanguageSelection extends WatchUi.Menu2InputDelegate {
     public function onSelect(item as MenuItem) as Void {
         var key = item.getId();
         Properties.setValue(key, item.getSubLabel());
+
+        // Change to other language
+        wordsArray = null;
+        getApp().onSettingsChanged();
         
         var parent_idx = parentmenu.findItemById(parentmenu_itemId);
 		var parent_item = parentmenu.getItem(parent_idx);

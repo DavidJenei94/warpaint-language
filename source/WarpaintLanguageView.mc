@@ -51,6 +51,8 @@ class WarpaintLanguageView extends WatchUi.View {
 
     function refreshWordsOnView() as Void {
 
+        getApp().downloadWords();
+
         var words = getLastWords();
         var wordFrom = "";
         var wordTo = "";

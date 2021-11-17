@@ -11,10 +11,14 @@ var languagesDict = {
     "fr" => "French"
 };
 
+var selectedLanguageFrom as String;
+var selectedLanguageTo as String;
+
 class WarpaintLanguageApp extends Application.AppBase {
 
     function initialize() {
         AppBase.initialize();
+        wordsArray = Storage.getValue("WordsArray");
         setGlobalVariables();
     }
 
@@ -36,22 +40,26 @@ class WarpaintLanguageApp extends Application.AppBase {
     }
 
     function downloadWords() as Void {
-        if (wordsArray == null || wordsArray.size() < 10) {
-            var params = {
-                "lan1" => "en",
-                "lan2" => "de",
-                "wordsNo" => 20
-            };
-            var options = {
-                :method => Communications.HTTP_REQUEST_METHOD_GET,
-                :responseType => Communications.HTTP_RESPONSE_CONTENT_TYPE_JSON
-            };
-            Communications.makeWebRequest(
-                "https://script.google.com/macros/s/AKfycbzVALwGCzk_J85y7R1BvLdWE3INeTnGKXNgyAMXMN3Go1iK6J1TgL9Z_YhE7pn_ZcuL/exec", 
-                params,
-                options,
-                method(:recieveWords)
-            );
+        if (selectedLanguageFrom != "None" && selectedLanguageFrom != null &&
+            selectedLanguageTo != "None" && selectedLanguageTo != null) {
+
+            if (wordsArray == null || wordsArray.size() < 10) {
+                var params = {
+                    "lan1" => selectedLanguageFrom,
+                    "lan2" => selectedLanguageTo,
+                    "wordsNo" => 20
+                };
+                var options = {
+                    :method => Communications.HTTP_REQUEST_METHOD_GET,
+                    :responseType => Communications.HTTP_RESPONSE_CONTENT_TYPE_JSON
+                };
+                Communications.makeWebRequest(
+                    "https://script.google.com/macros/s/AKfycbzVALwGCzk_J85y7R1BvLdWE3INeTnGKXNgyAMXMN3Go1iK6J1TgL9Z_YhE7pn_ZcuL/exec", 
+                    params,
+                    options,
+                    method(:recieveWords)
+                );
+            }
         }
     }
 
@@ -76,8 +84,13 @@ class WarpaintLanguageApp extends Application.AppBase {
         }
 	}
 
+    function onSettingsChanged() as Void {
+        setGlobalVariables();
+    }
+
     function setGlobalVariables() as Void {
-        wordsArray = Storage.getValue("WordsArray");
+        selectedLanguageFrom = Properties.getValue("languageFrom");
+        selectedLanguageTo = Properties.getValue("languageTo");
     }
 
 }
