@@ -2,6 +2,8 @@ import Toybox.Application;
 import Toybox.Application.Storage;
 import Toybox.Lang;
 import Toybox.WatchUi;
+import Toybox.Timer;
+import Toybox.Communications;
 
 var wordsArray = [];
 
@@ -15,6 +17,8 @@ var selectedLanguageFrom as String;
 var selectedLanguageTo as String;
 
 class WarpaintLanguageApp extends Application.AppBase {
+
+    var _downloadTimer as Timer.Timer;
 
     function initialize() {
         AppBase.initialize();
@@ -43,7 +47,7 @@ class WarpaintLanguageApp extends Application.AppBase {
         if (selectedLanguageFrom != "None" && selectedLanguageFrom != null &&
             selectedLanguageTo != "None" && selectedLanguageTo != null) {
 
-            if (wordsArray == null || wordsArray.size() < 10) {
+            if (System.getDeviceSettings().connectionAvailable && (wordsArray == null || wordsArray.size() < 10)) {
                 var params = {
                     "lan1" => selectedLanguageFrom,
                     "lan2" => selectedLanguageTo,
@@ -59,7 +63,29 @@ class WarpaintLanguageApp extends Application.AppBase {
                     options,
                     method(:recieveWords)
                 );
+
+                var progressBar = new WatchUi.ProgressBar("Downloading", null);
+                WatchUi.pushView(progressBar as ProgressBar, new $.ProgressDelegate(method(:stopTimer)), WatchUi.SLIDE_DOWN);
+
+                _downloadTimer = new Timer.Timer();
+                _downloadTimer.start(method(:timerCallback), 200, true);
+                return true;
             }
+        }
+    }
+
+        //! Stop the timer
+    public function stopTimer() as Void {
+        if (_downloadTimer != null) {
+            _downloadTimer.stop();
+        }
+    }
+
+    //! Update the progress bar every second
+    public function timerCallback() as Void {
+        if (wordsArray.size() > 10) {
+            _downloadTimer.stop();
+            WatchUi.popView(WatchUi.SLIDE_UP);
         }
     }
 
@@ -79,7 +105,7 @@ class WarpaintLanguageApp extends Application.AppBase {
             }
             wordsArray.addAll(words);
 
-            Storage.deleteValue("WordsArray");
+            // Storage.deleteValue("WordsArray");
             Storage.setValue("WordsArray", wordsArray);
         }
 	}
@@ -92,7 +118,26 @@ class WarpaintLanguageApp extends Application.AppBase {
         selectedLanguageFrom = Properties.getValue("languageFrom");
         selectedLanguageTo = Properties.getValue("languageTo");
     }
+}
 
+//! Input handler for the progress bar
+class ProgressDelegate extends WatchUi.BehaviorDelegate {
+    private var _callback as Method() as Void;
+
+    //! Constructor
+    //! @param callback Callback function
+    public function initialize(callback as Method() as Void) {
+        BehaviorDelegate.initialize();
+        _callback = callback;
+    }
+
+    //! Handle back behavior
+    //! @return true if handled, false otherwise
+    public function onBack() as Boolean {
+        _callback.invoke();
+        Communications.cancelAllRequests();
+        return true;
+    }
 }
 
 function getApp() as WarpaintLanguageApp {

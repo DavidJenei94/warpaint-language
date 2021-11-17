@@ -1,16 +1,11 @@
 import Toybox.Application;
 import Toybox.Application.Properties;
+import Toybox.Application.Storage;
 import Toybox.Graphics;
 import Toybox.WatchUi;
 
 //! This is the menu input delegate for the Basic Drawables menu
 class MenuLanguageSelection extends WatchUi.Menu2InputDelegate {
-
-    // //! Constructor
-    // public function initialize() {
-    //     Menu2InputDelegate.initialize();
-    // }
-
 
     var parentmenu;
 	var parentmenu_itemId;
@@ -28,7 +23,8 @@ class MenuLanguageSelection extends WatchUi.Menu2InputDelegate {
         Properties.setValue(key, item.getSubLabel());
 
         // Change to other language
-        wordsArray = null;
+        wordsArray = [];
+        Storage.deleteValue("WordsArray");
         getApp().onSettingsChanged();
         
         var parent_idx = parentmenu.findItemById(parentmenu_itemId);
