@@ -51,33 +51,39 @@ class StatisticsView extends WatchUi.View {
         // Set penwidth for arc
         dc.setPenWidth(dc.getWidth() * 0.32);
 
+        // Second most learned language arc and bar
         dc.setColor(secondColor, Graphics.COLOR_BLACK);
         dc.fillRectangle(0, dc.getHeight() * 0.21, dc.getWidth() * 0.50, dc.getHeight() * 0.09);
         dc.drawArc(dc.getWidth() * 0.50, dc.getHeight() * 0.65, dc.getWidth() * 0.16, Graphics.ARC_CLOCKWISE, 255, 135);
 
+        // Third most learned language arc and bar
         dc.setColor(thirdColor, Graphics.COLOR_BLACK);
         dc.fillRectangle(dc.getWidth() * 0.50, dc.getHeight() * 0.21, dc.getWidth() * 0.50, dc.getHeight() * 0.09);
         dc.drawArc(dc.getWidth() * 0.50, dc.getHeight() * 0.65, dc.getWidth() * 0.16, Graphics.ARC_CLOCKWISE, 135, 55);
 
+        // First most learned language arc and bar
         dc.setColor(firstColor, Graphics.COLOR_BLACK);
         dc.fillRectangle(dc.getWidth() * 0.35, dc.getHeight() * 0.21, dc.getWidth() * 0.31, dc.getHeight() * 0.09);
         dc.drawArc(dc.getWidth() * 0.50, dc.getHeight() * 0.65, dc.getWidth() * 0.16, Graphics.ARC_CLOCKWISE, 0, 255);
 
+        // Other learned languages arc
         dc.setColor(otherColor, Graphics.COLOR_BLACK);
         dc.drawArc(dc.getWidth() * 0.50, dc.getHeight() * 0.65, dc.getWidth() * 0.16, Graphics.ARC_CLOCKWISE, 55, 0);
 
+        // Draw 2 divider lines on learned language bars
+        dc.setColor(Graphics.COLOR_BLACK, Graphics.COLOR_BLACK);
+        dc.fillRectangle(dc.getWidth() * 0.35, dc.getHeight() * 0.21, dc.getWidth() * 0.01, dc.getHeight() * 0.09);
+        dc.fillRectangle(dc.getWidth() * 0.66, dc.getHeight() * 0.21, dc.getWidth() * 0.01, dc.getHeight() * 0.09);
+        
+        // Draw number of learned words
         dc.setColor(Graphics.COLOR_BLACK, Graphics.COLOR_TRANSPARENT);
         dc.drawText(dc.getWidth() * 0.20, dc.getHeight() * 0.25, Graphics.FONT_XTINY, "70000", Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
         dc.drawText(dc.getWidth() * 0.50, dc.getHeight() * 0.25, Graphics.FONT_XTINY, "140512", Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
         dc.drawText(dc.getWidth() * 0.80, dc.getHeight() * 0.25, Graphics.FONT_XTINY, "678", Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
 
-        dc.setColor(Graphics.COLOR_BLACK, Graphics.COLOR_BLACK);
-        dc.fillRectangle(dc.getWidth() * 0.35, dc.getHeight() * 0.21, dc.getWidth() * 0.01, dc.getHeight() * 0.09);
-        dc.fillRectangle(dc.getWidth() * 0.66, dc.getHeight() * 0.21, dc.getWidth() * 0.01, dc.getHeight() * 0.09);
-
+        // Draw the flags
         firstFlag.setLocation(dc.getWidth() * 0.55, dc.getHeight() * 0.75);
         secondFlag.setLocation(dc.getWidth() * 0.28, dc.getHeight() * 0.65);
-
         firstFlag.draw(dc);
         secondFlag.draw(dc);
         // thirdFlag.draw(dc);

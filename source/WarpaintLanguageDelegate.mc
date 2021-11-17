@@ -1,3 +1,5 @@
+import Toybox.Application;
+import Toybox.Application.Properties;
 import Toybox.WatchUi;
 
 //! Handle button view behavior
@@ -10,6 +12,24 @@ class WarpaintLanguageDelegate extends WatchUi.BehaviorDelegate {
     public function initialize(view as WarpaintLanguageView) {
         BehaviorDelegate.initialize();
         _view = view;
+    }
+
+    //! Handle the menu event
+    //! @return true if handled, false otherwise
+    public function onMenu() as Boolean {
+        // Generate a new Menu with a drawable Title
+        var menu = new WatchUi.Menu2({:title=>"Settings"});
+
+        var languageFromSublabel = Properties.getValue("languageFrom"); // gets the iso code
+        var languageToSublabel = Properties.getValue("languageTo");
+        languageFromSublabel = languagesDict[languageFromSublabel];
+        languageToSublabel = languagesDict[languageToSublabel];
+        // Label, sublabel, id, 
+        menu.addItem(new WatchUi.MenuItem("Language From", languageFromSublabel, "languageFrom", null));
+        menu.addItem(new WatchUi.MenuItem("Language To", languageToSublabel, "languageTo", null));
+        menu.addItem(new WatchUi.MenuItem("Categories", null, "category", null));
+        WatchUi.pushView(menu, new $.MainMenuDelegate(menu), WatchUi.SLIDE_UP);
+        return true;
     }
 
     //! Handle asking next word

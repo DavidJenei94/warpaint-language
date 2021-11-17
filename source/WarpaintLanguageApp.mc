@@ -5,6 +5,12 @@ import Toybox.WatchUi;
 
 var wordsArray = [];
 
+var languagesDict = {
+    "en" => "English",
+    "de" => "German",
+    "fr" => "French"
+};
+
 class WarpaintLanguageApp extends Application.AppBase {
 
     function initialize() {
