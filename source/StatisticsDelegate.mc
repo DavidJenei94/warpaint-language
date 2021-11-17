@@ -11,7 +11,7 @@ class StatisticsDelegate extends WatchUi.BehaviorDelegate {
     //! Handle the back event
     //! @return true if handled, false otherwise
     public function onBack() as Boolean {
-        WatchUi.popView(WatchUi.SLIDE_BLINK);
+        WatchUi.popView(WatchUi.SLIDE_RIGHT);
         return true;
     }
 

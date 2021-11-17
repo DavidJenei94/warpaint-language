@@ -65,7 +65,7 @@ class WarpaintLanguageApp extends Application.AppBase {
                 );
 
                 var progressBar = new WatchUi.ProgressBar("Downloading", null);
-                WatchUi.pushView(progressBar as ProgressBar, new $.ProgressDelegate(method(:stopTimer)), WatchUi.SLIDE_DOWN);
+                WatchUi.pushView(progressBar as ProgressBar, new $.ProgressDelegate(method(:stopTimer)), WatchUi.SLIDE_IMMEDIATE);
 
                 _downloadTimer = new Timer.Timer();
                 _downloadTimer.start(method(:timerCallback), 200, true);
@@ -83,9 +83,9 @@ class WarpaintLanguageApp extends Application.AppBase {
 
     //! Update the progress bar every second
     public function timerCallback() as Void {
-        if (wordsArray.size() > 10) {
+        if (wordsArray != null && wordsArray.size() > 10) {
             _downloadTimer.stop();
-            WatchUi.popView(WatchUi.SLIDE_UP);
+            WatchUi.popView(WatchUi.SLIDE_IMMEDIATE);
         }
     }
 
