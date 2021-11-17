@@ -35,9 +35,9 @@ class WarpaintLanguageDelegate extends WatchUi.BehaviorDelegate {
     //! Handle asking next word
     //! @return true if handled, false otherwise
     public function onNext() as Boolean {
-        // WatchUi.popView(WatchUi.SLIDE_IMMEDIATE);
         _view.revealLabel.setText("R E V E A L");
         _view.revealHider.unhide();
+
         _view.refreshWordsOnView();
         return true;
     }
@@ -45,10 +45,9 @@ class WarpaintLanguageDelegate extends WatchUi.BehaviorDelegate {
     //! Handle reveal translation
     //! @return true if handled, false otherwise
     public function onReveal() as Boolean {
-        // WatchUi.popView(WatchUi.SLIDE_IMMEDIATE);
         _view.revealLabel.setText("");
         _view.revealHider.hide();
-        _view.toTextArea.setText(_view.hiddenWordTo);
+        _view.toTextArea.setText(_view.wordTo);
         return true;
     }
 

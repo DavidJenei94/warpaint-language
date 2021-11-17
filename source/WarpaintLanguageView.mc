@@ -7,15 +7,17 @@ import Toybox.Timer;
 class WarpaintLanguageView extends WatchUi.View {
 
     var myShapes;
+
     var fromTextArea as TextArea;
     var toTextArea as TextArea;
+    var wordFrom as String;
+    var wordTo as String;
+
     var revealLabel as label;
     var revealHider as Drawable;
 
     var fromFlag as Bitmap;
     var toFlag as Bitmap;
-
-    var hiddenWordTo as String;
 
     function initialize() {
         View.initialize();
@@ -54,19 +56,22 @@ class WarpaintLanguageView extends WatchUi.View {
         getApp().downloadWords();
 
         var words = getLastWords();
-        var wordFrom = "";
-        var wordTo = "";
         if (words != null) {
             wordFrom = words.get("from");
-            wordTo = words.get("to");  
+            wordTo = words.get("to");
+
+            fromTextArea.setText(wordFrom);
+            toTextArea.setText("");
         } else {
             wordFrom = "Connect to Internet";
-            wordTo = "Then Refresh";
+            wordTo = "Then click Next";
+
+            fromTextArea.setText(wordFrom);
+            toTextArea.setText(wordTo);
+            revealLabel.setText("");
+            revealHider.hide();
         }
 
-        hiddenWordTo = wordTo;
-        fromTextArea.setText(wordFrom);
-        toTextArea.setText("");
         // fromTextArea.setText("I am not accepting anything else at");
         // toTextArea.setText("Do you understand what I’m saying?");
 
