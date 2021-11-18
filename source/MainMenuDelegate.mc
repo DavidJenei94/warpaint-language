@@ -40,7 +40,11 @@ class MainMenuDelegate extends WatchUi.Menu2InputDelegate {
             // languageMenu.addItem(new WatchUi.MenuItem("German", "de", newId, null));
             // languageMenu.addItem(new WatchUi.MenuItem("French", "fr", newId, null));
             WatchUi.pushView(languageMenu, new $.MenuLanguageSelection(mainMenu, id), WatchUi.SLIDE_UP);
-        } 
+        }  else if (id.equals("stats")) {
+            var view = new $.StatisticsView();
+            var delegate = new $.StatisticsDelegate();
+            WatchUi.pushView(view, delegate, WatchUi.SLIDE_LEFT);
+        }
         // else if (id.equals("check")) {
         //     // When the check menu item is selected, push a new menu that demonstrates
         //     // left and right checkbox menu items

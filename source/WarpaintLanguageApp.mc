@@ -19,9 +19,11 @@ var selectedLanguageTo as String;
 class WarpaintLanguageApp extends Application.AppBase {
 
     var _downloadTimer as Timer.Timer;
+    var _downloading as Boolean;
 
     function initialize() {
         AppBase.initialize();
+        _downloading = false;
         wordsArray = Storage.getValue("WordsArray");
         setGlobalVariables();
     }
@@ -44,10 +46,16 @@ class WarpaintLanguageApp extends Application.AppBase {
     }
 
     function downloadWords() as Void {
-        if (selectedLanguageFrom != "None" && selectedLanguageFrom != null &&
-            selectedLanguageTo != "None" && selectedLanguageTo != null) {
+        if (!selectedLanguageFrom.equals("None") && selectedLanguageFrom != null &&
+            !selectedLanguageTo.equals("None") && selectedLanguageTo != null) {
 
-            if (System.getDeviceSettings().connectionAvailable && (wordsArray == null || wordsArray.size() < 10)) {
+            // Downloading starts when wordsArray has <10 words, if it does not finish in time, start a new request
+            if (wordsArray == null || wordsArray.size() < 1) {
+                // Communications.cancelAllRequests();
+                _downloading = false;
+            }
+
+            if (!_downloading && System.getDeviceSettings().connectionAvailable && (wordsArray == null || wordsArray.size() < 10)) {
                 var params = {
                     "lan1" => selectedLanguageFrom,
                     "lan2" => selectedLanguageTo,
@@ -64,12 +72,16 @@ class WarpaintLanguageApp extends Application.AppBase {
                     method(:recieveWords)
                 );
 
-                var progressBar = new WatchUi.ProgressBar("Downloading", null);
-                WatchUi.pushView(progressBar as ProgressBar, new $.ProgressDelegate(method(:stopTimer)), WatchUi.SLIDE_IMMEDIATE);
+                _downloading = true;
 
-                _downloadTimer = new Timer.Timer();
-                _downloadTimer.start(method(:timerCallback), 200, true);
-                return true;
+                // Only show the progressbar if there are no more stores words
+                if (wordsArray == null || wordsArray.size() < 1) {
+                    var progressBar = new WatchUi.ProgressBar("Downloading", null);
+                    WatchUi.pushView(progressBar as ProgressBar, new $.ProgressDelegate(method(:stopTimer)), WatchUi.SLIDE_IMMEDIATE);
+
+                    _downloadTimer = new Timer.Timer();
+                    _downloadTimer.start(method(:timerCallback), 200, true);
+                }
             }
         }
     }
@@ -85,6 +97,7 @@ class WarpaintLanguageApp extends Application.AppBase {
     public function timerCallback() as Void {
         if (wordsArray != null && wordsArray.size() > 10) {
             _downloadTimer.stop();
+            _downloading = false;
             WatchUi.popView(WatchUi.SLIDE_IMMEDIATE);
         }
     }
@@ -136,6 +149,7 @@ class ProgressDelegate extends WatchUi.BehaviorDelegate {
     public function onBack() as Boolean {
         _callback.invoke();
         Communications.cancelAllRequests();
+        _downloading = false;
         return true;
     }
 }

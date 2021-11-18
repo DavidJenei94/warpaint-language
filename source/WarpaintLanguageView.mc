@@ -15,12 +15,14 @@ class WarpaintLanguageView extends WatchUi.View {
 
     var revealLabel as label;
     var revealHider as Drawable;
+    var revealed as Boolean;
 
     var fromFlag as Bitmap;
     var toFlag as Bitmap;
 
     function initialize() {
         View.initialize();
+        revealed = false;
     }
 
     // Load your resources here
@@ -70,6 +72,7 @@ class WarpaintLanguageView extends WatchUi.View {
             toTextArea.setText(wordTo);
             revealLabel.setText("");
             revealHider.hide();
+            revealed = true;
         }
 
         // fromTextArea.setText("I am not accepting anything else at");
