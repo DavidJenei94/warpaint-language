@@ -37,7 +37,7 @@ class WarpaintLanguageDelegate extends WatchUi.BehaviorDelegate {
     //! @param keyEvent
     //! @return true if handled, false otherwise
     function onKey(keyEvent) as Boolean {
-        System.println(keyEvent.getKey());
+        // System.println(keyEvent.getKey());
         if (keyEvent.getKey() == KEY_ENTER){
             if (_view.revealed) {
                 onNext();
@@ -65,7 +65,7 @@ class WarpaintLanguageDelegate extends WatchUi.BehaviorDelegate {
     //! Handle reveal translation
     //! @return true if handled, false otherwise
     public function onReveal() as Boolean {
-        System.println("onReveal");
+        // System.println("onReveal");
         _view.revealLabel.setText("");
         _view.revealHider.hide();
         _view.toTextArea.setText(_view.wordTo);
@@ -78,7 +78,7 @@ class WarpaintLanguageDelegate extends WatchUi.BehaviorDelegate {
     //! Handle Statistics translation
     //! @return true if handled, false otherwise
     public function onStats() as Boolean {
-        System.println("onStats");
+        // System.println("onStats");
         var view = new $.StatisticsView();
         var delegate = new $.StatisticsDelegate();
         WatchUi.pushView(view, delegate, WatchUi.SLIDE_LEFT);

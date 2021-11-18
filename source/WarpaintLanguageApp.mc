@@ -51,11 +51,12 @@ class WarpaintLanguageApp extends Application.AppBase {
 
             // Downloading starts when wordsArray has <10 words, if it does not finish in time, start a new request
             if (wordsArray == null || wordsArray.size() < 1) {
-                // Communications.cancelAllRequests();
+                Communications.cancelAllRequests();
                 _downloading = false;
             }
 
             if (!_downloading && System.getDeviceSettings().connectionAvailable && (wordsArray == null || wordsArray.size() < 10)) {
+                System.println("Start downloading");
                 var params = {
                     "lan1" => selectedLanguageFrom,
                     "lan2" => selectedLanguageTo,
@@ -121,6 +122,7 @@ class WarpaintLanguageApp extends Application.AppBase {
             // Storage.deleteValue("WordsArray");
             Storage.setValue("WordsArray", wordsArray);
         }
+        _downloading = false;
 	}
 
     function onSettingsChanged() as Void {
