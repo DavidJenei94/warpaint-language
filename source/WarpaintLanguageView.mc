@@ -4,6 +4,14 @@ import Toybox.Graphics;
 import Toybox.WatchUi;
 import Toybox.Timer;
 
+var flagsDict = {};
+
+var fromFlag as BitmapResource;
+var toFlag as BitmapResource;
+
+var fromFlagId as String;
+var toFlagId as String;
+
 class WarpaintLanguageView extends WatchUi.View {
 
     var myShapes;
@@ -16,9 +24,6 @@ class WarpaintLanguageView extends WatchUi.View {
     var revealLabel as label;
     var revealHider as Drawable;
     var revealed as Boolean;
-
-    var fromFlag as Bitmap;
-    var toFlag as Bitmap;
 
     function initialize() {
         View.initialize();
@@ -33,24 +38,28 @@ class WarpaintLanguageView extends WatchUi.View {
         revealLabel = View.findDrawableById("RevealLabel");
         revealHider = View.findDrawableById("RevealHider");
 
-        fromFlag = new WatchUi.Bitmap({
-            :rezId=>Rez.Drawables.usFlag,
-            :locX=>dc.getWidth() * 0.27,
-            :locY=>dc.getHeight() * 0.10
-        });
-        toFlag = new WatchUi.Bitmap({
-            :rezId=>Rez.Drawables.deFlag,
-            :locX=>dc.getWidth() * 0.56,
-            :locY=>dc.getHeight() * 0.10
-        });
+        flagsDict.put("en", Rez.Drawables.enFlag);
+        flagsDict.put("de", Rez.Drawables.deFlag);
+        flagsDict.put("fr", Rez.Drawables.frFlag);
+        flagsDict.put("nb", Rez.Drawables.nbFlag);
+        flagsDict.put("hu", Rez.Drawables.huFlag);
+        flagsDict.put("es", Rez.Drawables.esFlag);
+        flagsDict.put("ru", Rez.Drawables.ruFlag);
+        flagsDict.put("pt", Rez.Drawables.ptFlag);
+
+        loadFlags();
 
         refreshWordsOnView();
+    }
 
-        // var myTimer = new Timer.Timer();
-        // myTimer.start(method(:refreshWordsOnView), 5000, true);
+    function loadFlags() as Void {
+        if (!selectedLanguageFrom.equals("None") && selectedLanguageFrom != null) {
+            fromFlag = WatchUi.loadResource(flagsDict[selectedLanguageFrom]);
+        }
 
-        // to test text area sizes:
-        //myShapes = new Rez.Drawables.textAreas();
+        if (!selectedLanguageTo.equals("None") && selectedLanguageTo != null) {
+            toFlag = WatchUi.loadResource(flagsDict[selectedLanguageTo]);
+        }        
     }
 
     function refreshWordsOnView() as Void {
@@ -75,8 +84,8 @@ class WarpaintLanguageView extends WatchUi.View {
             revealed = true;
         }
 
-        // fromTextArea.setText("I am not accepting anything else at");
-        // toTextArea.setText("Do you understand what I’m saying?");
+        // fromTextArea.setText("the dog\na dog");
+        // toTextArea.setText("der Hund\nein Hund");
 
         WatchUi.requestUpdate();
     }
@@ -94,8 +103,12 @@ class WarpaintLanguageView extends WatchUi.View {
         // Call the parent onUpdate function to redraw the layout
         View.onUpdate(dc);
 
-        fromFlag.draw(dc);
-        toFlag.draw(dc);
+        if (!selectedLanguageFrom.equals("None") && selectedLanguageFrom != null) {
+            dc.drawBitmap(dc.getWidth() * 0.27, dc.getHeight() * 0.10, fromFlag);
+        }
+        if (!selectedLanguageTo.equals("None") && selectedLanguageTo != null) {
+            dc.drawBitmap(dc.getWidth() * 0.56, dc.getHeight() * 0.10, toFlag);
+        }
     }
 
     // Called when this View is removed from the screen. Save the

@@ -6,11 +6,17 @@ import Toybox.Timer;
 import Toybox.Communications;
 
 var wordsArray = [];
+var downloading as Boolean;
 
 var languagesDict = {
     "en" => "English",
     "de" => "German",
-    "fr" => "French"
+    "fr" => "French",
+    "nb" => "Norwegian",
+    "hu" => "Hungarian",
+    "es" => "Spanish",
+    "ru" => "Russian",
+    "pt" => "Portugese"
 };
 
 var selectedLanguageFrom as String;
@@ -19,11 +25,10 @@ var selectedLanguageTo as String;
 class WarpaintLanguageApp extends Application.AppBase {
 
     var _downloadTimer as Timer.Timer;
-    var _downloading as Boolean;
 
     function initialize() {
         AppBase.initialize();
-        _downloading = false;
+        downloading = false;
         wordsArray = Storage.getValue("WordsArray");
         setGlobalVariables();
     }
@@ -46,45 +51,53 @@ class WarpaintLanguageApp extends Application.AppBase {
     }
 
     function downloadWords() as Void {
-        if (!selectedLanguageFrom.equals("None") && selectedLanguageFrom != null &&
-            !selectedLanguageTo.equals("None") && selectedLanguageTo != null) {
+        // try {
+            if (!selectedLanguageFrom.equals("None") && selectedLanguageFrom != null &&
+                !selectedLanguageTo.equals("None") && selectedLanguageTo != null) {
 
-            // Downloading starts when wordsArray has <10 words, if it does not finish in time, start a new request
-            if (wordsArray == null || wordsArray.size() < 1) {
-                Communications.cancelAllRequests();
-                _downloading = false;
-            }
-
-            if (!_downloading && System.getDeviceSettings().connectionAvailable && (wordsArray == null || wordsArray.size() < 10)) {
-                System.println("Start downloading");
-                var params = {
-                    "lan1" => selectedLanguageFrom,
-                    "lan2" => selectedLanguageTo,
-                    "wordsNo" => 20
-                };
-                var options = {
-                    :method => Communications.HTTP_REQUEST_METHOD_GET,
-                    :responseType => Communications.HTTP_RESPONSE_CONTENT_TYPE_JSON
-                };
-                Communications.makeWebRequest(
-                    "https://script.google.com/macros/s/AKfycbzVALwGCzk_J85y7R1BvLdWE3INeTnGKXNgyAMXMN3Go1iK6J1TgL9Z_YhE7pn_ZcuL/exec", 
-                    params,
-                    options,
-                    method(:recieveWords)
-                );
-
-                _downloading = true;
-
-                // Only show the progressbar if there are no more stores words
+                // Downloading starts when wordsArray has <10 words, if it does not finish in time, start a new request
                 if (wordsArray == null || wordsArray.size() < 1) {
-                    var progressBar = new WatchUi.ProgressBar("Downloading", null);
-                    WatchUi.pushView(progressBar as ProgressBar, new $.ProgressDelegate(method(:stopTimer)), WatchUi.SLIDE_IMMEDIATE);
+                    Communications.cancelAllRequests();
+                    downloading = false;
+                }
 
-                    _downloadTimer = new Timer.Timer();
-                    _downloadTimer.start(method(:timerCallback), 200, true);
+                if (!downloading && System.getDeviceSettings().connectionAvailable && (wordsArray == null || wordsArray.size() < 10)) {
+                    System.println("Start downloading");
+                    var params = {
+                        "lan1" => selectedLanguageFrom,
+                        "lan2" => selectedLanguageTo,
+                        "wordsNo" => 20
+                    };
+                    var options = {
+                        :method => Communications.HTTP_REQUEST_METHOD_GET,
+                        :responseType => Communications.HTTP_RESPONSE_CONTENT_TYPE_JSON
+                    };
+                    Communications.makeWebRequest(
+                        "https://script.google.com/macros/s/AKfycbzVALwGCzk_J85y7R1BvLdWE3INeTnGKXNgyAMXMN3Go1iK6J1TgL9Z_YhE7pn_ZcuL/exec", 
+                        params,
+                        options,
+                        method(:recieveWords)
+                    );
+
+                    downloading = true;
+
+                    // Only show the progressbar if there are no more stores words
+                    if (wordsArray == null || wordsArray.size() < 1) {
+                        var progressBar = new WatchUi.ProgressBar("Downloading", null);
+                        WatchUi.pushView(progressBar as ProgressBar, new $.ProgressDelegate(method(:stopTimer)), WatchUi.SLIDE_IMMEDIATE);
+
+                        _downloadTimer = new Timer.Timer();
+                        _downloadTimer.start(method(:timerCallback), 200, true);
+                    }
                 }
             }
-        }
+        // } catch (ex) {
+
+        // } finally {
+        //     if (_downloadTimer != null) {
+        //         _downloadTimer.stop();
+        //     }
+        // }
     }
 
         //! Stop the timer
@@ -98,7 +111,7 @@ class WarpaintLanguageApp extends Application.AppBase {
     public function timerCallback() as Void {
         if (wordsArray != null && wordsArray.size() > 10) {
             _downloadTimer.stop();
-            _downloading = false;
+            downloading = false;
             WatchUi.popView(WatchUi.SLIDE_IMMEDIATE);
         }
     }
@@ -119,10 +132,9 @@ class WarpaintLanguageApp extends Application.AppBase {
             }
             wordsArray.addAll(words);
 
-            // Storage.deleteValue("WordsArray");
             Storage.setValue("WordsArray", wordsArray);
         }
-        _downloading = false;
+        downloading = false;
 	}
 
     function onSettingsChanged() as Void {
@@ -151,7 +163,7 @@ class ProgressDelegate extends WatchUi.BehaviorDelegate {
     public function onBack() as Boolean {
         _callback.invoke();
         Communications.cancelAllRequests();
-        _downloading = false;
+        downloading = false;
         return true;
     }
 }

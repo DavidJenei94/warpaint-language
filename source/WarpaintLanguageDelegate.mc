@@ -29,7 +29,7 @@ class WarpaintLanguageDelegate extends WatchUi.BehaviorDelegate {
         menu.addItem(new WatchUi.MenuItem("Language To", languageToSublabel, "languageTo", null));
         menu.addItem(new WatchUi.MenuItem("Categories", null, "category", null));
         menu.addItem(new WatchUi.MenuItem("Statistics", null, "stats", null));
-        WatchUi.pushView(menu, new $.MainMenuDelegate(menu), WatchUi.SLIDE_UP);
+        WatchUi.pushView(menu, new $.MainMenuDelegate(_view, menu), WatchUi.SLIDE_UP);
         return true;
     }
 

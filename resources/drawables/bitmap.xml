@@ -2,10 +2,13 @@
     <!-- <bitmap id="id_us_flag" x="25%" y="9%" filename="../drawables/us-flag_med.png" dithering="none"/>
     <bitmap id="id_gm_flag" x="55%" y="9%" filename="../drawables/gm-flag_med.png" dithering="none"/> -->
     
-    <bitmap id="usFlag" filename="../images/us-flag_med.png" dithering="none" />
-    <bitmap id="deFlag" filename="../images/gm-flag_med.png" dithering="none" />
-
-    <bitmap id="usFlagS" filename="../images/us-flag_small.png" dithering="none" />
-    <bitmap id="deFlagS" filename="../images/gm-flag_small.png" dithering="none" />
+    <bitmap id="enFlag" filename="../images/en-flag.png" dithering="none" />
+    <bitmap id="deFlag" filename="../images/de-flag.png" dithering="none" />
+    <bitmap id="esFlag" filename="../images/es-flag.png" dithering="none" />
+    <bitmap id="frFlag" filename="../images/fr-flag.png" dithering="none" />
+    <bitmap id="huFlag" filename="../images/hu-flag.png" dithering="none" />
+    <bitmap id="nbFlag" filename="../images/nb-flag.png" dithering="none" />
+    <bitmap id="ptFlag" filename="../images/pt-flag.png" dithering="none" />
+    <bitmap id="ruFlag" filename="../images/ru-flag.png" dithering="none" />
 
 </resources>

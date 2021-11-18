@@ -7,32 +7,43 @@ import Toybox.WatchUi;
 //! This is the menu input delegate for the Basic Drawables menu
 class MenuLanguageSelection extends WatchUi.Menu2InputDelegate {
 
-    var parentmenu;
-	var parentmenu_itemId;
+    var _mainView as View;
+    var _parentmenu as Menu2;
+	var _parentmenuItemId;
     //! Constructor
-	function initialize(parentmenu, parentmenu_itemId) {
+	function initialize(mainView, parentMenu, parentmenuItemId) {
 		Menu2InputDelegate.initialize();
-		self.parentmenu = parentmenu;
-		self.parentmenu_itemId = parentmenu_itemId;
+        _mainView = mainView;
+		_parentmenu = parentMenu;
+		_parentmenuItemId = parentmenuItemId;
 	}
 
     //! Handle an item being selected
     //! @param item The selected menu item
     public function onSelect(item as MenuItem) as Void {
         var key = item.getId();
-        Properties.setValue(key, item.getSubLabel());
+        var languageCode = item.getSubLabel();
+        Properties.setValue(key, languageCode);
+        if (key.equals("languageFrom")) {
+            selectedLanguageFrom = languageCode;
+            fromFlagId = languageCode;
+        } else if (key.equals("languageTo")) {
+            selectedLanguageTo = languageCode;
+            toFlagId = languageCode;
+        }
+        _mainView.loadFlags();
 
         // Change to other language
         wordsArray = [];
         Storage.deleteValue("WordsArray");
         getApp().onSettingsChanged();
         
-        var parent_idx = parentmenu.findItemById(parentmenu_itemId);
-		var parent_item = parentmenu.getItem(parent_idx);
+        var parent_idx = _parentmenu.findItemById(_parentmenuItemId);
+		var parent_item = _parentmenu.getItem(parent_idx);
 		if (parent_item) {
             var newSubLabel = item.getLabel();
 			parent_item.setSubLabel(newSubLabel);
-			parentmenu.updateItem(parent_item, parent_idx);
+			_parentmenu.updateItem(parent_item, parent_idx);
 		}
         WatchUi.popView(WatchUi.SLIDE_DOWN);
     }

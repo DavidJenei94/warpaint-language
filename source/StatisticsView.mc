@@ -18,17 +18,17 @@ class StatisticsView extends WatchUi.View {
         setLayout(Rez.Layouts.StatsLayout(dc));
 
         firstFlag = new WatchUi.Bitmap({
-            :rezId=>Rez.Drawables.usFlagS,
+            :rezId=>Rez.Drawables.enFlag,
             :locX=>dc.getWidth() * 0.10,
             :locY=>dc.getHeight() * 0.20
         });
         secondFlag = new WatchUi.Bitmap({
-            :rezId=>Rez.Drawables.deFlagS,
+            :rezId=>Rez.Drawables.deFlag,
             :locX=>dc.getWidth() * 0.35,
             :locY=>dc.getHeight() * 0.20
         });
         thirdFlag = new WatchUi.Bitmap({
-            :rezId=>Rez.Drawables.usFlagS,
+            :rezId=>Rez.Drawables.enFlag,
             :locX=>dc.getWidth() * 0.60,
             :locY=>dc.getHeight() * 0.20
         });

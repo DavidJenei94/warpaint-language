@@ -52,6 +52,8 @@
             </fonts>
         </text-area> 
 
+        <bitmap id="enFlag" filename="../images/en-flag.png" dithering="none" />
+
     </layout>
 
     <layout id="StatsLayout">
