@@ -87,6 +87,56 @@ class StatisticsView extends WatchUi.View {
         firstFlag.draw(dc);
         secondFlag.draw(dc);
         // thirdFlag.draw(dc);
+
+        // var someArray = [11, 9, 20, 3, 5, 4];
+        var someArray = languagesDict.values();
+        var newArray = [];
+        for (var i = 0; i < someArray.size(); i++) {
+            newArray.add(someArray[i][2]);
+        }
+        newArray = mergesort(newArray);
+        System.println(newArray.toString());
+    }
+
+    function mergesort(arrayToSort) {
+        if (arrayToSort.size() == 1) {
+            return arrayToSort;
+        }
+
+        var arrayOne = arrayToSort.slice(0, (arrayToSort.size()) / 2);
+        var arrayTwo = arrayToSort.slice((arrayToSort.size() / 2), arrayToSort.size());
+
+        arrayOne = mergesort(arrayOne);
+        arrayTwo = mergesort(arrayTwo);
+
+        return merge(arrayOne, arrayTwo);
+    }
+
+    function merge(arrayOne, arrayTwo) {
+        var arrayThree = [];
+
+        while (arrayOne.size() > 0 && arrayTwo.size() > 0) {
+            if (arrayOne[0] < arrayTwo[0]) {
+                arrayThree.add(arrayTwo[0]);
+                arrayTwo.remove(arrayTwo[0]);
+            } else {
+                arrayThree.add(arrayOne[0]);
+                arrayOne.remove(arrayOne[0]);
+            }
+        }
+
+        // either a or b array is empty
+        while (arrayOne.size() > 0) {
+            arrayThree.add(arrayOne[0]);
+            arrayOne.remove(arrayOne[0]);
+        }
+
+        while (arrayTwo.size() > 0) {
+            arrayThree.add(arrayTwo[0]);
+            arrayTwo.remove(arrayTwo[0]);
+        }
+
+        return arrayThree;
     }
 
 }

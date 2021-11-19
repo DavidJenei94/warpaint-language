@@ -36,7 +36,7 @@ class MainMenuDelegate extends WatchUi.Menu2InputDelegate {
             var languagesDictKeys = languagesDict.keys();
             for (var i = 0; i < languagesDict.size(); i++) {
                 var key = languagesDictKeys[i];
-                languageMenu.addItem(new WatchUi.MenuItem(languagesDict.get(key), key, subMenuId, null));
+                languageMenu.addItem(new WatchUi.MenuItem(languagesDict.get(key)[0], key, subMenuId, null));
             }
             
             WatchUi.pushView(languageMenu, new $.MenuLanguageSelection(_mainView, _mainMenu, id), WatchUi.SLIDE_UP);
