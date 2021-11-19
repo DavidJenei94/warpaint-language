@@ -40,6 +40,26 @@ class StatisticsView extends WatchUi.View {
         // Call the parent onUpdate function to redraw the layout
         View.onUpdate(dc);
 
+        // Sort learned words in Descending order
+        var languagesDictValues = languagesDict.values();
+        var languagesWordsNo = [];
+        for (var i = 0; i < languagesDictValues.size(); i++) {
+            languagesWordsNo.add(languagesDictValues[i][2]);
+        }
+        languagesWordsNo = mergesort(languagesWordsNo);
+        
+        // Store the languages in an array according to the descending order of words
+        var languagesKeysDescending = new [languagesWordsNo.size()];
+        var languagesDictKeys = languagesDict.keys();
+        for (var j = 0; j < languagesDictKeys.size(); j++) {
+            for (var i = 0; i < languagesWordsNo.size(); i++) {
+                if (languagesKeysDescending[i] == null && languagesDict[languagesDictKeys[j]][2] == languagesWordsNo[i]) {
+                    languagesKeysDescending[i] = languagesDictKeys[j];
+                    break;
+                }
+            }
+        }
+
         var firstColor = 0xFFFF00;
         var secondColor = 0xFF0000;
         var thirdColor = 0x00FF00;
@@ -77,9 +97,9 @@ class StatisticsView extends WatchUi.View {
         
         // Draw number of learned words
         dc.setColor(Graphics.COLOR_BLACK, Graphics.COLOR_TRANSPARENT);
-        dc.drawText(dc.getWidth() * 0.20, dc.getHeight() * 0.25, Graphics.FONT_XTINY, "70000", Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
-        dc.drawText(dc.getWidth() * 0.50, dc.getHeight() * 0.25, Graphics.FONT_XTINY, languagesDict[selectedLanguageTo][2], Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
-        dc.drawText(dc.getWidth() * 0.80, dc.getHeight() * 0.25, Graphics.FONT_XTINY, "678", Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
+        dc.drawText(dc.getWidth() * 0.20, dc.getHeight() * 0.25, Graphics.FONT_XTINY, languagesDict[languagesKeysDescending[1]][2], Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
+        dc.drawText(dc.getWidth() * 0.50, dc.getHeight() * 0.25, Graphics.FONT_XTINY, languagesDict[languagesKeysDescending[0]][2], Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
+        dc.drawText(dc.getWidth() * 0.80, dc.getHeight() * 0.25, Graphics.FONT_XTINY, languagesDict[languagesKeysDescending[2]][2], Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
 
         // Draw the flags
         firstFlag.setLocation(dc.getWidth() * 0.55, dc.getHeight() * 0.75);
@@ -87,15 +107,6 @@ class StatisticsView extends WatchUi.View {
         firstFlag.draw(dc);
         secondFlag.draw(dc);
         // thirdFlag.draw(dc);
-
-        // var someArray = [11, 9, 20, 3, 5, 4];
-        var someArray = languagesDict.values();
-        var newArray = [];
-        for (var i = 0; i < someArray.size(); i++) {
-            newArray.add(someArray[i][2]);
-        }
-        newArray = mergesort(newArray);
-        System.println(newArray.toString());
     }
 
     function mergesort(arrayToSort) {
