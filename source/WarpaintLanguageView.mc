@@ -4,8 +4,6 @@ import Toybox.Graphics;
 import Toybox.WatchUi;
 import Toybox.Timer;
 
-var flagsDict = {};
-
 var fromFlag as BitmapResource;
 var toFlag as BitmapResource;
 
@@ -38,15 +36,6 @@ class WarpaintLanguageView extends WatchUi.View {
         revealLabel = View.findDrawableById("RevealLabel");
         revealHider = View.findDrawableById("RevealHider");
 
-        flagsDict.put("en", Rez.Drawables.enFlag);
-        flagsDict.put("de", Rez.Drawables.deFlag);
-        flagsDict.put("fr", Rez.Drawables.frFlag);
-        flagsDict.put("nb", Rez.Drawables.nbFlag);
-        flagsDict.put("hu", Rez.Drawables.huFlag);
-        flagsDict.put("es", Rez.Drawables.esFlag);
-        flagsDict.put("ru", Rez.Drawables.ruFlag);
-        flagsDict.put("pt", Rez.Drawables.ptFlag);
-
         loadFlags();
 
         refreshWordsOnView();
@@ -54,11 +43,11 @@ class WarpaintLanguageView extends WatchUi.View {
 
     function loadFlags() as Void {
         if (!selectedLanguageFrom.equals("None") && selectedLanguageFrom != null) {
-            fromFlag = WatchUi.loadResource(flagsDict[selectedLanguageFrom]);
+            fromFlag = WatchUi.loadResource(languagesDict[selectedLanguageFrom][1]);
         }
 
         if (!selectedLanguageTo.equals("None") && selectedLanguageTo != null) {
-            toFlag = WatchUi.loadResource(flagsDict[selectedLanguageTo]);
+            toFlag = WatchUi.loadResource(languagesDict[selectedLanguageTo][1]);
         }        
     }
 

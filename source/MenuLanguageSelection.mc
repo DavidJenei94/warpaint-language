@@ -26,10 +26,8 @@ class MenuLanguageSelection extends WatchUi.Menu2InputDelegate {
         Properties.setValue(key, languageCode);
         if (key.equals("languageFrom")) {
             selectedLanguageFrom = languageCode;
-            fromFlagId = languageCode;
         } else if (key.equals("languageTo")) {
             selectedLanguageTo = languageCode;
-            toFlagId = languageCode;
         }
         _mainView.loadFlags();
 

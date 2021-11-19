@@ -9,14 +9,14 @@ var wordsArray = [];
 var downloading as Boolean;
 
 var languagesDict = {
-    "en" => "English",
-    "de" => "German",
-    "fr" => "French",
-    "nb" => "Norwegian",
-    "hu" => "Hungarian",
-    "es" => "Spanish",
-    "ru" => "Russian",
-    "pt" => "Portugese"
+    "en" => ["English", Rez.Drawables.enFlag, 0],
+    "de" => ["German", Rez.Drawables.deFlag, 0],
+    "fr" => ["French", Rez.Drawables.frFlag, 0],
+    "nb" => ["Norwegian", Rez.Drawables.nbFlag, 0],
+    "hu" => ["Hungarian", Rez.Drawables.huFlag, 0],
+    "es" => ["Spanish", Rez.Drawables.esFlag, 0],
+    "ru" => ["Russian", Rez.Drawables.ruFlag, 0],
+    "pt" => ["Portugese", Rez.Drawables.ptFlag, 0]
 };
 
 var selectedLanguageFrom as String;
