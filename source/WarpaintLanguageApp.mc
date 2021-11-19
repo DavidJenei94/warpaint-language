@@ -144,6 +144,11 @@ class WarpaintLanguageApp extends Application.AppBase {
     function setGlobalVariables() as Void {
         selectedLanguageFrom = Properties.getValue("languageFrom");
         selectedLanguageTo = Properties.getValue("languageTo");
+
+        var storedLanguagesDict = Storage.getValue("languagesDict");
+        if (storedLanguagesDict != null) {
+            languagesDict = storedLanguagesDict;
+        }
     }
 }
 

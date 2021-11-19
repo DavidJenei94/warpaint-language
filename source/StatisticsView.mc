@@ -78,7 +78,7 @@ class StatisticsView extends WatchUi.View {
         // Draw number of learned words
         dc.setColor(Graphics.COLOR_BLACK, Graphics.COLOR_TRANSPARENT);
         dc.drawText(dc.getWidth() * 0.20, dc.getHeight() * 0.25, Graphics.FONT_XTINY, "70000", Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
-        dc.drawText(dc.getWidth() * 0.50, dc.getHeight() * 0.25, Graphics.FONT_XTINY, "140512", Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
+        dc.drawText(dc.getWidth() * 0.50, dc.getHeight() * 0.25, Graphics.FONT_XTINY, languagesDict[selectedLanguageTo][2], Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
         dc.drawText(dc.getWidth() * 0.80, dc.getHeight() * 0.25, Graphics.FONT_XTINY, "678", Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
 
         // Draw the flags

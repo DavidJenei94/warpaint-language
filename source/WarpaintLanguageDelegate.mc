@@ -1,5 +1,6 @@
 import Toybox.Application;
 import Toybox.Application.Properties;
+import Toybox.Application.Storage;
 import Toybox.WatchUi;
 
 //! Handle button view behavior
@@ -70,6 +71,10 @@ class WarpaintLanguageDelegate extends WatchUi.BehaviorDelegate {
         _view.revealHider.hide();
         _view.toTextArea.setText(_view.wordTo);
 
+        if (_view.revealed == false) {
+            languagesDict[selectedLanguageTo][2]++;
+            Storage.setValue("languagesDict", languagesDict);
+        }
         _view.revealed = true;
         WatchUi.requestUpdate();
         return true;
