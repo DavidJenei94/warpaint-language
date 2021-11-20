@@ -20,7 +20,7 @@ class StatisticsDelegate extends WatchUi.BehaviorDelegate {
     public function onNextPage() as Boolean {
         var view = new $.StatisticsListView();
         var delegate = new $.StatisticsListDelegate();
-        WatchUi.pushView(view, delegate, WatchUi.SLIDE_DOWN);
+        WatchUi.pushView(view, delegate, WatchUi.SLIDE_UP);
 
         return true;
     }
