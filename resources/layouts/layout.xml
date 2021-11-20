@@ -63,4 +63,10 @@
 
     </layout>
 
+    <layout id="StatsListLayout">
+
+        <drawable id="StatsListAreas" />
+
+    </layout>
+
 </resources>
