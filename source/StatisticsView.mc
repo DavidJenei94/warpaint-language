@@ -45,7 +45,7 @@ class StatisticsView extends WatchUi.View {
         var firstLanguagePercentage = languagesWordsNo[0].toFloat() / totalWordsNo;
         var secondLanguagePercentage = languagesWordsNo[1].toFloat() / totalWordsNo;
         var thirdLanguagePercentage = languagesWordsNo[2].toFloat() / totalWordsNo;
-        var otherLanguagePercentage = 360 - firstLanguagePercentage - secondLanguagePercentage - thirdLanguagePercentage;
+        var otherLanguagePercentage = 1 - firstLanguagePercentage - secondLanguagePercentage - thirdLanguagePercentage;
 
         var firstLanguageArcDegree = firstLanguagePercentage * 360;
         var secondLanguageArcDegree = secondLanguagePercentage * 360;
@@ -56,55 +56,77 @@ class StatisticsView extends WatchUi.View {
         var secondLanguageArcDegreeEnd = firstLanguageArcDegreeEnd - secondLanguageArcDegree;
         var thirdLanguageArcDegreeEnd = secondLanguageArcDegreeEnd - thirdLanguageArcDegree;
 
+        var firstLanguageMidlleDegree = 360 - firstLanguageArcDegree / 2;
+        var secondLanguageMidlleDegree = firstLanguageArcDegreeEnd - secondLanguageArcDegree / 2;
+        var thirdLanguageMidlleDegree = secondLanguageArcDegreeEnd - thirdLanguageArcDegree / 2;
+        var otherLanguageMidlleDegree = thirdLanguageArcDegreeEnd - otherLanguageArcDegree / 2;
+
         // Set penwidth for arc
         dc.setPenWidth(dc.getWidth() * 0.32);
         // First most learned language arc and bar
-        dc.setColor(firstColor, Graphics.COLOR_BLACK);
-        dc.drawArc(dc.getWidth() * 0.50, dc.getHeight() * 0.50, dc.getWidth() * 0.16, Graphics.ARC_CLOCKWISE, 0, firstLanguageArcDegreeEnd);
+        if (firstLanguagePercentage > 0.00) {
+            dc.setColor(firstColor, Graphics.COLOR_BLACK);
+            dc.drawArc(dc.getWidth() * 0.50, dc.getHeight() * 0.50, dc.getWidth() * 0.16, Graphics.ARC_CLOCKWISE, 0, firstLanguageArcDegreeEnd);
+        }
         // Second most learned language arc and bar
-        dc.setColor(secondColor, Graphics.COLOR_BLACK);
-        dc.drawArc(dc.getWidth() * 0.50, dc.getHeight() * 0.50, dc.getWidth() * 0.16, Graphics.ARC_CLOCKWISE, firstLanguageArcDegreeEnd, secondLanguageArcDegreeEnd);
+        if (secondLanguagePercentage > 0.00) {
+            dc.setColor(secondColor, Graphics.COLOR_BLACK);
+            dc.drawArc(dc.getWidth() * 0.50, dc.getHeight() * 0.50, dc.getWidth() * 0.16, Graphics.ARC_CLOCKWISE, firstLanguageArcDegreeEnd, secondLanguageArcDegreeEnd);
+        }
         // Third most learned language arc and bar
-        dc.setColor(thirdColor, Graphics.COLOR_BLACK);
-        dc.drawArc(dc.getWidth() * 0.50, dc.getHeight() * 0.50, dc.getWidth() * 0.16, Graphics.ARC_CLOCKWISE, secondLanguageArcDegreeEnd, thirdLanguageArcDegreeEnd);
+        if (thirdLanguagePercentage > 0.00) {
+            dc.setColor(thirdColor, Graphics.COLOR_BLACK);
+            dc.drawArc(dc.getWidth() * 0.50, dc.getHeight() * 0.50, dc.getWidth() * 0.16, Graphics.ARC_CLOCKWISE, secondLanguageArcDegreeEnd, thirdLanguageArcDegreeEnd);
+        }
         // Other learned languages arc
-        dc.setColor(otherColor, Graphics.COLOR_BLACK);
-        dc.drawArc(dc.getWidth() * 0.50, dc.getHeight() * 0.50, dc.getWidth() * 0.16, Graphics.ARC_CLOCKWISE, thirdLanguageArcDegreeEnd, 0);
+        if (otherLanguagePercentage > 0.00) {
+            dc.setColor(otherColor, Graphics.COLOR_BLACK);
+            dc.drawArc(dc.getWidth() * 0.50, dc.getHeight() * 0.50, dc.getWidth() * 0.16, Graphics.ARC_CLOCKWISE, thirdLanguageArcDegreeEnd, 0);
+        }
 
+        // Draw the flags and percents
+        drawFlagAndPercentage(dc, 0, firstLanguagePercentage, firstLanguageMidlleDegree, false);
+        drawFlagAndPercentage(dc, 1, secondLanguagePercentage, secondLanguageMidlleDegree, false);
+        drawFlagAndPercentage(dc, 2, thirdLanguagePercentage, thirdLanguageMidlleDegree, false);
+        drawFlagAndPercentage(dc, -1, otherLanguagePercentage, otherLanguageMidlleDegree, true);
+    }
+
+    private function drawFlagAndPercentage(dc as Dc, languageNo as Integer, percentage as Float, middleDegree as Float, isOther as Boolean) as Void {
         // Draw the flags and percents
         var shiftDistance = dc.getWidth() / 2;
         var xShift = shiftDistance - dc.getWidth() * 0.08;
         var yShift = shiftDistance - dc.getWidth() * 0.05;
         var distance = dc.getWidth() * 0.16; // distance of the top left corner of the flags from the center of screen
-        var degree, radians as Float;
-        var x, y as Integer;
+        var percentTextDistance = distance * 2.4;
+        var coordinates;
 
-        if (firstLanguagePercentage > 0.01) {
-            degree = 360 - firstLanguageArcDegree / 2;
-            radians = Math.toRadians(degree);
-            x = distance * Math.cos(radians) + xShift;
-            y = -1 * distance * Math.sin(radians) + yShift;
+        if (percentage > 0.01) {
+            if (!isOther) {
+                coordinates = calculateXYfromDegree(middleDegree, distance, xShift, yShift);
+                dc.drawBitmap(coordinates[0], coordinates[1], flags[languageNo]);
+            }
 
-            dc.drawBitmap(x, y, flags[0]);
-        }
+            coordinates = calculateXYfromDegree(middleDegree, percentTextDistance, shiftDistance, shiftDistance);
+            if (coordinates[0] > dc.getWidth() * 0.4 && coordinates[0] < dc.getWidth() * 0.6) {
+                percentTextDistance = distance * 2.25;
+                coordinates = calculateXYfromDegree(middleDegree, percentTextDistance, shiftDistance, shiftDistance);
+            }
+            dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
+            dc.drawText(
+                coordinates[0], 
+                coordinates[1], 
+                Graphics.FONT_XTINY, 
+                (percentage * 100).format("%.0f").toString() + "%", 
+                Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER
+            );
+        }       
+    }
 
-        if (secondLanguagePercentage > 0.01) {
-            degree = firstLanguageArcDegreeEnd - secondLanguageArcDegree / 2;
-            radians = Math.toRadians(degree);
-            x = distance * Math.cos(radians) + xShift;
-            y = -1 * distance * Math.sin(radians) + yShift;
-
-            dc.drawBitmap(x, y, flags[1]);
-        }
-
-        if (thirdLanguagePercentage > 0.01) {
-            degree = secondLanguageArcDegreeEnd - thirdLanguageArcDegree / 2;
-            radians = Math.toRadians(degree);
-            x = distance * Math.cos(radians) + xShift;
-            y = -1 * distance * Math.sin(radians) + yShift;
-
-            dc.drawBitmap(x, y, flags[2]);
-        }
+    private function calculateXYfromDegree(degree as Float, distance as Float, xShift as Float, yShift as Float) as Array<Integer> {
+        var radians = Math.toRadians(degree);
+        var x = distance * Math.cos(radians) + xShift;
+        var y = -1 * distance * Math.sin(radians) + yShift;
+        return [x, y];
     }
 
     function orderLanguages() as Void {
