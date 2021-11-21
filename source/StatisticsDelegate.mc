@@ -3,9 +3,12 @@ import Toybox.WatchUi;
 //! Handle button view behavior
 class StatisticsDelegate extends WatchUi.BehaviorDelegate {
 
+    private var _statisticsView;
+
     //! Constructor
-    public function initialize() {
+    public function initialize(view) {
         BehaviorDelegate.initialize();
+        _statisticsView = view;
     }
 
     //! Handle the back event
@@ -15,13 +18,35 @@ class StatisticsDelegate extends WatchUi.BehaviorDelegate {
         return true;
     }
 
-    //! Handle going to the next view
+    //! Handle the select event
     //! @return true if handled, false otherwise
-    public function onNextPage() as Boolean {
-        var view = new $.StatisticsListView();
-        var delegate = new $.StatisticsListDelegate();
-        WatchUi.pushView(view, delegate, WatchUi.SLIDE_UP);
+    public function onSelect() as Boolean {
+        var totalWordsNo = _statisticsView.totalWordsNo;
+        var customMenu = new WatchUi.CustomMenu(35, 0x000000, {
+            :titleItemHeight=>70,
+            :title=>new $.StatisticsListMenuTitle(totalWordsNo)
+        });
+
+        var languagesKeysDescending = _statisticsView.languagesKeysDescending;
+        for (var i = 0; i < languagesKeysDescending.size(); i++) {
+            var languageWordsNo = languagesDict[languagesKeysDescending[i]][2];
+            if (languageWordsNo == 0) {
+                break;
+            }
+
+            var languageName = languagesDict[languagesKeysDescending[i]][0];
+            var text = languageName + ": " + languageWordsNo;
+            customMenu.addItem(new $.StatisticsListItem(languagesKeysDescending[i], text));
+        }
+        WatchUi.pushView(customMenu, new $.StatisticsListDelegate(), WatchUi.SLIDE_UP);
 
         return true;
     }
+
+    // //! Handle select
+    // //! @return true if handled, false otherwise
+    // public function onSelect() as Boolean {
+    //     onMenu();
+    //     return true;
+    // }
 }

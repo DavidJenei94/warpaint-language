@@ -14,11 +14,4 @@ class StatisticsListDelegate extends WatchUi.BehaviorDelegate {
         WatchUi.popView(WatchUi.SLIDE_DOWN);
         return true;
     }
-
-    //! Handle going to the previous view
-    //! @return true if handled, false otherwise
-    public function onPreviousPage() as Boolean {
-        WatchUi.popView(WatchUi.SLIDE_DOWN);
-        return true;
-    }
 }

@@ -5,14 +5,11 @@ import Toybox.WatchUi;
 
 class StatisticsView extends WatchUi.View {
 
-    var firstFlag as Bitmap;
-    var secondFlag as Bitmap;
-    var thirdFlag as Bitmap;
     var flags = new [3];
 
     private var languagesWordsNo = []; // words number sorted in this in descending
-    private var languagesKeysDescending;
-    private var totalWordsNo as Number;
+    var languagesKeysDescending;
+    var totalWordsNo as Number;
 
     function initialize() {
         View.initialize();
