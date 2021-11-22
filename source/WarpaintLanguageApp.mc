@@ -47,7 +47,12 @@ class WarpaintLanguageApp extends Application.AppBase {
         var view = new WarpaintLanguageView();
         var delegate = new WarpaintLanguageDelegate(view);
         return [view, delegate] as Array<Views or InputDelegates>;
+    }
 
+    // Return the glance view of your application here
+    function getGlanceView() as Array<Views or InputDelegates>? {
+        var view = new WarpaintLanguageGlanceView();
+        return [view] as View;
     }
 
     function downloadWords() as Void {
