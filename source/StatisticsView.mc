@@ -24,9 +24,9 @@ class StatisticsView extends WatchUi.View {
         // load flags
         for (var i = 0; i < 3; i++) {
             if (languagesWordsNo[i] > totalWordsNo * 0.10) {
-                flags[i] = WatchUi.loadResource(languagesDict[languagesKeysDescending[i]]["flags"][0]);
+                flags[i] = WatchUi.loadResource(languages[languagesKeysDescending[i]]["flags"][0]);
             } else if (languagesWordsNo[i] > totalWordsNo * 0.01) {
-                flags[i] = WatchUi.loadResource(languagesDict[languagesKeysDescending[i]]["flags"][1]);
+                flags[i] = WatchUi.loadResource(languages[languagesKeysDescending[i]]["flags"][1]);
             } else {
                 break;
             }        
@@ -39,58 +39,57 @@ class StatisticsView extends WatchUi.View {
         // Call the parent onUpdate function to redraw the layout
         View.onUpdate(dc);
 
-        // var firstColor = 0xFFFF00;
-        // var secondColor = 0xFF0000;
-        // var thirdColor = 0x00FF00;
-        var otherColor = 0x555555;
+        if (totalWordsNo > 0) {
+            var otherColor = 0x555555;
 
-        var firstLanguagePercentage = languagesWordsNo[0].toFloat() / totalWordsNo;
-        var secondLanguagePercentage = languagesWordsNo[1].toFloat() / totalWordsNo;
-        var thirdLanguagePercentage = languagesWordsNo[2].toFloat() / totalWordsNo;
-        var otherLanguagePercentage = ((totalWordsNo - languagesWordsNo[0] - languagesWordsNo[1] - languagesWordsNo[2]) / totalWordsNo).toFloat();
+            var firstLanguagePercentage = languagesWordsNo[0].toFloat() / totalWordsNo;
+            var secondLanguagePercentage = languagesWordsNo[1].toFloat() / totalWordsNo;
+            var thirdLanguagePercentage = languagesWordsNo[2].toFloat() / totalWordsNo;
+            var otherLanguagePercentage = ((totalWordsNo - languagesWordsNo[0] - languagesWordsNo[1] - languagesWordsNo[2]) / totalWordsNo).toFloat();
 
-        var firstLanguageArcDegree = firstLanguagePercentage * 360;
-        var secondLanguageArcDegree = secondLanguagePercentage * 360;
-        var thirdLanguageArcDegree = thirdLanguagePercentage * 360;
-        var otherLanguageArcDegree = otherLanguagePercentage * 360;
-        
-        var firstLanguageArcDegreeEnd = 360 - firstLanguageArcDegree;
-        var secondLanguageArcDegreeEnd = firstLanguageArcDegreeEnd - secondLanguageArcDegree;
-        var thirdLanguageArcDegreeEnd = secondLanguageArcDegreeEnd - thirdLanguageArcDegree;
+            var firstLanguageArcDegree = firstLanguagePercentage * 360;
+            var secondLanguageArcDegree = secondLanguagePercentage * 360;
+            var thirdLanguageArcDegree = thirdLanguagePercentage * 360;
+            var otherLanguageArcDegree = otherLanguagePercentage * 360;
+            
+            var firstLanguageArcDegreeEnd = 360 - firstLanguageArcDegree;
+            var secondLanguageArcDegreeEnd = firstLanguageArcDegreeEnd - secondLanguageArcDegree;
+            var thirdLanguageArcDegreeEnd = secondLanguageArcDegreeEnd - thirdLanguageArcDegree;
 
-        var firstLanguageMidlleDegree = 360 - firstLanguageArcDegree / 2;
-        var secondLanguageMidlleDegree = firstLanguageArcDegreeEnd - secondLanguageArcDegree / 2;
-        var thirdLanguageMidlleDegree = secondLanguageArcDegreeEnd - thirdLanguageArcDegree / 2;
-        var otherLanguageMidlleDegree = thirdLanguageArcDegreeEnd - otherLanguageArcDegree / 2;
+            var firstLanguageMidlleDegree = 360 - firstLanguageArcDegree / 2;
+            var secondLanguageMidlleDegree = firstLanguageArcDegreeEnd - secondLanguageArcDegree / 2;
+            var thirdLanguageMidlleDegree = secondLanguageArcDegreeEnd - thirdLanguageArcDegree / 2;
+            var otherLanguageMidlleDegree = thirdLanguageArcDegreeEnd - otherLanguageArcDegree / 2;
 
-        // Set penwidth for arc
-        dc.setPenWidth(dc.getWidth() * 0.32);
-        // First most learned language arc and bar
-        if (firstLanguagePercentage > 0.00) {
-            dc.setColor(languagesDict[languagesKeysDescending[0]]["chartColor"], Graphics.COLOR_BLACK);
-            dc.drawArc(dc.getWidth() * 0.50, dc.getHeight() * 0.50, dc.getWidth() * 0.16, Graphics.ARC_CLOCKWISE, 0, firstLanguageArcDegreeEnd);
+            // Set penwidth for arc
+            dc.setPenWidth(dc.getWidth() * 0.32);
+            // First most learned language arc and bar
+            if (firstLanguagePercentage > 0.00) {
+                dc.setColor(languages[languagesKeysDescending[0]]["chartColor"], Graphics.COLOR_BLACK);
+                dc.drawArc(dc.getWidth() * 0.50, dc.getHeight() * 0.50, dc.getWidth() * 0.16, Graphics.ARC_CLOCKWISE, 0, firstLanguageArcDegreeEnd);
+            }
+            // Second most learned language arc and bar
+            if (secondLanguagePercentage > 0.00) {
+                dc.setColor(languages[languagesKeysDescending[1]]["chartColor"], Graphics.COLOR_BLACK);
+                dc.drawArc(dc.getWidth() * 0.50, dc.getHeight() * 0.50, dc.getWidth() * 0.16, Graphics.ARC_CLOCKWISE, firstLanguageArcDegreeEnd, secondLanguageArcDegreeEnd);
+            }
+            // Third most learned language arc and bar
+            if (thirdLanguagePercentage > 0.00) {
+                dc.setColor(languages[languagesKeysDescending[2]]["chartColor"], Graphics.COLOR_BLACK);
+                dc.drawArc(dc.getWidth() * 0.50, dc.getHeight() * 0.50, dc.getWidth() * 0.16, Graphics.ARC_CLOCKWISE, secondLanguageArcDegreeEnd, thirdLanguageArcDegreeEnd);
+            }
+            // Other learned languages arc
+            if (otherLanguagePercentage > 0.00) {
+                dc.setColor(otherColor, Graphics.COLOR_BLACK);
+                dc.drawArc(dc.getWidth() * 0.50, dc.getHeight() * 0.50, dc.getWidth() * 0.16, Graphics.ARC_CLOCKWISE, thirdLanguageArcDegreeEnd, 0);
+            }
+
+            // Draw the flags and percents
+            drawFlagAndPercentage(dc, 0, firstLanguagePercentage, firstLanguageMidlleDegree, false);
+            drawFlagAndPercentage(dc, 1, secondLanguagePercentage, secondLanguageMidlleDegree, false);
+            drawFlagAndPercentage(dc, 2, thirdLanguagePercentage, thirdLanguageMidlleDegree, false);
+            drawFlagAndPercentage(dc, -1, otherLanguagePercentage, otherLanguageMidlleDegree, true);
         }
-        // Second most learned language arc and bar
-        if (secondLanguagePercentage > 0.00) {
-            dc.setColor(languagesDict[languagesKeysDescending[1]]["chartColor"], Graphics.COLOR_BLACK);
-            dc.drawArc(dc.getWidth() * 0.50, dc.getHeight() * 0.50, dc.getWidth() * 0.16, Graphics.ARC_CLOCKWISE, firstLanguageArcDegreeEnd, secondLanguageArcDegreeEnd);
-        }
-        // Third most learned language arc and bar
-        if (thirdLanguagePercentage > 0.00) {
-            dc.setColor(languagesDict[languagesKeysDescending[2]]["chartColor"], Graphics.COLOR_BLACK);
-            dc.drawArc(dc.getWidth() * 0.50, dc.getHeight() * 0.50, dc.getWidth() * 0.16, Graphics.ARC_CLOCKWISE, secondLanguageArcDegreeEnd, thirdLanguageArcDegreeEnd);
-        }
-        // Other learned languages arc
-        if (otherLanguagePercentage > 0.00) {
-            dc.setColor(otherColor, Graphics.COLOR_BLACK);
-            dc.drawArc(dc.getWidth() * 0.50, dc.getHeight() * 0.50, dc.getWidth() * 0.16, Graphics.ARC_CLOCKWISE, thirdLanguageArcDegreeEnd, 0);
-        }
-
-        // Draw the flags and percents
-        drawFlagAndPercentage(dc, 0, firstLanguagePercentage, firstLanguageMidlleDegree, false);
-        drawFlagAndPercentage(dc, 1, secondLanguagePercentage, secondLanguageMidlleDegree, false);
-        drawFlagAndPercentage(dc, 2, thirdLanguagePercentage, thirdLanguageMidlleDegree, false);
-        drawFlagAndPercentage(dc, -1, otherLanguagePercentage, otherLanguageMidlleDegree, true);
     }
 
     private function drawFlagAndPercentage(dc as Dc, languageNo as Integer, percentage as Float, middleDegree as Float, isOther as Boolean) as Void {
@@ -143,21 +142,28 @@ class StatisticsView extends WatchUi.View {
 
     function orderLanguages() as Void {
         // Sort learned words in Descending order
-        // Language Order does not matter at this point, it will be searched later according to this
-        var languagesDictValues = languagesDict.values();
-        for (var i = 0; i < languagesDictValues.size(); i++) {
-            languagesWordsNo.add(languagesDictValues[i]["totalLearnedWords"]);
+        // Language Order does not matter at this point, it will be searched below
+        var languagesKeys = languages.keys();
+        for (var i = 0; i < languagesKeys.size(); i++) {
+            if (totalLearnedWords.hasKey(languagesKeys[i])) {
+                languagesWordsNo.add(totalLearnedWords[languagesKeys[i]]);
+            } else {
+                languagesWordsNo.add(0);
+            }
         }
         languagesWordsNo = mergesort(languagesWordsNo);
         
         // Store the languages in an array according to the descending order of words
-        languagesKeysDescending = new [languagesWordsNo.size()];
-        var languagesDictKeys = languagesDict.keys();
-        for (var j = 0; j < languagesDictKeys.size(); j++) {
-            for (var i = 0; i < languagesWordsNo.size(); i++) {
-                if (languagesKeysDescending[i] == null && languagesDict[languagesDictKeys[j]]["totalLearnedWords"] == languagesWordsNo[i]) {
-                    languagesKeysDescending[i] = languagesDictKeys[j];
-                    break;
+        languagesKeysDescending = new [totalLearnedWords.size()];
+        // var languagesKeys = languages.keys();
+        for (var j = 0; j < languagesKeys.size(); j++) {
+            // If the language is in the total learned words keys
+            if (totalLearnedWords.hasKey(languagesKeys[j])) {
+                for (var i = 0; i < totalLearnedWords.size(); i++) {
+                    if (languagesKeysDescending[i] == null && totalLearnedWords[languagesKeys[j]] == languagesWordsNo[i]) {
+                        languagesKeysDescending[i] = languagesKeys[j];
+                        break;
+                    }
                 }
             }
         }

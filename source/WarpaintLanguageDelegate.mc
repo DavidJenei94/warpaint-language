@@ -23,8 +23,8 @@ class WarpaintLanguageDelegate extends WatchUi.BehaviorDelegate {
 
         var languageFromSublabel = Properties.getValue("languageFrom"); // gets the iso code
         var languageToSublabel = Properties.getValue("languageTo");
-        languageFromSublabel = languageFromSublabel.equals("None") ? languageFromSublabel : WatchUi.loadResource(languagesDict[languageFromSublabel]["name"]);
-        languageToSublabel = languageToSublabel.equals("None") ? languageFromSublabel : WatchUi.loadResource(languagesDict[languageToSublabel]["name"]);
+        languageFromSublabel = languageFromSublabel.equals("None") ? languageFromSublabel : WatchUi.loadResource(languages[languageFromSublabel]["name"]);
+        languageToSublabel = languageToSublabel.equals("None") ? languageFromSublabel : WatchUi.loadResource(languages[languageToSublabel]["name"]);
         
         // Label, sublabel, id, 
         menu.addItem(new WatchUi.MenuItem("Language From", languageFromSublabel, "languageFrom", null));
@@ -73,9 +73,24 @@ class WarpaintLanguageDelegate extends WatchUi.BehaviorDelegate {
         _view.toTextArea.setText(_view.wordTo);
 
         if (_view.revealed == false) {
-            languagesDict[selectedLanguageTo]["totalLearnedWords"]++;
-            languagesDict[selectedLanguageTo]["learnedWords"]++;
-            Storage.setValue("languagesDict", languagesDict);
+            // languages[selectedLanguageTo]["totalLearnedWords"]++;
+            // languages[selectedLanguageTo]["learnedWords"]++;
+            
+            if (totalLearnedWords.hasKey(selectedLanguageTo)) {
+                totalLearnedWords[selectedLanguageTo]++;
+            } else {
+                totalLearnedWords.put(selectedLanguageTo, 1);
+            }
+            Storage.setValue("totalLearnedWords", totalLearnedWords);
+            
+            if (actualLearnedWords.hasKey(selectedLanguageTo)) {
+                actualLearnedWords[selectedLanguageTo]++;
+            } else {
+                actualLearnedWords.put(selectedLanguageTo, 1);
+            }
+            Storage.setValue("actualLearnedWords", actualLearnedWords);
+
+            Storage.setValue("languages", languages);
         }
         _view.revealed = true;
         WatchUi.requestUpdate();

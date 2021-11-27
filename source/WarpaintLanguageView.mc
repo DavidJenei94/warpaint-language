@@ -7,11 +7,6 @@ import Toybox.Timer;
 var fromFlag as BitmapResource;
 var toFlag as BitmapResource;
 
-var fromFlagId as String;
-var toFlagId as String;
-
-var languagesDictBest = {};
-
 class WarpaintLanguageView extends WatchUi.View {
 
     var myShapes;
@@ -27,12 +22,12 @@ class WarpaintLanguageView extends WatchUi.View {
 
     function initialize() {
         View.initialize();
+
         revealed = false;
 
         loadLanguages();
+        // load languages dict values from storage
         getApp().setGlobalVariables();
-        // var test = languagesDictBest["languages"][1];
-        System.println("asd");
     }
 
     // Load your resources here
@@ -50,11 +45,11 @@ class WarpaintLanguageView extends WatchUi.View {
 
     function loadFlags() as Void {
         if (!selectedLanguageFrom.equals("None") && selectedLanguageFrom != null) {
-            fromFlag = WatchUi.loadResource(languagesDict[selectedLanguageFrom]["flags"][0]);
+            fromFlag = WatchUi.loadResource(languages[selectedLanguageFrom]["flags"][0]);
         }
 
         if (!selectedLanguageTo.equals("None") && selectedLanguageTo != null) {
-            toFlag = WatchUi.loadResource(languagesDict[selectedLanguageTo]["flags"][0]);
+            toFlag = WatchUi.loadResource(languages[selectedLanguageTo]["flags"][0]);
         }        
     }
 

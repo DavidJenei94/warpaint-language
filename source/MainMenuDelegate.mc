@@ -33,10 +33,10 @@ class MainMenuDelegate extends WatchUi.Menu2InputDelegate {
             var subMenuId = id.equals("languageFrom") ? "languageFrom" : "languageTo";
             var languageMenu = new WatchUi.Menu2({:title=>title});
             
-            var languagesDictKeys = languagesDict.keys();
-            for (var i = 0; i < languagesDict.size(); i++) {
-                var key = languagesDictKeys[i];
-                languageMenu.addItem(new WatchUi.MenuItem(WatchUi.loadResource(languagesDict[key]["name"]), key, subMenuId, null));
+            var languagesKeys = languages.keys();
+            for (var i = 0; i < languages.size(); i++) {
+                var key = languagesKeys[i];
+                languageMenu.addItem(new WatchUi.MenuItem(WatchUi.loadResource(languages[key]["name"]), key, subMenuId, null));
             }
             
             WatchUi.pushView(languageMenu, new $.MenuLanguageSelection(_mainView, _mainMenu, id), WatchUi.SLIDE_UP);

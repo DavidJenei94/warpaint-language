@@ -8,18 +8,9 @@ import Toybox.Communications;
 var wordsArray = [];
 var downloading as Boolean;
 
-var languagesDict = {};
-
-// var languagesDict = {
-//     "en" => ["English", Rez.Drawables.enFlag, 0],
-//     "de" => ["German", Rez.Drawables.deFlag, 0],
-//     "fr" => ["French", Rez.Drawables.frFlag, 0],
-//     "nb" => ["Norwegian", Rez.Drawables.nbFlag, 0],
-//     "hu" => ["Hungarian", Rez.Drawables.huFlag, 0],
-//     "es" => ["Spanish", Rez.Drawables.esFlag, 0],
-//     "ru" => ["Russian", Rez.Drawables.ruFlag, 0],
-//     "pt" => ["Portugese", Rez.Drawables.ptFlag, 0]
-// };
+var languages = {};
+var totalLearnedWords = {};
+var actualLearnedWords = {};
 
 var selectedLanguageFrom as String;
 var selectedLanguageTo as String;
@@ -37,7 +28,6 @@ class WarpaintLanguageApp extends Application.AppBase {
 
     // onStart() is called on application start up
     function onStart(state as Dictionary?) as Void {
-        downloadWords();
     }
 
     // onStop() is called when your application is exiting
@@ -152,9 +142,12 @@ class WarpaintLanguageApp extends Application.AppBase {
         selectedLanguageFrom = Properties.getValue("languageFrom");
         selectedLanguageTo = Properties.getValue("languageTo");
 
-        var storedLanguagesDict = Storage.getValue("languagesDict");
-        if (storedLanguagesDict != null) {
-            languagesDict = storedLanguagesDict;
+        totalLearnedWords = Storage.getValue("totalLearnedWords");
+        actualLearnedWords = Storage.getValue("actualLearnedWords");
+
+        var storedlanguages = Storage.getValue("languages");
+        if (storedlanguages != null) {
+            languages = storedlanguages;
         }
     }
 }
