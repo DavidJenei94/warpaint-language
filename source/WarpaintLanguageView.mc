@@ -193,12 +193,26 @@ class WarpaintLanguageView extends WatchUi.View {
                         :method => Communications.HTTP_REQUEST_METHOD_GET,
                         :responseType => Communications.HTTP_RESPONSE_CONTENT_TYPE_JSON
                     };
+                    var url = "https://script.google.com/macros/s/AKfycbzPho5sFpbrq4Q-DooZvOhZT5AQSB6aeQq_lWMvy_4KAnK7EwmiRiVBE2pGJhVu4uyS/exec";
                     Communications.makeWebRequest(
-                        "https://script.google.com/macros/s/AKfycbzVALwGCzk_J85y7R1BvLdWE3INeTnGKXNgyAMXMN3Go1iK6J1TgL9Z_YhE7pn_ZcuL/exec", 
+                        url, 
                         params,
                         options,
                         method(:recieveWords)
                     );
+
+                    if (actualLearnedWords.size() != 0) {
+                        options = {
+                            :method => Communications.HTTP_REQUEST_METHOD_POST,
+                            :responseType => Communications.HTTP_RESPONSE_CONTENT_TYPE_TEXT_PLAIN
+                        };
+                        Communications.makeWebRequest(
+                            url, 
+                            actualLearnedWords,
+                            options,
+                            method(:uploadActualLearnedWords)
+                        );
+                    }
 
                     downloading = true;
 
@@ -261,6 +275,14 @@ class WarpaintLanguageView extends WatchUi.View {
         self.revealed = false;
         self.refreshWordsOnView(true);
 	}
+
+    function uploadActualLearnedWords(responseCode, data) as Void {
+        if (responseCode == 200) {
+			actualLearnedWords = {};
+            Storage.setValue("actualLearnedWords", actualLearnedWords);
+		}
+	}
+
 
     //! Store the array when App stops
     //! @return _wordsArray the last downloaded words
