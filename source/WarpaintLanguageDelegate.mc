@@ -23,8 +23,8 @@ class WarpaintLanguageDelegate extends WatchUi.BehaviorDelegate {
 
         var languageFromSublabel = Properties.getValue("languageFrom"); // gets the iso code
         var languageToSublabel = Properties.getValue("languageTo");
-        languageFromSublabel = languageFromSublabel.equals("None") ? languageFromSublabel : languagesDict[languageFromSublabel][0];
-        languageToSublabel = languageToSublabel.equals("None") ? languageFromSublabel : languagesDict[languageToSublabel][0];
+        languageFromSublabel = languageFromSublabel.equals("None") ? languageFromSublabel : WatchUi.loadResource(languagesDict[languageFromSublabel]["name"]);
+        languageToSublabel = languageToSublabel.equals("None") ? languageFromSublabel : WatchUi.loadResource(languagesDict[languageToSublabel]["name"]);
         
         // Label, sublabel, id, 
         menu.addItem(new WatchUi.MenuItem("Language From", languageFromSublabel, "languageFrom", null));
@@ -73,7 +73,8 @@ class WarpaintLanguageDelegate extends WatchUi.BehaviorDelegate {
         _view.toTextArea.setText(_view.wordTo);
 
         if (_view.revealed == false) {
-            languagesDict[selectedLanguageTo][2]++;
+            languagesDict[selectedLanguageTo]["totalLearnedWords"]++;
+            languagesDict[selectedLanguageTo]["learnedWords"]++;
             Storage.setValue("languagesDict", languagesDict);
         }
         _view.revealed = true;
@@ -88,5 +89,38 @@ class WarpaintLanguageDelegate extends WatchUi.BehaviorDelegate {
         var view = new $.StatisticsView();
         var delegate = new $.StatisticsDelegate(view);
         WatchUi.pushView(view, delegate, WatchUi.SLIDE_LEFT);
+    }
+}
+
+class HiderDrawable extends WatchUi.Drawable {
+
+    private var _width as Float;
+    private var _height as Float;
+    private var _color as Number;
+
+    public function initialize(params as Dictionary) {
+        Drawable.initialize(params);
+        _width = params[:width];
+		_height = params[:height];
+		_color = params[:color];
+    }
+
+    function draw(dc as Dc) {
+        dc.setColor(_color, Graphics.COLOR_BLACK);
+        dc.fillRectangle(
+            self.locX,
+            self.locY,
+            _width,
+            _height
+        );
+    }
+
+    // hide the reveal
+    function hide() as Void {
+        _color = Graphics.COLOR_BLACK;
+    }
+
+    function unhide() as Void {
+        _color = Graphics.COLOR_TRANSPARENT;
     }
 }

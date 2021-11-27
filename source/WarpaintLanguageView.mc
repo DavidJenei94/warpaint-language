@@ -10,6 +10,8 @@ var toFlag as BitmapResource;
 var fromFlagId as String;
 var toFlagId as String;
 
+var languagesDictBest = {};
+
 class WarpaintLanguageView extends WatchUi.View {
 
     var myShapes;
@@ -26,6 +28,11 @@ class WarpaintLanguageView extends WatchUi.View {
     function initialize() {
         View.initialize();
         revealed = false;
+
+        loadLanguages();
+        getApp().setGlobalVariables();
+        // var test = languagesDictBest["languages"][1];
+        System.println("asd");
     }
 
     // Load your resources here
@@ -43,11 +50,11 @@ class WarpaintLanguageView extends WatchUi.View {
 
     function loadFlags() as Void {
         if (!selectedLanguageFrom.equals("None") && selectedLanguageFrom != null) {
-            fromFlag = WatchUi.loadResource(languagesDict[selectedLanguageFrom][1]);
+            fromFlag = WatchUi.loadResource(languagesDict[selectedLanguageFrom]["flags"][0]);
         }
 
         if (!selectedLanguageTo.equals("None") && selectedLanguageTo != null) {
-            toFlag = WatchUi.loadResource(languagesDict[selectedLanguageTo][1]);
+            toFlag = WatchUi.loadResource(languagesDict[selectedLanguageTo]["flags"][0]);
         }        
     }
 
@@ -57,6 +64,8 @@ class WarpaintLanguageView extends WatchUi.View {
 
         var words = getLastWords();
         if (words != null) {
+            // System.println("to with get: " + words.get("to"));
+            // System.println("to with []: " + words["to"]);
             wordFrom = words.get("from");
             wordTo = words.get("to");
 

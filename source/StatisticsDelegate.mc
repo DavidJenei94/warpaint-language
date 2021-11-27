@@ -29,12 +29,12 @@ class StatisticsDelegate extends WatchUi.BehaviorDelegate {
 
         var languagesKeysDescending = _statisticsView.languagesKeysDescending;
         for (var i = 0; i < languagesKeysDescending.size(); i++) {
-            var languageWordsNo = languagesDict[languagesKeysDescending[i]][2];
+            var languageWordsNo = languagesDict[languagesKeysDescending[i]]["totalLearnedWords"];
             if (languageWordsNo == 0) {
                 break;
             }
 
-            var languageName = languagesDict[languagesKeysDescending[i]][0];
+            var languageName = WatchUi.loadResource(languagesDict[languagesKeysDescending[i]]["name"]);
             var text = languageName + ": " + languageWordsNo;
             customMenu.addItem(new $.StatisticsListItem(languagesKeysDescending[i], text));
         }

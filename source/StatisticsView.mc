@@ -23,8 +23,10 @@ class StatisticsView extends WatchUi.View {
 
         // load flags
         for (var i = 0; i < 3; i++) {
-            if (languagesWordsNo[i] > totalWordsNo * 0.01) {
-                flags[i] = WatchUi.loadResource(languagesDict[languagesKeysDescending[i]][1]);
+            if (languagesWordsNo[i] > totalWordsNo * 0.10) {
+                flags[i] = WatchUi.loadResource(languagesDict[languagesKeysDescending[i]]["flags"][0]);
+            } else if (languagesWordsNo[i] > totalWordsNo * 0.01) {
+                flags[i] = WatchUi.loadResource(languagesDict[languagesKeysDescending[i]]["flags"][1]);
             } else {
                 break;
             }        
@@ -37,15 +39,15 @@ class StatisticsView extends WatchUi.View {
         // Call the parent onUpdate function to redraw the layout
         View.onUpdate(dc);
 
-        var firstColor = 0xFFFF00;
-        var secondColor = 0xFF0000;
-        var thirdColor = 0x00FF00;
+        // var firstColor = 0xFFFF00;
+        // var secondColor = 0xFF0000;
+        // var thirdColor = 0x00FF00;
         var otherColor = 0x555555;
 
         var firstLanguagePercentage = languagesWordsNo[0].toFloat() / totalWordsNo;
         var secondLanguagePercentage = languagesWordsNo[1].toFloat() / totalWordsNo;
         var thirdLanguagePercentage = languagesWordsNo[2].toFloat() / totalWordsNo;
-        var otherLanguagePercentage = 1 - firstLanguagePercentage - secondLanguagePercentage - thirdLanguagePercentage;
+        var otherLanguagePercentage = ((totalWordsNo - languagesWordsNo[0] - languagesWordsNo[1] - languagesWordsNo[2]) / totalWordsNo).toFloat();
 
         var firstLanguageArcDegree = firstLanguagePercentage * 360;
         var secondLanguageArcDegree = secondLanguagePercentage * 360;
@@ -65,17 +67,17 @@ class StatisticsView extends WatchUi.View {
         dc.setPenWidth(dc.getWidth() * 0.32);
         // First most learned language arc and bar
         if (firstLanguagePercentage > 0.00) {
-            dc.setColor(firstColor, Graphics.COLOR_BLACK);
+            dc.setColor(languagesDict[languagesKeysDescending[0]]["chartColor"], Graphics.COLOR_BLACK);
             dc.drawArc(dc.getWidth() * 0.50, dc.getHeight() * 0.50, dc.getWidth() * 0.16, Graphics.ARC_CLOCKWISE, 0, firstLanguageArcDegreeEnd);
         }
         // Second most learned language arc and bar
         if (secondLanguagePercentage > 0.00) {
-            dc.setColor(secondColor, Graphics.COLOR_BLACK);
+            dc.setColor(languagesDict[languagesKeysDescending[1]]["chartColor"], Graphics.COLOR_BLACK);
             dc.drawArc(dc.getWidth() * 0.50, dc.getHeight() * 0.50, dc.getWidth() * 0.16, Graphics.ARC_CLOCKWISE, firstLanguageArcDegreeEnd, secondLanguageArcDegreeEnd);
         }
         // Third most learned language arc and bar
         if (thirdLanguagePercentage > 0.00) {
-            dc.setColor(thirdColor, Graphics.COLOR_BLACK);
+            dc.setColor(languagesDict[languagesKeysDescending[2]]["chartColor"], Graphics.COLOR_BLACK);
             dc.drawArc(dc.getWidth() * 0.50, dc.getHeight() * 0.50, dc.getWidth() * 0.16, Graphics.ARC_CLOCKWISE, secondLanguageArcDegreeEnd, thirdLanguageArcDegreeEnd);
         }
         // Other learned languages arc
@@ -96,19 +98,29 @@ class StatisticsView extends WatchUi.View {
         var shiftDistance = dc.getWidth() / 2;
         var xShift = shiftDistance - dc.getWidth() * 0.08;
         var yShift = shiftDistance - dc.getWidth() * 0.05;
+        var xShiftSmall = shiftDistance - dc.getWidth() * 0.00;
+        var yShiftSmall = shiftDistance - dc.getWidth() * 0.02;
         var distance = dc.getWidth() * 0.16; // distance of the top left corner of the flags from the center of screen
-        var percentTextDistance = distance * 2.4;
+        var percentTextDistance = distance * 2.40;
         var coordinates;
 
         if (percentage > 0.01) {
             if (!isOther) {
-                coordinates = calculateXYfromDegree(middleDegree, distance, xShift, yShift);
+                if (percentage > 0.10) {
+                    coordinates = calculateXYfromDegree(middleDegree, distance, xShift, yShift);
+                } else {
+                    coordinates = calculateXYfromDegree(middleDegree, distance, xShiftSmall, yShiftSmall);
+                }
                 dc.drawBitmap(coordinates[0], coordinates[1], flags[languageNo]);
             }
 
+            // determine the coordinate of the text - adjust if necessary (at the end and in the middle)
             coordinates = calculateXYfromDegree(middleDegree, percentTextDistance, shiftDistance, shiftDistance);
             if (coordinates[0] > dc.getWidth() * 0.4 && coordinates[0] < dc.getWidth() * 0.6) {
                 percentTextDistance = distance * 2.25;
+                coordinates = calculateXYfromDegree(middleDegree, percentTextDistance, shiftDistance, shiftDistance);
+            } else if (coordinates[0] > dc.getWidth() * 0.85 || coordinates[0] < dc.getWidth() * 0.15) {
+                percentTextDistance = distance * 2.50;
                 coordinates = calculateXYfromDegree(middleDegree, percentTextDistance, shiftDistance, shiftDistance);
             }
             dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
@@ -131,9 +143,10 @@ class StatisticsView extends WatchUi.View {
 
     function orderLanguages() as Void {
         // Sort learned words in Descending order
+        // Language Order does not matter at this point, it will be searched later according to this
         var languagesDictValues = languagesDict.values();
         for (var i = 0; i < languagesDictValues.size(); i++) {
-            languagesWordsNo.add(languagesDictValues[i][2]);
+            languagesWordsNo.add(languagesDictValues[i]["totalLearnedWords"]);
         }
         languagesWordsNo = mergesort(languagesWordsNo);
         
@@ -142,7 +155,7 @@ class StatisticsView extends WatchUi.View {
         var languagesDictKeys = languagesDict.keys();
         for (var j = 0; j < languagesDictKeys.size(); j++) {
             for (var i = 0; i < languagesWordsNo.size(); i++) {
-                if (languagesKeysDescending[i] == null && languagesDict[languagesDictKeys[j]][2] == languagesWordsNo[i]) {
+                if (languagesKeysDescending[i] == null && languagesDict[languagesDictKeys[j]]["totalLearnedWords"] == languagesWordsNo[i]) {
                     languagesKeysDescending[i] = languagesDictKeys[j];
                     break;
                 }

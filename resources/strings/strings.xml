@@ -1,4 +1,13 @@
 <strings>
     <string id="AppName">Warpaint Language</string>
     <string id="AppVersionTitle">Warpaint Language version</string>
+    
+    <string id="enName">English</string>
+    <string id="deName">German</string>
+    <string id="frName">French</string>
+    <string id="esName">Spanish</string>
+    <string id="ruName">Russian</string>
+    <string id="ptName">Portuguese</string>
+    <string id="huName">Hungarian</string>
+    <string id="nbName">Norwegian</string>
 </strings>

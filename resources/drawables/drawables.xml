@@ -13,5 +13,6 @@
     </drawable-list>
     <drawable-list id="StatsAreas" background="Graphics.COLOR_TRANSPARENT">
         <shape type="rectangle" x="0%" y="0%" width="100%" height="10%" color="0x0000FF"/> <!-- Statistics label background -->
+        <shape type="rectangle" x="0%" y="90%" width="100%" height="10%" color="0x0000FF"/> <!-- Statistics bottom label background -->
     </drawable-list>
 </drawables>
