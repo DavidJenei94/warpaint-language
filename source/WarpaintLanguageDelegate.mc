@@ -56,11 +56,11 @@ class WarpaintLanguageDelegate extends WatchUi.BehaviorDelegate {
     //! @return true if handled, false otherwise
     public function onNext() as Boolean {
         System.println("onNext");
-        _view.revealLabel.setText("R E V E A L");
+        _view.revealLabel.setText(_view.revealText);
         _view.revealHider.unhide();
 
         _view.revealed = false;
-        _view.refreshWordsOnView();
+        _view.refreshWordsOnView(true);
         return true;
     }
 
@@ -89,8 +89,6 @@ class WarpaintLanguageDelegate extends WatchUi.BehaviorDelegate {
                 actualLearnedWords.put(selectedLanguageTo, 1);
             }
             Storage.setValue("actualLearnedWords", actualLearnedWords);
-
-            Storage.setValue("languages", languages);
         }
         _view.revealed = true;
         WatchUi.requestUpdate();
