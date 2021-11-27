@@ -45,7 +45,7 @@ class StatisticsView extends WatchUi.View {
             var firstLanguagePercentage = languagesWordsNo[0].toFloat() / totalWordsNo;
             var secondLanguagePercentage = languagesWordsNo[1].toFloat() / totalWordsNo;
             var thirdLanguagePercentage = languagesWordsNo[2].toFloat() / totalWordsNo;
-            var otherLanguagePercentage = ((totalWordsNo - languagesWordsNo[0] - languagesWordsNo[1] - languagesWordsNo[2]) / totalWordsNo).toFloat();
+            var otherLanguagePercentage = (totalWordsNo - languagesWordsNo[0] - languagesWordsNo[1] - languagesWordsNo[2]).toFloat() / totalWordsNo;
 
             var firstLanguageArcDegree = firstLanguagePercentage * 360;
             var secondLanguageArcDegree = secondLanguagePercentage * 360;
