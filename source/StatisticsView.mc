@@ -145,13 +145,25 @@ class StatisticsView extends WatchUi.View {
         // Language Order does not matter at this point, it will be searched below
         var languagesKeys = languages.keys();
         for (var i = 0; i < languagesKeys.size(); i++) {
-            if (totalLearnedWords.hasKey(languagesKeys[i])) {
+            if (totalLearnedWords != null && totalLearnedWords.hasKey(languagesKeys[i])) {
                 languagesWordsNo.add(totalLearnedWords[languagesKeys[i]]);
             } else {
                 languagesWordsNo.add(0);
             }
         }
         languagesWordsNo = mergesort(languagesWordsNo);
+
+        totalWordsNo = 0;
+        for (var i = 0; i < languagesWordsNo.size(); i++) {
+            if (languagesWordsNo[i] == 0) {
+                break;
+            }
+            totalWordsNo += languagesWordsNo[i];
+        }
+
+        if (totalWordsNo == 0) {
+            return;
+        }
         
         // Store the languages in an array according to the descending order of words
         languagesKeysDescending = new [totalLearnedWords.size()];
@@ -166,14 +178,6 @@ class StatisticsView extends WatchUi.View {
                     }
                 }
             }
-        }
-
-        totalWordsNo = 0;
-        for (var i = 0; i < languagesWordsNo.size(); i++) {
-            if (languagesWordsNo[i] == 0) {
-                break;
-            }
-            totalWordsNo += languagesWordsNo[i];
         }
     }
 

@@ -71,11 +71,11 @@ class WarpaintLanguageView extends WatchUi.View {
     }
 
     function loadFlags() as Void {
-        if (!selectedLanguageFrom.equals("None") && selectedLanguageFrom != null) {
+        if (selectedLanguageFrom != null && !selectedLanguageFrom.equals("None")) {
             _fromFlag = WatchUi.loadResource(languages[selectedLanguageFrom]["flags"][0]);
         }
 
-        if (!selectedLanguageTo.equals("None") && selectedLanguageTo != null) {
+        if (selectedLanguageTo != null && !selectedLanguageTo.equals("None")) {
             _toFlag = WatchUi.loadResource(languages[selectedLanguageTo]["flags"][0]);
         }        
     }
@@ -146,10 +146,10 @@ class WarpaintLanguageView extends WatchUi.View {
         // Call the parent onUpdate function to redraw the layout
         View.onUpdate(dc);
 
-        if (!selectedLanguageFrom.equals("None") && selectedLanguageFrom != null) {
+        if (selectedLanguageFrom != null && !selectedLanguageFrom.equals("None")) {
             dc.drawBitmap(dc.getWidth() * 0.27, dc.getHeight() * 0.10, _fromFlag);
         }
-        if (!selectedLanguageTo.equals("None") && selectedLanguageTo != null) {
+        if (selectedLanguageTo != null && !selectedLanguageTo.equals("None")) {
             dc.drawBitmap(dc.getWidth() * 0.56, dc.getHeight() * 0.10, _toFlag);
         }
     }
@@ -173,8 +173,8 @@ class WarpaintLanguageView extends WatchUi.View {
 
     function downloadWords() as Void {
         // try {
-            if (!selectedLanguageFrom.equals("None") && selectedLanguageFrom != null &&
-                !selectedLanguageTo.equals("None") && selectedLanguageTo != null) {
+            if (selectedLanguageFrom != null && !selectedLanguageFrom.equals("None") && 
+                selectedLanguageTo != null && !selectedLanguageTo.equals("None")) {
 
                 // Downloading starts when wordsArray has <10 words, if it does not finish in time, start a new request
                 if (_wordsArray == null || _wordsArray.size() < 1) {
@@ -189,30 +189,24 @@ class WarpaintLanguageView extends WatchUi.View {
                         "lan2" => selectedLanguageTo,
                         "wordsNo" => 20
                     };
+                    // Add actual words to params
+                    if (actualLearnedWords != null) {
+                        for (var i = 0; i < actualLearnedWords.size(); i++) {
+                            var actualLearnedWordsKeys = actualLearnedWords.keys();
+                            params.put(actualLearnedWordsKeys[i], actualLearnedWords[actualLearnedWordsKeys[i]]);
+                        }
+                    }
                     var options = {
                         :method => Communications.HTTP_REQUEST_METHOD_GET,
                         :responseType => Communications.HTTP_RESPONSE_CONTENT_TYPE_JSON
                     };
-                    var url = "https://script.google.com/macros/s/AKfycbzPho5sFpbrq4Q-DooZvOhZT5AQSB6aeQq_lWMvy_4KAnK7EwmiRiVBE2pGJhVu4uyS/exec";
+                    var url = "https://script.google.com/macros/s/AKfycbzq5I8VstN7DwAjObKn5JUZJTC_QgAcgyJ4x1mxiZ_bpiYoF52MbBOXz9_2eoAd1L38/exec";
                     Communications.makeWebRequest(
                         url, 
                         params,
                         options,
                         method(:recieveWords)
                     );
-
-                    if (actualLearnedWords.size() != 0) {
-                        options = {
-                            :method => Communications.HTTP_REQUEST_METHOD_POST,
-                            :responseType => Communications.HTTP_RESPONSE_CONTENT_TYPE_TEXT_PLAIN
-                        };
-                        Communications.makeWebRequest(
-                            url, 
-                            actualLearnedWords,
-                            options,
-                            method(:uploadActualLearnedWords)
-                        );
-                    }
 
                     downloading = true;
 
@@ -252,20 +246,21 @@ class WarpaintLanguageView extends WatchUi.View {
     }
 
 	function recieveWords(responseCode, data) as Void {
+        System.println("Response code: " + responseCode);
         System.println("recieveWords data: " + data);
 
-		// HTTP failure: return responseCode.
-		// Otherwise, return data response.
+		// If no HTTP failure:  return data response.
 		var words = null;
-        if (responseCode != 200) {
-			data = responseCode;
-		} else {
+		if (responseCode == 200) {
             words = data.get("results");
             
             if (_wordsArray == null) {
                 _wordsArray = [];
             }
             _wordsArray.addAll(words);
+
+            actualLearnedWords = {};
+            Storage.setValue("actualLearnedWords", actualLearnedWords);
         }
 
         downloading = false;
@@ -275,14 +270,6 @@ class WarpaintLanguageView extends WatchUi.View {
         self.revealed = false;
         self.refreshWordsOnView(true);
 	}
-
-    function uploadActualLearnedWords(responseCode, data) as Void {
-        if (responseCode == 200) {
-			actualLearnedWords = {};
-            Storage.setValue("actualLearnedWords", actualLearnedWords);
-		}
-	}
-
 
     //! Store the array when App stops
     //! @return _wordsArray the last downloaded words

@@ -55,12 +55,16 @@ class WarpaintLanguageDelegate extends WatchUi.BehaviorDelegate {
     //! Handle asking next word
     //! @return true if handled, false otherwise
     public function onNext() as Boolean {
-        System.println("onNext");
-        _view.revealLabel.setText(_view.revealText);
-        _view.revealHider.unhide();
+        // System.println("onNext");
+        if (selectedLanguageFrom != null && !selectedLanguageFrom.equals("None") && 
+            selectedLanguageTo != null && !selectedLanguageTo.equals("None")) {
 
-        _view.revealed = false;
-        _view.refreshWordsOnView(true);
+            _view.revealLabel.setText(_view.revealText);
+            _view.revealHider.unhide();
+
+            _view.revealed = false;
+            _view.refreshWordsOnView(true);
+        }
         return true;
     }
 
@@ -73,9 +77,9 @@ class WarpaintLanguageDelegate extends WatchUi.BehaviorDelegate {
         _view.toTextArea.setText(_view.wordTo);
 
         if (_view.revealed == false) {
-            // languages[selectedLanguageTo]["totalLearnedWords"]++;
-            // languages[selectedLanguageTo]["learnedWords"]++;
-            
+            if (totalLearnedWords == null) {
+                totalLearnedWords = {};
+            }
             if (totalLearnedWords.hasKey(selectedLanguageTo)) {
                 totalLearnedWords[selectedLanguageTo]++;
             } else {
@@ -83,6 +87,9 @@ class WarpaintLanguageDelegate extends WatchUi.BehaviorDelegate {
             }
             Storage.setValue("totalLearnedWords", totalLearnedWords);
             
+            if (actualLearnedWords == null) {
+                actualLearnedWords = {};
+            }
             if (actualLearnedWords.hasKey(selectedLanguageTo)) {
                 actualLearnedWords[selectedLanguageTo]++;
             } else {
