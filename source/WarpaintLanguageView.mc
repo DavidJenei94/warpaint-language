@@ -93,9 +93,9 @@ class WarpaintLanguageView extends WatchUi.View {
 
             fromTextArea.setText(wordFrom);
             toTextArea.setText("");
-        } else if (selectedLanguageFrom.equals("None") || !selectedLanguageTo.equals("None")) {
+        } else if (selectedLanguageFrom.equals("None") || selectedLanguageTo.equals("None")) {
             wordFrom = "Select languages";
-            wordTo = "in the settings";
+            wordTo = "in settings";
 
             fromTextArea.setText(wordFrom);
             toTextArea.setText(wordTo);
@@ -212,8 +212,8 @@ class WarpaintLanguageView extends WatchUi.View {
 
                     // Only show the progressbar if there are no more stores words
                     if (_wordsArray == null || _wordsArray.size() < 1) {
-                        var progressBar = new WatchUi.ProgressBar("Downloading", null);
-                        WatchUi.pushView(progressBar as ProgressBar, new $.ProgressDelegate(method(:stopTimer)), WatchUi.SLIDE_IMMEDIATE);
+                        var progressBar = new WatchUi.ProgressBar("Download\nwords", null);
+                        WatchUi.pushView(progressBar as ProgressBar, new $.ProgressDelegate(method(:stopTimer), revealHider, method(:setRevealed)), WatchUi.SLIDE_IMMEDIATE);
 
                         _downloadTimer = new Timer.Timer();
                         _downloadTimer.start(method(:timerCallback), 200, true);
@@ -242,6 +242,7 @@ class WarpaintLanguageView extends WatchUi.View {
             _downloadTimer.stop();
             downloading = false;
             WatchUi.popView(WatchUi.SLIDE_IMMEDIATE);
+            self.refreshWordsOnView(true);
         }
     }
 
@@ -258,7 +259,10 @@ class WarpaintLanguageView extends WatchUi.View {
                 _wordsArray = [];
             }
             _wordsArray.addAll(words);
+        }
 
+        // Probably the words already uploaded but there was issue in the response
+        if (responseCode != Communications.BLE_CONNECTION_UNAVAILABLE || responseCode != Communications.BLE_QUEUE_FULL) {
             actualLearnedWords = {};
             Storage.setValue("actualLearnedWords", actualLearnedWords);
         }
@@ -268,7 +272,6 @@ class WarpaintLanguageView extends WatchUi.View {
         self.revealLabel.setText(revealText);
         self.revealHider.unhide();
         self.revealed = false;
-        self.refreshWordsOnView(true);
 	}
 
     //! Store the array when App stops
@@ -284,25 +287,38 @@ class WarpaintLanguageView extends WatchUi.View {
         WatchUi.requestUpdate();
     }
 
+    function setRevealed(value as Boolean) as Void {
+        revealed = value;
+    }
+
 }
 
 //! Input handler for the progress bar
 class ProgressDelegate extends WatchUi.BehaviorDelegate {
-    private var _callback as Method() as Void;
+    private var _stopTimerCallback as Method() as Void;
+    private var _revealHider as HiderDrawable;
+    private var _setRevealed as Method() as Void;
 
     //! Constructor
     //! @param callback Callback function
-    public function initialize(callback as Method() as Void) {
+    public function initialize(stopTimerCallback as Method() as Void, revealHider as HiderDrawable, setRevealed as Method() as Void) {
         BehaviorDelegate.initialize();
-        _callback = callback;
+        _stopTimerCallback = stopTimerCallback;
+        _revealHider = revealHider;
+        _setRevealed = setRevealed;
     }
 
     //! Handle back behavior
     //! @return true if handled, false otherwise
     public function onBack() as Boolean {
-        _callback.invoke();
+        _stopTimerCallback.invoke();
+
         Communications.cancelAllRequests();
         downloading = false;
+
+        _revealHider.hide();
+        _setRevealed.invoke(true);
+
         return true;
     }
 }
