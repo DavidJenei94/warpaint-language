@@ -21,10 +21,15 @@ class WarpaintLanguageView extends WatchUi.View {
 
     var myShapes;
 
-    var fromTextArea as TextArea;
-    var toTextArea as TextArea;
     var wordFrom as String;
     var wordTo as String;
+
+    var fromTopText as Text;
+    var fromMiddleText as Text;
+    var fromBottomText as Text;
+    var toTopText as Text;
+    var toMiddleText as Text;
+    var toBottomText as Text;
 
     var revealText as String;
     var revealLabel as label;
@@ -60,10 +65,15 @@ class WarpaintLanguageView extends WatchUi.View {
     // Load your resources here
     function onLayout(dc as Dc) as Void {
         setLayout(Rez.Layouts.MainLayout(dc));
-        fromTextArea = View.findDrawableById("TextAreaFrom");
-        toTextArea = View.findDrawableById("TextAreaTo");
         revealLabel = View.findDrawableById("RevealLabel");
         revealHider = View.findDrawableById("RevealHider");
+
+        fromTopText = View.findDrawableById("FromTopText");
+		fromMiddleText = View.findDrawableById("FromMiddleText");
+		fromBottomText = View.findDrawableById("FromBottomText");
+        toTopText = View.findDrawableById("ToTopText");
+		toMiddleText = View.findDrawableById("ToMiddleText");
+		toBottomText = View.findDrawableById("ToBottomText");
 
         loadFlags();
 
@@ -86,19 +96,13 @@ class WarpaintLanguageView extends WatchUi.View {
 
         var words = getLastWords();
         if (words != null) {
-            // System.println("to with get: " + words.get("to"));
-            // System.println("to with []: " + words["to"]);
             wordFrom = words.get("from");
             wordTo = words.get("to");
-
-            fromTextArea.setText(wordFrom);
-            toTextArea.setText("");
+            revealed = false;
         } else if (selectedLanguageFrom.equals("None") || selectedLanguageTo.equals("None")) {
             wordFrom = "Select languages";
             wordTo = "in settings";
 
-            fromTextArea.setText(wordFrom);
-            toTextArea.setText(wordTo);
             revealLabel.setText("");
             revealHider.hide();
             revealed = true;
@@ -106,16 +110,11 @@ class WarpaintLanguageView extends WatchUi.View {
             wordFrom = "Connect to Internet";
             wordTo = "Then click Next";
 
-            fromTextArea.setText(wordFrom);
-            toTextArea.setText(wordTo);
             revealLabel.setText("");
             revealHider.hide();
             revealed = true;
         }
-
-        // fromTextArea.setText("the dog\na dog");
-        // toTextArea.setText("der Hund\nein Hund");
-
+        
         if (withViewRefresh) {
             WatchUi.requestUpdate();
         }
@@ -129,6 +128,24 @@ class WarpaintLanguageView extends WatchUi.View {
 
     // Update the view
     function onUpdate(dc as Dc) as Void {
+
+        var splittedTranslationFrom = TranslationText.splitTranslation(dc, wordFrom);
+        var selectedFontFrom = splittedTranslationFrom[3];
+        fromTopText.setTranslationText(splittedTranslationFrom[0], selectedFontFrom);
+        fromMiddleText.setTranslationText(splittedTranslationFrom[1], selectedFontFrom);
+        fromBottomText.setTranslationText(splittedTranslationFrom[2], selectedFontFrom);
+
+        if (revealed) {
+            var splittedTranslationTo = TranslationText.splitTranslation(dc, wordTo);
+            var selectedFontTo = splittedTranslationTo[3];
+            toTopText.setTranslationText(splittedTranslationTo[0], selectedFontTo);
+            toMiddleText.setTranslationText(splittedTranslationTo[1], selectedFontTo);
+            toBottomText.setTranslationText(splittedTranslationTo[2], selectedFontTo);
+        } else {
+            toTopText.setTranslationText("", Graphics.FONT_MEDIUM);
+            toMiddleText.setTranslationText("", Graphics.FONT_MEDIUM);
+            toBottomText.setTranslationText("", Graphics.FONT_MEDIUM);
+        }
 
         if (settingsChanged) {
             _wordsArray = [];
@@ -145,6 +162,9 @@ class WarpaintLanguageView extends WatchUi.View {
         dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_DK_GRAY);
         // Call the parent onUpdate function to redraw the layout
         View.onUpdate(dc);
+
+        // // Test
+        // dc.drawText(dc.getWidth() * 0.50, dc.getHeight() * 0.55, Graphics.FONT_TINY, wordTo, Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
 
         if (selectedLanguageFrom != null && !selectedLanguageFrom.equals("None")) {
             dc.drawBitmap(dc.getWidth() * 0.27, dc.getHeight() * 0.10, _fromFlag);

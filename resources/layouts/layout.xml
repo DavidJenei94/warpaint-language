@@ -1,7 +1,6 @@
 <resources>
     <layout id="MainLayout">
 
-        <!-- <drawable id="TextAreas" /> -->
         <drawable id="ClickAreas" />
         <label id="NextLabel" text="Next" x="50%" y="87%" color="Graphics.COLOR_WHITE" font="Graphics.FONT_SMALL" justification="Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER" />
         <label id="RevealLabel" text="R E V E A L" x="50%" y="62%" color="Graphics.COLOR_BLACK" font="Graphics.FONT_LARGE" justification="Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER" />
@@ -18,40 +17,36 @@
             <param name="color">Graphics.COLOR_TRANSPARENT</param>
         </drawable>
 
-        <text-area 
-            id="TextAreaFrom" 
-            x="5%" 
-            y="25%" 
-            justification="Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER"
-            color="Graphics.COLOR_WHITE" 
-            width="90%"
-            height="25%">
-            <fonts>
-                <font>Graphics.FONT_LARGE</font>
-                <font>Graphics.FONT_MEDIUM</font>
-                <font>Graphics.FONT_SMALL</font>            
-                <font>Graphics.FONT_TINY</font>
-                <font>Graphics.FONT_XTINY</font>
-            </fonts>
-        </text-area> 
-        <text-area 
-            id="TextAreaTo" 
-            x="5%" 
-            y="50%" 
-            justification="Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER"
-            color="Graphics.COLOR_WHITE" 
-            width="90%"
-            height="25%">
-            <fonts>
-                <font>Graphics.FONT_LARGE</font>
-                <font>Graphics.FONT_MEDIUM</font>
-                <font>Graphics.FONT_SMALL</font>            
-                <font>Graphics.FONT_TINY</font>
-                <font>Graphics.FONT_XTINY</font>
-            </fonts>
-        </text-area> 
-
-        <bitmap id="enFlag" filename="../images/en-flag.png" dithering="none" />
+        <drawable class="TranslationText" id="FromTopText">
+			<param name="locX">dc.getWidth() * 0.50</param>
+			<param name="locY">dc.getHeight() * 0.31</param>
+			<param name="justification">Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER</param>
+		</drawable>	
+		<drawable class="TranslationText" id="FromMiddleText">
+			<param name="locX">dc.getWidth() * 0.50</param>
+			<param name="locY">dc.getHeight() * 0.37</param>
+			<param name="justification">Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER</param>
+		</drawable>
+		<drawable class="TranslationText" id="FromBottomText">
+			<param name="locX">dc.getWidth() * 0.50</param>
+			<param name="locY">dc.getHeight() * 0.42</param>
+			<param name="justification">Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER</param>
+		</drawable>
+        <drawable class="TranslationText" id="ToTopText">
+			<param name="locX">dc.getWidth() * 0.50</param>
+			<param name="locY">dc.getHeight() * 0.56</param>
+			<param name="justification">Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER</param>
+		</drawable>	
+		<drawable class="TranslationText" id="ToMiddleText">
+			<param name="locX">dc.getWidth() * 0.50</param>
+			<param name="locY">dc.getHeight() * 0.61</param>
+			<param name="justification">Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER</param>
+		</drawable>
+		<drawable class="TranslationText" id="ToBottomText">
+			<param name="locX">dc.getWidth() * 0.50</param>
+			<param name="locY">dc.getHeight() * 0.68</param>
+			<param name="justification">Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER</param>
+		</drawable>
 
     </layout>
 
