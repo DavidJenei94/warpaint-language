@@ -29,7 +29,6 @@ class WarpaintLanguageDelegate extends WatchUi.BehaviorDelegate {
         // Label, sublabel, id, 
         menu.addItem(new WatchUi.MenuItem("Language From", languageFromSublabel, "languageFrom", null));
         menu.addItem(new WatchUi.MenuItem("Language To", languageToSublabel, "languageTo", null));
-        menu.addItem(new WatchUi.MenuItem("Categories", null, "category", null));
         menu.addItem(new WatchUi.MenuItem("Statistics", null, "stats", null));
         WatchUi.pushView(menu, new $.MainMenuDelegate(_view, menu), WatchUi.SLIDE_UP);
         return true;
@@ -74,7 +73,6 @@ class WarpaintLanguageDelegate extends WatchUi.BehaviorDelegate {
         // System.println("onReveal");
         _view.revealLabel.setText("");
         _view.revealHider.hide();
-        _view.toTextArea.setText(_view.wordTo);
 
         if (_view.revealed == false) {
             if (totalLearnedWords == null) {

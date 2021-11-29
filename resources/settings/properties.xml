@@ -5,8 +5,4 @@
 	<property id="languageFrom" type="string">None</property>
 	<property id="languageTo" type="string">None</property>
 
-    <property id="animalsCategory" type="boolean">true</property>
-    <property id="plantsCategory" type="boolean">true</property>
-    <property id="foodCategory" type="boolean">true</property>
-
 </properties>

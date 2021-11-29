@@ -20,15 +20,7 @@ class MainMenuDelegate extends WatchUi.Menu2InputDelegate {
     //! @param item The selected menu item
     public function onSelect(item as MenuItem) as Void {
         var id = item.getId() as String;
-        if (id.equals("category")) {
-            // When the toggle menu item is selected, push a new menu that demonstrates
-            // left and right toggles with automatic substring toggles.
-            var toggleMenu = new WatchUi.Menu2({:title=>"Categories"});
-            toggleMenu.addItem(new WatchUi.ToggleMenuItem("Animals", {:enabled=>"On", :disabled=>"Off"}, "animalsCategory", true, {:alignment=>WatchUi.MenuItem.MENU_ITEM_LABEL_ALIGN_RIGHT}));
-            toggleMenu.addItem(new WatchUi.ToggleMenuItem("Plants", {:enabled=>"On", :disabled=>"Off"}, "plantsCategory", true, {:alignment=>WatchUi.MenuItem.MENU_ITEM_LABEL_ALIGN_RIGHT}));
-            toggleMenu.addItem(new WatchUi.ToggleMenuItem("Food", {:enabled=>"On", :disabled=>"Off"}, "foodCategory", true, {:alignment=>WatchUi.MenuItem.MENU_ITEM_LABEL_ALIGN_RIGHT}));
-            WatchUi.pushView(toggleMenu, new $.SubMenuDelegate(), WatchUi.SLIDE_UP);
-        } else if (id.equals("languageFrom") || id.equals("languageTo")) {
+        if (id.equals("languageFrom") || id.equals("languageTo")) {
             var title = id.equals("languageFrom") ? "Language From" : "Language To";
             var subMenuId = id.equals("languageFrom") ? "languageFrom" : "languageTo";
             var languageMenu = new WatchUi.Menu2({:title=>title});
