@@ -47,6 +47,11 @@ class StatisticsView extends WatchUi.View {
             var thirdLanguagePercentage = languagesWordsNo[2].toFloat() / totalWordsNo;
             var otherLanguagePercentage = (totalWordsNo - languagesWordsNo[0] - languagesWordsNo[1] - languagesWordsNo[2]).toFloat() / totalWordsNo;
 
+            var otherLanguagePercentageDisplay = Math.round(otherLanguagePercentage * 100);
+            var thirdLanguagePercentageDisplay = Math.round(thirdLanguagePercentage * 100);
+            var secondLanguagePercentageDisplay = Math.round(secondLanguagePercentage * 100);
+            var firstLanguagePercentageDisplay = (100 - otherLanguagePercentageDisplay -thirdLanguagePercentageDisplay - secondLanguagePercentageDisplay);
+
             var firstLanguageArcDegree = firstLanguagePercentage * 360;
             var secondLanguageArcDegree = secondLanguagePercentage * 360;
             var thirdLanguageArcDegree = thirdLanguagePercentage * 360;
@@ -85,25 +90,25 @@ class StatisticsView extends WatchUi.View {
             }
 
             // Draw the flags and percents
-            drawFlagAndPercentage(dc, 0, firstLanguagePercentage, firstLanguageMidlleDegree, false);
-            drawFlagAndPercentage(dc, 1, secondLanguagePercentage, secondLanguageMidlleDegree, false);
-            drawFlagAndPercentage(dc, 2, thirdLanguagePercentage, thirdLanguageMidlleDegree, false);
-            drawFlagAndPercentage(dc, -1, otherLanguagePercentage, otherLanguageMidlleDegree, true);
+            drawFlagAndPercentage(dc, 0, firstLanguagePercentage, firstLanguagePercentageDisplay, firstLanguageMidlleDegree, false);
+            drawFlagAndPercentage(dc, 1, secondLanguagePercentage, secondLanguagePercentageDisplay, secondLanguageMidlleDegree, false);
+            drawFlagAndPercentage(dc, 2, thirdLanguagePercentage, thirdLanguagePercentageDisplay, thirdLanguageMidlleDegree, false);
+            drawFlagAndPercentage(dc, -1, otherLanguagePercentage, otherLanguagePercentageDisplay, otherLanguageMidlleDegree, true);
         }
     }
 
-    private function drawFlagAndPercentage(dc as Dc, languageNo as Integer, percentage as Float, middleDegree as Float, isOther as Boolean) as Void {
+    private function drawFlagAndPercentage(dc as Dc, languageNo as Integer, percentage as Float, percentageDisplay as Float, middleDegree as Float, isOther as Boolean) as Void {
         // Draw the flags and percents
         var shiftDistance = dc.getWidth() / 2;
         var xShift = shiftDistance - dc.getWidth() * 0.08;
         var yShift = shiftDistance - dc.getWidth() * 0.05;
-        var xShiftSmall = shiftDistance - dc.getWidth() * 0.00;
+        var xShiftSmall = shiftDistance - dc.getWidth() * 0.04;
         var yShiftSmall = shiftDistance - dc.getWidth() * 0.02;
         var distance = dc.getWidth() * 0.16; // distance of the top left corner of the flags from the center of screen
         var percentTextDistance = distance * 2.40;
         var coordinates;
 
-        if (percentage > 0.01) {
+        if (percentage > 0.00) {
             if (!isOther) {
                 if (percentage > 0.10) {
                     coordinates = calculateXYfromDegree(middleDegree, distance, xShift, yShift);
@@ -127,7 +132,7 @@ class StatisticsView extends WatchUi.View {
                 coordinates[0], 
                 coordinates[1], 
                 Graphics.FONT_XTINY, 
-                (percentage * 100).format("%.0f").toString() + "%", 
+                percentageDisplay.format("%.0f").toString() + "%", 
                 Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER
             );
         }       
