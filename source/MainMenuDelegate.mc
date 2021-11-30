@@ -32,7 +32,7 @@ class MainMenuDelegate extends WatchUi.Menu2InputDelegate {
             }
             
             WatchUi.pushView(languageMenu, new $.MenuLanguageSelection(_mainView, _mainMenu, id), WatchUi.SLIDE_UP);
-        }  else if (id.equals("stats")) {
+        } else if (id.equals("stats")) {
             var view = new $.StatisticsView();
             var delegate = new $.StatisticsDelegate(view);
             WatchUi.pushView(view, delegate, WatchUi.SLIDE_LEFT);

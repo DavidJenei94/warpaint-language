@@ -3,12 +3,14 @@ import Toybox.WatchUi;
 //! Handle button view behavior
 class StatisticsDelegate extends WatchUi.BehaviorDelegate {
 
-    private var _statisticsView;
+    private var _statisticsView as View;
+    private var _menuTitleHeight as Number;
 
     //! Constructor
     public function initialize(view) {
         BehaviorDelegate.initialize();
         _statisticsView = view;
+        _menuTitleHeight = screenSize / 3.50;
     }
 
     //! Handle the back event
@@ -22,8 +24,8 @@ class StatisticsDelegate extends WatchUi.BehaviorDelegate {
     //! @return true if handled, false otherwise
     public function onSelect() as Boolean {
         var totalWordsNo = _statisticsView.totalWordsNo;
-        var customMenu = new WatchUi.CustomMenu(35, 0x000000, {
-            :titleItemHeight=>70,
+        var customMenu = new WatchUi.CustomMenu((_menuTitleHeight / 2).toNumber(), 0x000000, {
+            :titleItemHeight=>_menuTitleHeight.toNumber(),
             :title=>new $.StatisticsListMenuTitle(totalWordsNo)
         });
 

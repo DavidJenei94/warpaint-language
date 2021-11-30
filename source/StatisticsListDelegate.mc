@@ -8,6 +8,13 @@ class StatisticsListDelegate extends WatchUi.BehaviorDelegate {
         BehaviorDelegate.initialize();
     }
 
+    //! Handle the select event
+    //! @return true if handled, false otherwise
+    public function onSelect() as Boolean {
+        WatchUi.popView(WatchUi.SLIDE_DOWN);
+        return true;
+    }
+
     //! Handle the back event
     //! @return true if handled, false otherwise
     public function onBack() as Boolean {

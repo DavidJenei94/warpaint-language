@@ -54,7 +54,7 @@
 
         <drawable id="StatsAreas" />
         <label id="StatsLabel" text="Statistics" x="50%" y="5%" color="Graphics.COLOR_WHITE" font="Graphics.FONT_XTINY" justification="Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER" />
-        <label id="WarpaintLabel" text="WarpaintVision" x="50%" y="93%" color="Graphics.COLOR_WHITE" font="Graphics.FONT_XTINY" justification="Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER" />
+        <label id="WarpaintLabel" text="Warpaint" x="50%" y="94%" color="Graphics.COLOR_WHITE" font="Graphics.FONT_XTINY" justification="Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER" />
 
     </layout>
 

@@ -13,8 +13,9 @@ var selectedLanguageFrom as String;
 var selectedLanguageTo as String;
 
 var downloading as Boolean;
-
 var settingsChanged as Boolean;
+
+var screenSize as Number;
 
 class WarpaintLanguageView extends WatchUi.View {
 
@@ -75,6 +76,8 @@ class WarpaintLanguageView extends WatchUi.View {
         loadFlags();
 
         refreshWordsOnView(false);
+
+        screenSize = dc.getWidth();
     }
 
     function loadFlags() as Void {
