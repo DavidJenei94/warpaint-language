@@ -8,9 +8,19 @@ class StatisticsListDelegate extends WatchUi.BehaviorDelegate {
         BehaviorDelegate.initialize();
     }
 
+    function onTitle() as Boolean {
+        WatchUi.popView(WatchUi.SLIDE_DOWN);
+        return true;        
+    }
+
+    function onFooter() as Boolean {
+        WatchUi.popView(WatchUi.SLIDE_DOWN);
+        return true;        
+    }
+
     //! Handle the select event
     //! @return true if handled, false otherwise
-    public function onSelect() as Boolean {
+    public function onSelect(item as MenuItem) as Boolean {
         WatchUi.popView(WatchUi.SLIDE_DOWN);
         return true;
     }

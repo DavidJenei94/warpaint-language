@@ -52,7 +52,7 @@ class MenuLanguageSelection extends WatchUi.Menu2InputDelegate {
     //! @param key The key triggering the menu wrap
     //! @return true if wrap is allowed, false otherwise
     public function onWrap(key as Key) as Boolean {
-        // Don't allow wrapping
-        return false;
+        // Allow wrapping
+        return true;
     }
 }
