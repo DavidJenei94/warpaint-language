@@ -1,5 +1,4 @@
 import Toybox.Application;
-import Toybox.Application.Properties;
 import Toybox.Application.Storage;
 import Toybox.Graphics;
 import Toybox.WatchUi;
@@ -23,7 +22,7 @@ class MenuLanguageSelection extends WatchUi.Menu2InputDelegate {
     public function onSelect(item as MenuItem) as Void {
         var key = item.getId();
         var languageCode = item.getSubLabel();
-        Properties.setValue(key, languageCode);
+        Storage.setValue(key, languageCode);
         if (key.equals("languageFrom")) {
             selectedLanguageFrom = languageCode;
         } else if (key.equals("languageTo")) {

@@ -1,5 +1,4 @@
 import Toybox.Application;
-import Toybox.Application.Properties;
 import Toybox.Application.Storage;
 import Toybox.WatchUi;
 
@@ -21,8 +20,8 @@ class WarpaintLanguageDelegate extends WatchUi.BehaviorDelegate {
         // Generate a new Menu with a drawable Title
         var menu = new WatchUi.Menu2({:title=>"Settings"});
 
-        var languageFromSublabel = Properties.getValue("languageFrom"); // gets the iso code
-        var languageToSublabel = Properties.getValue("languageTo");
+        var languageFromSublabel = Storage.getValue("languageFrom"); // gets the iso code
+        var languageToSublabel = Storage.getValue("languageTo");
         languageFromSublabel = languageFromSublabel.equals("None") ? languageFromSublabel : WatchUi.loadResource(languages[languageFromSublabel]["name"]);
         languageToSublabel = languageToSublabel.equals("None") ? languageFromSublabel : WatchUi.loadResource(languages[languageToSublabel]["name"]);
         

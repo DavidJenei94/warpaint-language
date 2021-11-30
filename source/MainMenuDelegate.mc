@@ -1,5 +1,5 @@
 import Toybox.Application;
-import Toybox.Application.Properties;
+import Toybox.Application.Storage;
 import Toybox.Graphics;
 import Toybox.WatchUi;
 
@@ -48,6 +48,7 @@ class MainMenuDelegate extends WatchUi.Menu2InputDelegate {
     }
 }
 
+//! This was ued for categories - may be used for themes later
 //! This is the menu input delegate shared by all the basic sub-menus in the application
 class SubMenuDelegate extends WatchUi.Menu2InputDelegate {
 
@@ -60,7 +61,7 @@ class SubMenuDelegate extends WatchUi.Menu2InputDelegate {
     //! @param item The selected menu item
     public function onSelect(item as MenuItem) as Void {
         var id = item.getId() as String;
-        Properties.setValue(id, item.isEnabled());
+        Storage.setValue(id, item.isEnabled());
 
         WatchUi.requestUpdate();
     }

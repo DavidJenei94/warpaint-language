@@ -1,6 +1,5 @@
 import Toybox.Application;
 import Toybox.Application.Storage;
-import Toybox.Application.Properties;
 import Toybox.Graphics;
 import Toybox.WatchUi;
 import Toybox.Timer;
@@ -19,17 +18,15 @@ var settingsChanged as Boolean;
 
 class WarpaintLanguageView extends WatchUi.View {
 
-    var myShapes;
+    private var wordFrom as String;
+    private var wordTo as String;
 
-    var wordFrom as String;
-    var wordTo as String;
-
-    var fromTopText as Text;
-    var fromMiddleText as Text;
-    var fromBottomText as Text;
-    var toTopText as Text;
-    var toMiddleText as Text;
-    var toBottomText as Text;
+    private var fromTopText as Text;
+    private var fromMiddleText as Text;
+    private var fromBottomText as Text;
+    private var toTopText as Text;
+    private var toMiddleText as Text;
+    private var toBottomText as Text;
 
     var revealText as String;
     var revealLabel as label;
@@ -301,8 +298,16 @@ class WarpaintLanguageView extends WatchUi.View {
     }
 
     function onSettingsChanged() as Void {
-        selectedLanguageFrom = Properties.getValue("languageFrom");
-        selectedLanguageTo = Properties.getValue("languageTo");
+        selectedLanguageFrom = Storage.getValue("languageFrom");
+        selectedLanguageTo = Storage.getValue("languageTo");
+        if (selectedLanguageFrom == null) { 
+            selectedLanguageFrom = "None"; 
+            Storage.setValue("languageFrom", selectedLanguageFrom);
+        }
+        if (selectedLanguageTo == null) { 
+            selectedLanguageTo = "None"; 
+            Storage.setValue("languageTo", selectedLanguageTo);
+        }
 
         WatchUi.requestUpdate();
     }
