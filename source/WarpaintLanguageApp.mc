@@ -33,6 +33,7 @@ class WarpaintLanguageApp extends Application.AppBase {
     }
 
     // Return the glance view of your application here
+    (:glance)
     function getGlanceView() as Array<Views or InputDelegates>? {
         var glanceView = new WarpaintLanguageGlanceView();
         return [glanceView] as View;

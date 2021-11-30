@@ -1,6 +1,7 @@
 import Toybox.Graphics;
 import Toybox.WatchUi;
 
+(:glance)
 class WarpaintLanguageGlanceView extends WatchUi.GlanceView {
 
     function initialize() {

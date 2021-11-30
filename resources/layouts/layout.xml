@@ -58,7 +58,7 @@
 
     </layout>
 
-    <layout id="GlanceLayout">
+    <layout scope="glance" id="GlanceLayout">
 
         <label id="AppNameLabel" text="Warpaint Language" x="10%" y="10%" color="Graphics.COLOR_RED" font="Graphics.FONT_XTINY" justification="Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER" />
 
