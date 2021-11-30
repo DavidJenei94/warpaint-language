@@ -27,16 +27,20 @@ class StatisticsDelegate extends WatchUi.BehaviorDelegate {
             :title=>new $.StatisticsListMenuTitle(totalWordsNo)
         });
 
-        var languagesKeysDescending = _statisticsView.languagesKeysDescending;
-        for (var i = 0; i < languagesKeysDescending.size(); i++) {
-            var languageWordsNo = totalLearnedWords[languagesKeysDescending[i]];
-            if (languageWordsNo == 0) {
-                break;
-            }
+        if (totalWordsNo > 0) {
+            var languagesKeysDescending = _statisticsView.languagesKeysDescending;
+            for (var i = 0; i < languagesKeysDescending.size(); i++) {
+                var languageWordsNo = totalLearnedWords[languagesKeysDescending[i]];
+                if (languageWordsNo == 0) {
+                    break;
+                }
 
-            var languageName = WatchUi.loadResource(languages[languagesKeysDescending[i]]["name"]);
-            var text = languageName + ": " + languageWordsNo;
-            customMenu.addItem(new $.StatisticsListItem(languagesKeysDescending[i], text));
+                var languageName = WatchUi.loadResource(languages[languagesKeysDescending[i]]["name"]);
+                var text = languageName + ": " + languageWordsNo;
+                customMenu.addItem(new $.StatisticsListItem(languagesKeysDescending[i], text));
+            }
+        } else {
+            customMenu.addItem(new $.StatisticsListItem("", ""));
         }
         WatchUi.pushView(customMenu, new $.StatisticsListDelegate(), WatchUi.SLIDE_UP);
 
