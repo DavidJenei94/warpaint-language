@@ -15,7 +15,7 @@ class StatisticsListMenuTitle extends WatchUi.Drawable {
     //! Draw the application icon and main menu title
     //! @param dc Device Context
     public function draw(dc as Dc) as Void {
-        dc.setColor(0x0000FF, 0x0000FF);
+        dc.setColor(0x0055AA, 0x0055AA);
         dc.clear();
 
         dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
@@ -45,12 +45,12 @@ class StatisticsListItem extends WatchUi.CustomMenuItem {
     public function draw(dc as Dc) as Void {
 
         if (_id.equals(selectedLanguageTo)) {
-            dc.setColor(0xFFFF00, 0xFFFF00);
+            dc.setColor(0xFFFFFF, 0xFFFFFF);
             dc.clear();
         }
 
         dc.setPenWidth(1);
-        dc.setColor(0x0000FF, Graphics.COLOR_BLACK);
+        dc.setColor(0x0055AA, Graphics.COLOR_BLACK);
         dc.drawLine(0, 0, dc.getWidth(), 0);
         dc.drawLine(0, dc.getHeight() - 1, dc.getWidth(), dc.getHeight() - 1);
 

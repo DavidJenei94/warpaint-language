@@ -1,15 +1,15 @@
 <drawables>
     <bitmap id="LauncherIcon" filename="WpV_logo.png" dithering="none" />
     <drawable-list id="ClickAreas" background="Graphics.COLOR_TRANSPARENT">
-        <shape type="rectangle" x="0%" y="0%" width="100%" height="25%" color="0x0000FF"/> <!-- Flags background -->
+        <shape type="rectangle" x="0%" y="0%" width="100%" height="25%" color="0x0055AA"/> <!-- Flags background -->
         <shape type="polygon" points="[[48%, 13%], [48%, 17%], [52%, 15%]]" color="0xFFFFFF"/> <!-- Translation icon between flags -->
-        <shape type="rectangle" x="0%" y="49%" width="100%" height="2%" color="0x0000FF"/> <!-- Translation divider background -->
-        <shape type="rectangle" x="0%" y="75%" width="100%" height="25%" color="0x0000FF"/> <!-- Next label background -->
-        <shape type="rectangle"  x="0%" y="50%" width="100%" height="25%" color="0xFFFF00"/>  <!-- Reveal label background -->
+        <shape type="rectangle" x="0%" y="49%" width="100%" height="2%" color="0x0055AA"/> <!-- Translation divider background -->
+        <shape type="rectangle" x="0%" y="75%" width="100%" height="25%" color="0x0055AA"/> <!-- Next label background -->
+        <shape type="rectangle"  x="0%" y="50%" width="100%" height="25%" color="0xFFFFFF"/>  <!-- Reveal label background -->
     </drawable-list>
     <drawable-list id="StatsAreas" background="Graphics.COLOR_TRANSPARENT">
-        <shape type="rectangle" x="0%" y="0%" width="100%" height="10%" color="0x0000FF"/> <!-- Statistics label background -->
-        <shape type="rectangle" x="0%" y="90%" width="100%" height="10%" color="0x0000FF"/> <!-- Statistics bottom label background -->
+        <shape type="rectangle" x="0%" y="0%" width="100%" height="10%" color="0x0055AA"/> <!-- Statistics label background -->
+        <shape type="rectangle" x="0%" y="90%" width="100%" height="10%" color="0x0055AA"/> <!-- Statistics bottom label background -->
     </drawable-list>
     <drawable-list scope="glance" id="GlanceAreas" background="Graphics.COLOR_TRANSPARENT">
         <shape type="polygon" points="[[80%, 46%], [84%, 46%], [82%, 54%]]" color="0xFFFFFF"/> <!-- Translation icon between flags -->
