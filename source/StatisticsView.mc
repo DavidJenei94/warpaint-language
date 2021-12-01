@@ -90,10 +90,10 @@ class StatisticsView extends WatchUi.View {
             }
 
             // Draw the flags and percents
-            drawFlagAndPercentage(dc, 0, firstLanguagePercentage, firstLanguagePercentageDisplay, firstLanguageMidlleDegree, false);
-            drawFlagAndPercentage(dc, 1, secondLanguagePercentage, secondLanguagePercentageDisplay, secondLanguageMidlleDegree, false);
-            drawFlagAndPercentage(dc, 2, thirdLanguagePercentage, thirdLanguagePercentageDisplay, thirdLanguageMidlleDegree, false);
             drawFlagAndPercentage(dc, -1, otherLanguagePercentage, otherLanguagePercentageDisplay, otherLanguageMidlleDegree, true);
+            drawFlagAndPercentage(dc, 2, thirdLanguagePercentage, thirdLanguagePercentageDisplay, thirdLanguageMidlleDegree, false);
+            drawFlagAndPercentage(dc, 1, secondLanguagePercentage, secondLanguagePercentageDisplay, secondLanguageMidlleDegree, false);
+            drawFlagAndPercentage(dc, 0, firstLanguagePercentage, firstLanguagePercentageDisplay, firstLanguageMidlleDegree, false);
         }
     }
 

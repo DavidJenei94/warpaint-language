@@ -1,4 +1,4 @@
-
+(:glance)
 function loadLanguages() as Void {
     languages = {
         "en" => {
@@ -7,7 +7,7 @@ function loadLanguages() as Void {
                 Rez.Drawables.enFlag,
                 Rez.Drawables.enFlagS
             ],
-            "chartColor" => 0xFF0000,
+            "chartColor" => 0x00FF00,
             "reveal" => "R E V E A L"       
         },
         "de" => {
@@ -16,7 +16,7 @@ function loadLanguages() as Void {
                 Rez.Drawables.deFlag,
                 Rez.Drawables.deFlagS
             ],
-            "chartColor" => 0xFF5500,
+            "chartColor" => 0xAA5555,
             "reveal" => "V E R R A T E N"
         },
         "fr" => {
@@ -25,7 +25,7 @@ function loadLanguages() as Void {
                 Rez.Drawables.frFlag,
                 Rez.Drawables.frFlagS
             ],
-            "chartColor" => 0xFF0055,
+            "chartColor" => 0xFF55FF,
             "reveal" => "R É V É L E R"
         },
         "es" => {
@@ -34,7 +34,7 @@ function loadLanguages() as Void {
                 Rez.Drawables.esFlag,
                 Rez.Drawables.esFlagS
             ],
-            "chartColor" => 0x550000,
+            "chartColor" => 0x0055FF,
             "reveal" => "R E V E L A R"
         },
         "ru" => {
@@ -43,7 +43,7 @@ function loadLanguages() as Void {
                 Rez.Drawables.ruFlag,
                 Rez.Drawables.ruFlagS
             ],
-            "chartColor" => 0x555500,
+            "chartColor" => 0xAAAA00,
             "reveal" => "РАСКРЫВАТЬ"
         },
         "pt" => {
@@ -52,7 +52,7 @@ function loadLanguages() as Void {
                 Rez.Drawables.ptFlag,
                 Rez.Drawables.ptFlagS
             ],
-            "chartColor" => 0x0055AA,
+            "chartColor" => 0x5500FF,
             "reveal" => "R E V E L A R"
         },
         "hu" => {
@@ -61,7 +61,7 @@ function loadLanguages() as Void {
                 Rez.Drawables.huFlag,
                 Rez.Drawables.huFlagS
             ],
-            "chartColor" => 0xFF00FF,
+            "chartColor" => 0xFFAA00,
             "reveal" => "F E L F E D",
         },
         "nb" => {
@@ -70,7 +70,7 @@ function loadLanguages() as Void {
                 Rez.Drawables.nbFlag,
                 Rez.Drawables.nbFlagS
             ],
-            "chartColor" => 0xFF55AA,
+            "chartColor" => 0x55FF55,
             "reveal" => "A V S L Ø R E"
         }
     };

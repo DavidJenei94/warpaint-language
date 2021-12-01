@@ -21,7 +21,7 @@
 			<param name="locX">dc.getWidth() * 0.50</param>
 			<param name="locY">dc.getHeight() * 0.31</param>
 			<param name="justification">Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER</param>
-		</drawable>	
+		</drawable>
 		<drawable class="TranslationText" id="FromMiddleText">
 			<param name="locX">dc.getWidth() * 0.50</param>
 			<param name="locY">dc.getHeight() * 0.37</param>
@@ -36,7 +36,7 @@
 			<param name="locX">dc.getWidth() * 0.50</param>
 			<param name="locY">dc.getHeight() * 0.56</param>
 			<param name="justification">Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER</param>
-		</drawable>	
+		</drawable>
 		<drawable class="TranslationText" id="ToMiddleText">
 			<param name="locX">dc.getWidth() * 0.50</param>
 			<param name="locY">dc.getHeight() * 0.61</param>
@@ -47,21 +47,19 @@
 			<param name="locY">dc.getHeight() * 0.68</param>
 			<param name="justification">Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER</param>
 		</drawable>
-
+		
     </layout>
 
     <layout id="StatsLayout">
-
         <drawable id="StatsAreas" />
         <label id="StatsLabel" text="Statistics" x="50%" y="5%" color="Graphics.COLOR_WHITE" font="Graphics.FONT_XTINY" justification="Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER" />
         <label id="WarpaintLabel" text="Warpaint" x="50%" y="94%" color="Graphics.COLOR_WHITE" font="Graphics.FONT_XTINY" justification="Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER" />
-
     </layout>
 
     <layout scope="glance" id="GlanceLayout">
-
-        <label id="AppNameLabel" text="Warpaint Language" x="10%" y="10%" color="Graphics.COLOR_RED" font="Graphics.FONT_XTINY" justification="Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER" />
-
+		<drawable id="GlanceAreas" />
+        <label id="AppNameLabel" text="Warpaint" x="7%" y="33%" color="Graphics.COLOR_WHITE" font="Graphics.FONT_TINY" justification="Graphics.TEXT_JUSTIFY_LEFT | Graphics.TEXT_JUSTIFY_VCENTER" />
+        <label id="AppNameLabel2" text="Language" x="7%" y="67%" color="Graphics.COLOR_WHITE" font="Graphics.FONT_TINY" justification="Graphics.TEXT_JUSTIFY_LEFT | Graphics.TEXT_JUSTIFY_VCENTER" />
     </layout>
 
 </resources>

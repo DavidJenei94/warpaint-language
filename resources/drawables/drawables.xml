@@ -11,4 +11,7 @@
         <shape type="rectangle" x="0%" y="0%" width="100%" height="10%" color="0x0000FF"/> <!-- Statistics label background -->
         <shape type="rectangle" x="0%" y="90%" width="100%" height="10%" color="0x0000FF"/> <!-- Statistics bottom label background -->
     </drawable-list>
+    <drawable-list scope="glance" id="GlanceAreas" background="Graphics.COLOR_TRANSPARENT">
+        <shape type="polygon" points="[[80%, 46%], [84%, 46%], [82%, 54%]]" color="0xFFFFFF"/> <!-- Translation icon between flags -->
+    </drawable-list>
 </drawables>

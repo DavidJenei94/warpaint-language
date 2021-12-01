@@ -35,6 +35,19 @@ class WarpaintLanguageApp extends Application.AppBase {
     // Return the glance view of your application here
     (:glance)
     function getGlanceView() as Array<Views or InputDelegates>? {
+        loadLanguages();
+
+        selectedLanguageFrom = Storage.getValue("languageFrom");
+        selectedLanguageTo = Storage.getValue("languageTo");
+        if (selectedLanguageFrom == null) { 
+            selectedLanguageFrom = "None"; 
+            Storage.setValue("languageFrom", selectedLanguageFrom);
+        }
+        if (selectedLanguageTo == null) { 
+            selectedLanguageTo = "None"; 
+            Storage.setValue("languageTo", selectedLanguageTo);
+        }
+
         var glanceView = new WarpaintLanguageGlanceView();
         return [glanceView] as View;
     }
