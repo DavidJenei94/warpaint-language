@@ -18,6 +18,11 @@ class StatisticsListDelegate extends WatchUi.BehaviorDelegate {
         return true;        
     }
 
+    function onDone() as Boolean {
+        WatchUi.popView(WatchUi.SLIDE_DOWN);
+        return true;        
+    }
+
     //! Handle the select event
     //! @return true if handled, false otherwise
     public function onSelect(item as MenuItem) as Boolean {
@@ -30,5 +35,9 @@ class StatisticsListDelegate extends WatchUi.BehaviorDelegate {
     public function onBack() as Boolean {
         WatchUi.popView(WatchUi.SLIDE_DOWN);
         return true;
+    }
+
+    function onWrap(key as Key) as Boolean {
+        return true;        
     }
 }
