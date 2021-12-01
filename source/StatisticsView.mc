@@ -23,7 +23,7 @@ class StatisticsView extends WatchUi.View {
 
         // load flags
         for (var i = 0; i < 3; i++) {
-            if (languagesWordsNo[i] > totalWordsNo * 0.10) {
+            if (languagesWordsNo[i] > totalWordsNo * 0.12) {
                 flags[i] = WatchUi.loadResource(languages[languagesKeysDescending[i]]["flags"][0]);
             } else if (languagesWordsNo[i] > totalWordsNo * 0.01) {
                 flags[i] = WatchUi.loadResource(languages[languagesKeysDescending[i]]["flags"][1]);
@@ -110,7 +110,7 @@ class StatisticsView extends WatchUi.View {
 
         if (percentage > 0.00) {
             if (!isOther) {
-                if (percentage > 0.10) {
+                if (percentage > 0.12) {
                     coordinates = calculateXYfromDegree(middleDegree, distance, xShift, yShift);
                 } else {
                     coordinates = calculateXYfromDegree(middleDegree, distance, xShiftSmall, yShiftSmall);
