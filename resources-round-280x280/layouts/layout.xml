@@ -1,0 +1,65 @@
+<resources>
+    <layout id="MainLayout">
+
+        <drawable id="ClickAreas" />
+        <label id="RevealLabel" text="R E V E A L" x="50%" y="62%" color="Graphics.COLOR_BLACK" font="Graphics.FONT_LARGE" justification="Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER" />
+
+        <button x="0%" y="75%" width="100%" height="25%" background="Graphics.COLOR_BLACK" behavior="onNext" />
+        <button x="10%" y="50%" width="100%" height="25%" background="Graphics.COLOR_BLACK" behavior="onReveal" />
+        <button x="0%" y="0%" width="100%" height="25%" background="Graphics.COLOR_BLACK" behavior="onStats" />
+
+        <drawable class="HiderDrawable" id="RevealHider">
+            <param name="locX">dc.getWidth() * 0.00</param>
+            <param name="locY">dc.getHeight() * 0.50</param>
+            <param name="width">dc.getWidth() * 1.00</param>
+            <param name="height">dc.getHeight() * 0.25</param>
+            <param name="color">Graphics.COLOR_TRANSPARENT</param>
+        </drawable>
+
+        <drawable class="TranslationText" id="FromTopText">
+			<param name="locX">dc.getWidth() * 0.50</param>
+			<param name="locY">dc.getHeight() * 0.31</param>
+			<param name="justification">Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER</param>
+		</drawable>
+		<drawable class="TranslationText" id="FromMiddleText">
+			<param name="locX">dc.getWidth() * 0.50</param>
+			<param name="locY">dc.getHeight() * 0.37</param>
+			<param name="justification">Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER</param>
+		</drawable>
+		<drawable class="TranslationText" id="FromBottomText">
+			<param name="locX">dc.getWidth() * 0.50</param>
+			<param name="locY">dc.getHeight() * 0.42</param>
+			<param name="justification">Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER</param>
+		</drawable>
+        <drawable class="TranslationText" id="ToTopText">
+			<param name="locX">dc.getWidth() * 0.50</param>
+			<param name="locY">dc.getHeight() * 0.56</param>
+			<param name="justification">Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER</param>
+		</drawable>
+		<drawable class="TranslationText" id="ToMiddleText">
+			<param name="locX">dc.getWidth() * 0.50</param>
+			<param name="locY">dc.getHeight() * 0.61</param>
+			<param name="justification">Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER</param>
+		</drawable>
+		<drawable class="TranslationText" id="ToBottomText">
+			<param name="locX">dc.getWidth() * 0.50</param>
+			<param name="locY">dc.getHeight() * 0.68</param>
+			<param name="justification">Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER</param>
+		</drawable>
+
+		<bitmap id="WpVlogo"  x="38%" y="76%" filename="../images/WpV_logo_BW.png" dithering="none" />
+
+    </layout>
+
+    <layout id="StatsLayout">
+        <drawable id="StatsAreas" />
+        <label id="WarpaintLabel" text="Warpaint" x="50%" y="5%" color="Graphics.COLOR_WHITE" font="Graphics.FONT_XTINY" justification="Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER" />
+        <label id="VisionLabel" text="Vision" x="50%" y="94%" color="Graphics.COLOR_WHITE" font="Graphics.FONT_XTINY" justification="Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER" />
+    </layout>
+
+    <layout scope="glance" id="GlanceLayout">
+		<drawable id="GlanceAreas" />
+		<label id="AppNameLabel" text="Warpaint Language" x="50%" y="20%" color="Graphics.COLOR_WHITE" font="Graphics.FONT_XTINY" justification="Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER" />
+	</layout>
+
+</resources>
