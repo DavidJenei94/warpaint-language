@@ -68,10 +68,10 @@ class TranslationText extends WatchUi.Text {
                     if (spaceIndex == null) {
                         translationTop = translation.substring(0, Math.ceil(translationLength * splitPart)) + "-";
                         translationBottom = translation.substring(Math.ceil(translationLength * splitPart), translationLength);
+                        break;
                     }
 
                     translationBottom = translation.substring(spaceIndex + 1, translationLength);
-
                     break;
                 }
             }
