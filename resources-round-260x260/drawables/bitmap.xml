@@ -1,0 +1,20 @@
+<resources>
+    
+    <bitmap scope="glance" id="enFlag" filename="../images/en-flag.png" dithering="none" />
+    <bitmap scope="glance" id="enFlagS" filename="../images/en-flagS.png" dithering="none" />
+    <bitmap scope="glance" id="deFlag" filename="../images/de-flag.png" dithering="none" />
+    <bitmap scope="glance" id="deFlagS" filename="../images/de-flagS.png" dithering="none" />
+    <bitmap scope="glance" id="frFlag" filename="../images/fr-flag.png" dithering="none" />
+    <bitmap scope="glance" id="frFlagS" filename="../images/fr-flagS.png" dithering="none" />
+    <bitmap scope="glance" id="esFlag" filename="../images/es-flag.png" dithering="none" />
+    <bitmap scope="glance" id="esFlagS" filename="../images/es-flagS.png" dithering="none" />
+    <bitmap scope="glance" id="ruFlag" filename="../images/ru-flag.png" dithering="none" />
+    <bitmap scope="glance" id="ruFlagS" filename="../images/ru-flagS.png" dithering="none" />
+    <bitmap scope="glance" id="ptFlag" filename="../images/pt-flag.png" dithering="none" />
+    <bitmap scope="glance" id="ptFlagS" filename="../images/pt-flagS.png" dithering="none" />
+    <bitmap scope="glance" id="huFlag" filename="../images/hu-flag.png" dithering="none" />
+    <bitmap scope="glance" id="huFlagS" filename="../images/hu-flagS.png" dithering="none" />
+    <bitmap scope="glance" id="nbFlag" filename="../images/nb-flag.png" dithering="none" />
+    <bitmap scope="glance" id="nbFlagS" filename="../images/nb-flagS.png" dithering="none" />
+
+</resources>
