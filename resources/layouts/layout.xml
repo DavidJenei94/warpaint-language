@@ -2,7 +2,7 @@
     <layout id="MainLayout">
 
         <drawable id="ClickAreas" />
-        <label id="NextLabel" text="Next" x="50%" y="87%" color="Graphics.COLOR_WHITE" font="Graphics.FONT_SMALL" justification="Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER" />
+        <!-- <label id="NextLabel" text="Next" x="50%" y="87%" color="Graphics.COLOR_WHITE" font="Graphics.FONT_SMALL" justification="Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER" /> -->
         <label id="RevealLabel" text="R E V E A L" x="50%" y="62%" color="Graphics.COLOR_BLACK" font="Graphics.FONT_LARGE" justification="Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER" />
 
         <button x="0%" y="75%" width="100%" height="25%" background="Graphics.COLOR_BLACK" behavior="onNext" />
@@ -48,6 +48,8 @@
 			<param name="justification">Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER</param>
 		</drawable>
 
+		<bitmap id="WpVlogo"  x="39%" y="74%" filename="../images/WpV_logo_BW.png" dithering="none" />
+
     </layout>
 
     <layout id="StatsLayout">
@@ -58,8 +60,7 @@
 
     <layout scope="glance" id="GlanceLayout">
 		<drawable id="GlanceAreas" />
-        <label id="AppNameLabel" text="Warpaint" x="7%" y="33%" color="Graphics.COLOR_WHITE" font="Graphics.FONT_TINY" justification="Graphics.TEXT_JUSTIFY_LEFT | Graphics.TEXT_JUSTIFY_VCENTER" />
-        <label id="AppNameLabel2" text="Language" x="7%" y="67%" color="Graphics.COLOR_WHITE" font="Graphics.FONT_TINY" justification="Graphics.TEXT_JUSTIFY_LEFT | Graphics.TEXT_JUSTIFY_VCENTER" />
-    </layout>
+		<label id="AppNameLabel" text="Warpaint Language" x="50%" y="20%" color="Graphics.COLOR_WHITE" font="Graphics.FONT_XTINY" justification="Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER" />
+	</layout>
 
 </resources>

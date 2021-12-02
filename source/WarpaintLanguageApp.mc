@@ -48,7 +48,21 @@ class WarpaintLanguageApp extends Application.AppBase {
             Storage.setValue("languageTo", selectedLanguageTo);
         }
 
-        var glanceView = new WarpaintLanguageGlanceView();
+        totalLearnedWords = Storage.getValue("totalLearnedWords");
+
+        var totalWordsNo = 0;
+        var selectedLanguageWordsNo = 0;
+        if (totalLearnedWords != null) {
+            var totalLearnedWordsKeys = totalLearnedWords.keys();
+            for (var i = 0; i < totalLearnedWords.size(); i++) {
+                totalWordsNo += totalLearnedWords[totalLearnedWordsKeys[i]];
+                if (totalLearnedWordsKeys[i].equals(selectedLanguageTo)) {
+                    selectedLanguageWordsNo = totalLearnedWords[selectedLanguageTo];
+                }
+            }
+        }
+
+        var glanceView = new WarpaintLanguageGlanceView(selectedLanguageWordsNo, totalWordsNo);
         return [glanceView] as View;
     }
 

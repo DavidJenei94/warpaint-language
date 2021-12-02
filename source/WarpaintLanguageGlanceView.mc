@@ -7,8 +7,13 @@ class WarpaintLanguageGlanceView extends WatchUi.GlanceView {
     private var _fromFlag as BitmapResource;
     private var _toFlag as BitmapResource;
 
-    function initialize() {
+    var _selectedLanguageWordsNo as Number;
+    var _totalWordsNo as Number;
+
+    function initialize(selectedLanguageWordsNo, totalWordsNo) {
         GlanceView.initialize();
+        _selectedLanguageWordsNo = selectedLanguageWordsNo;
+        _totalWordsNo = totalWordsNo;
     }
 
     // Load your resources here
@@ -39,11 +44,15 @@ class WarpaintLanguageGlanceView extends WatchUi.GlanceView {
 
         // Draw flags
         if (selectedLanguageFrom != null && !selectedLanguageFrom.equals("None")) {
-            dc.drawBitmap(dc.getWidth() * 0.75, dc.getHeight() * 0.16, _fromFlag);
+            dc.drawBitmap(dc.getWidth() * 0.30, dc.getHeight() * 0.43, _fromFlag);
         }
         if (selectedLanguageTo != null && !selectedLanguageTo.equals("None")) {
-            dc.drawBitmap(dc.getWidth() * 0.75, dc.getHeight() * 0.65, _toFlag);
+            dc.drawBitmap(dc.getWidth() * 0.57, dc.getHeight() * 0.43, _toFlag);
         }
+
+        var displayStats = selectedLanguageTo + " " + _selectedLanguageWordsNo + " / Σ " + _totalWordsNo;
+        dc.setColor(Graphics.COLOR_WHITE, dc.COLOR_TRANSPARENT);
+        dc.drawText(dc.getWidth() * 0.50, dc.getHeight() * 0.78, Graphics.FONT_XTINY, displayStats, Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
     }
 
     // Called when this View is removed from the screen. Save the
