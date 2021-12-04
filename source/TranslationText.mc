@@ -66,6 +66,7 @@ class TranslationText extends WatchUi.Text {
                     } while (dc.getTextWidthInPixels(translationTop, iFont) >= screenWidth * screenLengthPercent || spaceIndex == null);
 
                     if (spaceIndex == null) {
+                        splitPart = 0.50;
                         translationTop = translation.substring(0, Math.ceil(translationLength * splitPart)) + "-";
                         translationBottom = translation.substring(Math.ceil(translationLength * splitPart), translationLength);
                         break;
