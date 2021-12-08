@@ -25,7 +25,7 @@ class TranslationText extends WatchUi.Text {
         _font = font;
     }
 
-    static function splitTranslation(dc as DC, translation as String) as Array<String or Number> {
+    static function splitTranslation(dc as DC, translation as String, isFrom as Boolean) as Array<String or Number> {
         var screenWidth = dc.getWidth();
         var screenHeight = dc.getHeight();
 
@@ -47,10 +47,26 @@ class TranslationText extends WatchUi.Text {
             selectedFont = Graphics.FONT_MEDIUM;
         } else {
             for (var iFont = Graphics.FONT_SMALL; iFont >= 0; iFont--){
-                if (dc.getTextWidthInPixels(translation, iFont) <= (screenWidth * screenLengthPercent) * 2) {
-                    selectedFont = iFont;
+                var textLength = dc.getTextWidthInPixels(translation, iFont);
+                var maxTextLength = (screenWidth * screenLengthPercent) * 2;
 
-                    var splitPart = 0.50;
+                selectedFont = iFont;
+                var splitPart = isFrom ? 0.47 : 0.48;
+
+                // if it is a bit too long, split with "-"
+                if (iFont == 0 && dc.getTextWidthInPixels(translation, iFont) > (screenWidth * screenLengthPercent) * 1.80) {
+                    var middleIndex = Math.ceil(translationLength * splitPart);
+                    translationTop = translation.substring(0, middleIndex);
+                    // if space or , is not the splitting part
+                    if (!translation.substring(middleIndex, middleIndex + 1).equals(" ") && !translation.substring(middleIndex, middleIndex + 1).equals(",") && 
+                        !translation.substring(middleIndex - 1, middleIndex).equals(" ") && !translation.substring(middleIndex - 1, middleIndex).equals(",")) {
+                        translationTop += "-";
+                    }
+                    translationBottom = translation.substring(middleIndex, translationLength);
+                    break;
+                }
+
+                if (dc.getTextWidthInPixels(translation, iFont) <= (screenWidth * screenLengthPercent) * 2) {
                     do {
                         translationBottom = translation.substring(Math.ceil(translationLength * splitPart), translationLength); 
                         spaceIndex = translationBottom.find(" ");
@@ -66,7 +82,7 @@ class TranslationText extends WatchUi.Text {
                     } while (dc.getTextWidthInPixels(translationTop, iFont) >= screenWidth * screenLengthPercent || spaceIndex == null);
 
                     if (spaceIndex == null) {
-                        splitPart = 0.50;
+                        splitPart = 0.48;
                         translationTop = translation.substring(0, Math.ceil(translationLength * splitPart)) + "-";
                         translationBottom = translation.substring(Math.ceil(translationLength * splitPart), translationLength);
                         break;

@@ -129,14 +129,14 @@ class WarpaintLanguageView extends WatchUi.View {
     // Update the view
     function onUpdate(dc as Dc) as Void {
 
-        var splittedTranslationFrom = TranslationText.splitTranslation(dc, wordFrom);
+        var splittedTranslationFrom = TranslationText.splitTranslation(dc, wordFrom, true);
         var selectedFontFrom = splittedTranslationFrom[3];
         fromTopText.setTranslationText(splittedTranslationFrom[0], selectedFontFrom);
         fromMiddleText.setTranslationText(splittedTranslationFrom[1], selectedFontFrom);
         fromBottomText.setTranslationText(splittedTranslationFrom[2], selectedFontFrom);
 
         if (revealed) {
-            var splittedTranslationTo = TranslationText.splitTranslation(dc, wordTo);
+            var splittedTranslationTo = TranslationText.splitTranslation(dc, wordTo, false);
             var selectedFontTo = splittedTranslationTo[3];
             toTopText.setTranslationText(splittedTranslationTo[0], selectedFontTo);
             toMiddleText.setTranslationText(splittedTranslationTo[1], selectedFontTo);
