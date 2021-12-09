@@ -16,8 +16,17 @@ function loadLanguages() as Void {
                 Rez.Drawables.deFlag,
                 Rez.Drawables.deFlagS
             ],
-            "chartColor" => 0xAA5555,
+            "chartColor" => 0x00AA00,
             "reveal" => "V E R R A T E N"
+        },
+        "hu" => {
+            "name" => Rez.Strings.huName,
+            "flags" => [
+                Rez.Drawables.huFlag,
+                Rez.Drawables.huFlagS
+            ],
+            "chartColor" => 0xFFAA00,
+            "reveal" => "F E L F E D",
         },
         "fr" => {
             "name" => Rez.Strings.frName,
@@ -55,14 +64,14 @@ function loadLanguages() as Void {
             "chartColor" => 0x5500FF,
             "reveal" => "R E V E L A R"
         },
-        "hu" => {
-            "name" => Rez.Strings.huName,
+        "it" => {
+            "name" => Rez.Strings.itName,
             "flags" => [
-                Rez.Drawables.huFlag,
-                Rez.Drawables.huFlagS
+                Rez.Drawables.itFlag,
+                Rez.Drawables.itFlagS
             ],
-            "chartColor" => 0xFFAA00,
-            "reveal" => "F E L F E D",
+            "chartColor" => 0xAAFF00,
+            "reveal" => "S V E L A R E"
         },
         "nb" => {
             "name" => Rez.Strings.nbName,
