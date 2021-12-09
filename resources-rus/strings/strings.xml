@@ -1,0 +1,18 @@
+<resources>
+    
+    <string scope="glance" id="enName">английский</string>
+    <string scope="glance" id="deName">Немецкий</string>
+    <string scope="glance" id="huName">венгерский язык</string>
+    <string scope="glance" id="frName">французкий язык</string>
+    <string scope="glance" id="esName">испанский</string>
+    <string scope="glance" id="ruName">русский</string>
+    <string scope="glance" id="ptName">португальский</string>
+    <string scope="glance" id="itName">Итальянский</string>
+    <string scope="glance" id="nbName">Норвежский</string>
+
+    <string id="languageSelection1">Выберите языки</string>
+    <string id="languageSelection2">В настройках</string>
+    <string id="internetConnection1">Подключиться к Интернету</string>
+    <string id="internetConnection2">Затем нажмите «Далее»</string>
+
+</resources>

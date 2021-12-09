@@ -100,15 +100,15 @@ class WarpaintLanguageView extends WatchUi.View {
             wordTo = words.get("to");
             revealed = false;
         } else if (selectedLanguageFrom.equals("None") || selectedLanguageTo.equals("None")) {
-            wordFrom = "Select languages";
-            wordTo = "in settings";
+            wordFrom = WatchUi.loadResource(Rez.Strings.languageSelection1);
+            wordTo = WatchUi.loadResource(Rez.Strings.languageSelection2);
 
             revealLabel.setText("");
             revealHider.hide();
             revealed = true;
         } else {
-            wordFrom = "Connect to Internet";
-            wordTo = "Then click Next";
+            wordFrom = WatchUi.loadResource(Rez.Strings.internetConnection1);
+            wordTo = WatchUi.loadResource(Rez.Strings.internetConnection2);
 
             revealLabel.setText("");
             revealHider.hide();

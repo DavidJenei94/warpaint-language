@@ -1,0 +1,18 @@
+<resources>
+    
+    <string scope="glance" id="enName">Angol</string>
+    <string scope="glance" id="deName">Német</string>
+    <string scope="glance" id="huName">Magyar</string>
+    <string scope="glance" id="frName">Francia</string>
+    <string scope="glance" id="esName">Spanyol</string>
+    <string scope="glance" id="ruName">Orosz</string>
+    <string scope="glance" id="ptName">Portugál</string>
+    <string scope="glance" id="itName">Olasz</string>
+    <string scope="glance" id="nbName">Norvég</string>
+
+    <string id="languageSelection1">Válasszon nyelveket</string>
+    <string id="languageSelection2">A beállításokban</string>
+    <string id="internetConnection1">Csatlakozzon az internethez</string>
+    <string id="internetConnection2">Majd kattintson a "Tovább" gombra</string>
+
+</resources>

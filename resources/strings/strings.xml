@@ -1,13 +1,21 @@
-<strings>
+<resources>
+
     <string id="AppName">Warpaint Language</string>
     <string id="AppVersionTitle">Warpaint Language version</string>
-    
+
     <string scope="glance" id="enName">English</string>
     <string scope="glance" id="deName">German</string>
+    <string scope="glance" id="huName">Hungarian</string>
     <string scope="glance" id="frName">French</string>
     <string scope="glance" id="esName">Spanish</string>
     <string scope="glance" id="ruName">Russian</string>
     <string scope="glance" id="ptName">Portuguese</string>
-    <string scope="glance" id="huName">Hungarian</string>
+    <string scope="glance" id="itName">Italian</string>
     <string scope="glance" id="nbName">Norwegian</string>
-</strings>
+
+    <string id="languageSelection1">Select languages</string>
+    <string id="languageSelection2">in the settings</string>
+    <string id="internetConnection1">Connect to Internet</string>
+    <string id="internetConnection2">Then click 'Next'</string>
+
+</resources>

@@ -5,6 +5,8 @@ A Garmin Connect IQ widget with translations of 2 selected languages.
 
 The Warpaint Language is a unique widget...
 
+This app was created to help Garmin users to learn the most used words and phrases in different languages for free. It is much appreciated if you report any issues with the translations or proofread any languages. In these cases please send me a message via 'Contact Developer' option.
+
 The Warpaint Language is fully free, however if you enjoy using it you can support my work with a small donation on the following link: https://paypal.me/WarpaintVision (Please mention the name of the app: "Warpaint Language" and choose the option "donate to a friend" for less paypal fees).
 
 Please leave a review if you like the watch face!
