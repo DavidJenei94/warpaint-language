@@ -34,6 +34,7 @@ class WarpaintLanguageView extends WatchUi.View {
     var revealHider as Drawable;
     var revealed as Boolean;
 
+    private var _screenShape as Number;
     private var _fromFlag as BitmapResource;
     private var _toFlag as BitmapResource;
 
@@ -51,6 +52,8 @@ class WarpaintLanguageView extends WatchUi.View {
         downloading = false;
         revealed = false;
         settingsChanged = false;
+
+        _screenShape = System.getDeviceSettings().screenShape;
 
         loadLanguages();
         self.onSettingsChanged();
@@ -163,14 +166,20 @@ class WarpaintLanguageView extends WatchUi.View {
         // Call the parent onUpdate function to redraw the layout
         View.onUpdate(dc);
 
-        // // Test
-        // dc.drawText(dc.getWidth() * 0.50, dc.getHeight() * 0.55, Graphics.FONT_TINY, wordTo, Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
-
+        // Draw flags
         if (selectedLanguageFrom != null && !selectedLanguageFrom.equals("None")) {
-            dc.drawBitmap(dc.getWidth() * 0.27, dc.getHeight() * 0.10, _fromFlag);
+            if (_screenShape == System.SCREEN_SHAPE_RECTANGLE) {
+                dc.drawBitmap(dc.getWidth() * 0.27, dc.getHeight() * 0.08, _fromFlag);
+            } else {
+                dc.drawBitmap(dc.getWidth() * 0.27, dc.getHeight() * 0.10, _fromFlag);
+            }
         }
         if (selectedLanguageTo != null && !selectedLanguageTo.equals("None")) {
-            dc.drawBitmap(dc.getWidth() * 0.56, dc.getHeight() * 0.10, _toFlag);
+            if (_screenShape == System.SCREEN_SHAPE_RECTANGLE) {
+                dc.drawBitmap(dc.getWidth() * 0.56, dc.getHeight() * 0.08, _toFlag);
+            } else {
+                dc.drawBitmap(dc.getWidth() * 0.56, dc.getHeight() * 0.10, _toFlag);
+            }
         }
     }
 
@@ -267,8 +276,8 @@ class WarpaintLanguageView extends WatchUi.View {
     }
 
 	function recieveWords(responseCode, data) as Void {
-        System.println("Response code: " + responseCode);
-        System.println("recieveWords data: " + data);
+        // System.println("Response code: " + responseCode);
+        // System.println("recieveWords data: " + data);
 
 		// If no HTTP failure:  return data response.
 		var words = null;

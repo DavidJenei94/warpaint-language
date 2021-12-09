@@ -1,5 +1,6 @@
 import Toybox.Graphics;
 import Toybox.WatchUi;
+import Toybox.System;
 
 //! This is the custom drawable we will use for our main menu title
 class StatisticsListMenuTitle extends WatchUi.Drawable {
@@ -19,7 +20,8 @@ class StatisticsListMenuTitle extends WatchUi.Drawable {
         dc.clear();
 
         dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
-        dc.drawText(dc.getWidth() / 2, dc.getHeight() / 2, Graphics.FONT_SMALL, "Words\nTotal: " + _totalWordsNo, Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
+        var totalWordsText = System.getDeviceSettings().screenShape == System.SCREEN_SHAPE_RECTANGLE ? "Words Total: " : "Words\nTotal: ";
+        dc.drawText(dc.getWidth() / 2, dc.getHeight() / 2, Graphics.FONT_SMALL, totalWordsText + _totalWordsNo, Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
     }
 }
 
