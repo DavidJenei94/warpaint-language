@@ -207,7 +207,7 @@ class WarpaintLanguageView extends WatchUi.View {
                     var params = {
                         "lan1" => selectedLanguageFrom,
                         "lan2" => selectedLanguageTo,
-                        "wordsNo" => 20
+                        "wordsNo" => 25
                     };
                     // Add actual words to params
                     if (actualLearnedWords != null) {
@@ -220,7 +220,7 @@ class WarpaintLanguageView extends WatchUi.View {
                         :method => Communications.HTTP_REQUEST_METHOD_GET,
                         :responseType => Communications.HTTP_RESPONSE_CONTENT_TYPE_JSON
                     };
-                    var url = "https://script.google.com/macros/s/AKfycbzq5I8VstN7DwAjObKn5JUZJTC_QgAcgyJ4x1mxiZ_bpiYoF52MbBOXz9_2eoAd1L38/exec";
+                    var url = "https://script.google.com/macros/s/AKfycbwEUraBqCOTwWHfHX_u46vk9o_WDfTdrbPt3Tutpfjyuoc7zAcgYfphBRg8RyemJdSk/exec";
                     Communications.makeWebRequest(
                         url, 
                         params,
