@@ -64,5 +64,5 @@ class WarpaintLanguageGlanceView extends WatchUi.GlanceView {
     // memory.
     function onHide() as Void {
     }
-    
+
 }

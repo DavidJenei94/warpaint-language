@@ -3,12 +3,13 @@ A Garmin Connect IQ widget with translations of 2 selected languages.
 
 ## Description
 
-The Warpaint Language is a unique widget that was created to help Garmin users learn the most used words and phrases in different languages for free. I used many translators but as I don't speak most of the available languages it may contain mistakes (especially with genders and with words which have noun and verb forms too). It is much appreciated if you report any issues with the translations or apply to proofread any languages. In these cases please send me a message via 'Contact Developer' option.
+The Warpaint Language is a unique widget that was created to help Garmin users learn the most used words and phrases in different languages for free. I used many translators but as I don't speak most of the available languages it may contain mistakes (especially with genders and with words which have noun and verb forms too). It is much appreciated if you report any issues with the translations or apply to proofread any languages. In these cases please send me a message via 'Contact Developer' option. 
+More languages are coming but if you have any desired one let me know and I will put to the beggining of the queue according to the number of request.
 
 The Warpaint Language is fully free, however if you enjoy using it you can support my work with a small donation on the following link: https://paypal.me/WarpaintVision (Please mention the name of the app: "Warpaint Language" and choose the option "donate to a friend" for less paypal fees).
 
 Please leave a review if you like the widget!
-In case of any issues/questions please check the following 'Warpaint Language (WpL) - Garmin widget help' spreadsheet, which includes the settings, FAQ, available features per device and instructions of how to use the app: https://docs.google.com/spreadsheets/d/1j0OmzTjzIc9nzAGclR-g87UA_Xr875As2goZkQ10z9s/edit?usp=sharing. If your question is not answered there, feel free to send me a message via 'Contact Developer' option.
+In case of any issues/questions please check the following 'Warpaint Language (WpL) - Garmin widget help' spreadsheet, which includes the settings, FAQ, available features per device and instructions of how to use the app: https://docs.google.com/spreadsheets/d/18EWHCTvGiSRE_q7oDRBywszU02dxI6LBvyxhMYlaXvI/edit?usp=sharing. If your question is not answered there, feel free to send me a message via 'Contact Developer' option.
 
 ### Features:
 - Warpaint Language has 9 available languages: English, German, Hungarian, French, Spanish, Russian, Portuguese, Italian, Norwegian (Bokmal)
@@ -41,6 +42,8 @@ Language, Translate, Translation, dictionary, Vocabulary, Learning, Studying, Mo
 
 ## What's New
 
+### 1.0.1
+- Optimizing long phrase splitting
 ### 1.0.0
 - Public release.
 

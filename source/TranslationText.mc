@@ -57,6 +57,14 @@ class TranslationText extends WatchUi.Text {
             // 1 line
             translationMiddle = translation;
             selectedFont = Graphics.FONT_MEDIUM;
+        } else if (dc.getTextWidthInPixels(translation, Graphics.FONT_SMALL) <= screenWidth * screenLengthPercent) {
+            // 1 line
+            translationMiddle = translation;
+            selectedFont = Graphics.FONT_SMALL;
+        } else if (dc.getTextWidthInPixels(translation, Graphics.FONT_TINY) <= screenWidth * screenLengthPercent) {
+            // 1 line
+            translationMiddle = translation;
+            selectedFont = Graphics.FONT_TINY;
         } else {
             // 2 lines
             for (var iFont = Graphics.FONT_SMALL; iFont >= 0; iFont--){
@@ -95,14 +103,20 @@ class TranslationText extends WatchUi.Text {
                         }
                     } while (dc.getTextWidthInPixels(translationTop, iFont) >= screenWidth * screenLengthPercent || spaceIndex == null);
 
-                    if (spaceIndex == null) {
-                        splitPart = 0.48;
-                        translationTop = translation.substring(0, Math.ceil(translationLength * splitPart)) + "-";
-                        translationBottom = translation.substring(Math.ceil(translationLength * splitPart), translationLength);
-                        break;
+                    translationBottom = translation.substring(spaceIndex + 1, translationLength);
+
+                    // If second line is way longer do not split (with next if), but change to smaller font if possible
+                    if (iFont != 0 && dc.getTextWidthInPixels(translationBottom, iFont) >= screenWidth * screenLengthPercent) {
+                        continue;
                     }
 
-                    translationBottom = translation.substring(spaceIndex + 1, translationLength);
+                    // If long word found (+second line is longer because of this), split with "-" 
+                    if (spaceIndex == null || dc.getTextWidthInPixels(translationBottom, iFont) >= screenWidth * screenLengthPercent) {
+                        splitPart = 0.47;
+                        translationTop = translation.substring(0, Math.ceil(translationLength * splitPart)) + "-";
+                        translationBottom = translation.substring(Math.ceil(translationLength * splitPart), translationLength);
+                    }
+
                     break;
                 }
             }
