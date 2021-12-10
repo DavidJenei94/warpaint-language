@@ -41,6 +41,7 @@ class WarpaintLanguageView extends WatchUi.View {
     private var _wordsArray = [];
 
     private var _downloadTimer as Timer.Timer;
+    private var _progressBarCounter as Integer;
 
     function initialize() {
         View.initialize();
@@ -52,10 +53,10 @@ class WarpaintLanguageView extends WatchUi.View {
         downloading = false;
         revealed = false;
         settingsChanged = false;
+        _progressBarCounter = 0;
 
         _screenShape = System.getDeviceSettings().screenShape;
 
-        loadLanguages();
         self.onSettingsChanged();
 
         if (!selectedLanguageFrom.equals("None")) {
@@ -221,6 +222,7 @@ class WarpaintLanguageView extends WatchUi.View {
                 if (_wordsArray == null || _wordsArray.size() < 1) {
                     Communications.cancelAllRequests();
                     downloading = false;
+                    _progressBarCounter = 0;
                 }
 
                 // Downloading only starts when wordsArray has <10 words
@@ -243,6 +245,8 @@ class WarpaintLanguageView extends WatchUi.View {
                         :responseType => Communications.HTTP_RESPONSE_CONTENT_TYPE_JSON
                     };
                     var url = "https://script.google.com/macros/s/AKfycbwEUraBqCOTwWHfHX_u46vk9o_WDfTdrbPt3Tutpfjyuoc7zAcgYfphBRg8RyemJdSk/exec";
+                    // Old one to use for testing: 
+                    // var url = "https://script.google.com/macros/s/AKfycbzq5I8VstN7DwAjObKn5JUZJTC_QgAcgyJ4x1mxiZ_bpiYoF52MbBOXz9_2eoAd1L38/exec";
                     Communications.makeWebRequest(
                         url, 
                         params,
@@ -280,10 +284,29 @@ class WarpaintLanguageView extends WatchUi.View {
 
     //! Update the progress bar every second
     public function timerCallback() as Void {
+        _progressBarCounter++;
+
+        // If 30 seconds passed, exit downloading
+        if (_progressBarCounter > 150) {
+            Communications.cancelAllRequests();
+            _downloadTimer.stop();
+            downloading = false;
+            _progressBarCounter = 0;
+
+            WatchUi.popView(WatchUi.SLIDE_IMMEDIATE);
+
+            revealHider.hide();
+            setRevealed(true);
+
+            return;
+        }
+
         // If wordsArray is filled up stop timer and downloading and go back to main view
         if (_wordsArray != null && _wordsArray.size() > 10) {
             _downloadTimer.stop();
             downloading = false;
+            _progressBarCounter = 0;
+
             WatchUi.popView(WatchUi.SLIDE_IMMEDIATE);
             self.refreshWordsOnView(true);
         }
@@ -312,6 +335,7 @@ class WarpaintLanguageView extends WatchUi.View {
         }
 
         downloading = false;
+        _progressBarCounter = 0;
 
         self.revealLabel.setText(revealText);
         self.revealHider.unhide();
@@ -372,6 +396,7 @@ class ProgressDelegate extends WatchUi.BehaviorDelegate {
 
         Communications.cancelAllRequests();
         downloading = false;
+        _progressBarCounter = 0;
 
         _revealHider.hide();
         _setRevealed.invoke(true);

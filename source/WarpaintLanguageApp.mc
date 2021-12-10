@@ -27,6 +27,8 @@ class WarpaintLanguageApp extends Application.AppBase {
 
     // Return the initial view of your application here
     function getInitialView() as Array<Views or InputDelegates>? {
+        loadLanguages();
+
         _mainView = new WarpaintLanguageView();
         var delegate = new WarpaintLanguageDelegate(_mainView);
         return [_mainView, delegate] as Array<Views or InputDelegates>;
