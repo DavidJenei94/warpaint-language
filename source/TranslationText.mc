@@ -7,24 +7,34 @@ class TranslationText extends WatchUi.Text {
     private var _translationText as String;
     private var _font as Number;
 
+    //! Contructor
+    //! @params params as in the custom drawable in layouts
     public function initialize(params as Dictionary) {
         Text.initialize(params);
     }
 
+    //! draw the texts
+    //! @param dc Device Content
     function draw(dc as Dc) {
-        //dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
         self.setColor(Graphics.COLOR_WHITE);
         self.setFont(_font);
         self.setText(_translationText);
 		Text.draw(dc);
     }
 
-    // Set the text
+    //! Set the translation text and font
+    //! @param translationText the text to show
+    //! @param font the font to show the text with
     function setTranslationText(translationText as String, font as Number) as Void {
         _translationText = translationText;
         _font = font;
     }
 
+    //! split the translation text according to length
+    //! @param dc Device Content
+    //! @param translation the text to split
+    //! @param isFrom a little different layout if from or to (because the round watch)
+    //! @return array of splitted text and selected font
     static function splitTranslation(dc as DC, translation as String, isFrom as Boolean) as Array<String or Number> {
         var screenWidth = dc.getWidth();
         var screenHeight = dc.getHeight();
@@ -40,12 +50,15 @@ class TranslationText extends WatchUi.Text {
         var screenLengthPercent = 0.95;
 
         if (dc.getTextWidthInPixels(translation, Graphics.FONT_LARGE) <= screenWidth * screenLengthPercent) {
+            // 1 line
     		translationMiddle = translation;
             selectedFont = Graphics.FONT_LARGE;
     	} else if (dc.getTextWidthInPixels(translation, Graphics.FONT_MEDIUM) <= screenWidth * screenLengthPercent) {
+            // 1 line
             translationMiddle = translation;
             selectedFont = Graphics.FONT_MEDIUM;
         } else {
+            // 2 lines
             for (var iFont = Graphics.FONT_SMALL; iFont >= 0; iFont--){
                 var textLength = dc.getTextWidthInPixels(translation, iFont);
                 var maxTextLength = (screenWidth * screenLengthPercent) * 2;
@@ -57,7 +70,7 @@ class TranslationText extends WatchUi.Text {
                 if (iFont == 0 && dc.getTextWidthInPixels(translation, iFont) > (screenWidth * screenLengthPercent) * 1.80) {
                     var middleIndex = Math.ceil(translationLength * splitPart);
                     translationTop = translation.substring(0, middleIndex);
-                    // if space or , is not the splitting part
+                    // if "space" or "," is not the splitting part, then use "-"
                     if (!translation.substring(middleIndex, middleIndex + 1).equals(" ") && !translation.substring(middleIndex, middleIndex + 1).equals(",") && 
                         !translation.substring(middleIndex - 1, middleIndex).equals(" ") && !translation.substring(middleIndex - 1, middleIndex).equals(",")) {
                         translationTop += "-";
@@ -66,6 +79,7 @@ class TranslationText extends WatchUi.Text {
                     break;
                 }
 
+                // Otherwise split at middle at the next space
                 if (dc.getTextWidthInPixels(translation, iFont) <= (screenWidth * screenLengthPercent) * 2) {
                     do {
                         translationBottom = translation.substring(Math.ceil(translationLength * splitPart), translationLength); 
@@ -96,5 +110,4 @@ class TranslationText extends WatchUi.Text {
 
         return [translationTop, translationMiddle, translationBottom, selectedFont];
     }
-
 }

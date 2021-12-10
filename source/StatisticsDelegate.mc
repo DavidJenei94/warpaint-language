@@ -7,6 +7,7 @@ class StatisticsDelegate extends WatchUi.BehaviorDelegate {
     private var _menuTitleHeight as Number;
 
     //! Constructor
+    //! @param view Statistics view
     public function initialize(view) {
         BehaviorDelegate.initialize();
         _statisticsView = view;
@@ -48,11 +49,4 @@ class StatisticsDelegate extends WatchUi.BehaviorDelegate {
 
         return true;
     }
-
-    // //! Handle select
-    // //! @return true if handled, false otherwise
-    // public function onSelect() as Boolean {
-    //     onMenu();
-    //     return true;
-    // }
 }

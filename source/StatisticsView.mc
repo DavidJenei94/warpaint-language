@@ -16,12 +16,13 @@ class StatisticsView extends WatchUi.View {
     }
 
     // Load your resources here
+    //! @param dc as Device Content
     function onLayout(dc as Dc) as Void {
         setLayout(Rez.Layouts.StatsLayout(dc));
 
         orderLanguages();
 
-        // load flags
+        // load flags of the 3 most learned languages
         for (var i = 0; i < 3; i++) {
             if (languagesWordsNo[i] > totalWordsNo * 0.12) {
                 flags[i] = WatchUi.loadResource(languages[languagesKeysDescending[i]]["flags"][0]);
@@ -34,11 +35,13 @@ class StatisticsView extends WatchUi.View {
     }
 
     // Update the view
+    //! @param dc as Device Content
     function onUpdate(dc as Dc) as Void {
 
         // Call the parent onUpdate function to redraw the layout
         View.onUpdate(dc);
 
+        // Calculate and draw the pie chart and percentages
         if (totalWordsNo > 0) {
             var otherColor = 0x555555;
 
@@ -47,6 +50,7 @@ class StatisticsView extends WatchUi.View {
             var thirdLanguagePercentage = languagesWordsNo[2].toFloat() / totalWordsNo;
             var otherLanguagePercentage = (totalWordsNo - languagesWordsNo[0] - languagesWordsNo[1] - languagesWordsNo[2]).toFloat() / totalWordsNo;
 
+            // percentage to display (needed to calculate because of roundings)
             var otherLanguagePercentageDisplay = Math.round(otherLanguagePercentage * 100);
             var thirdLanguagePercentageDisplay = Math.round(thirdLanguagePercentage * 100);
             var secondLanguagePercentageDisplay = Math.round(secondLanguagePercentage * 100);
@@ -97,6 +101,13 @@ class StatisticsView extends WatchUi.View {
         }
     }
 
+    //! draw the flags and percentages on top of pie chart
+    //! @param dc as Device Content
+    //! @param languageNo the order of the language (1st, 2nd, 3rd, other)
+    //! @param percentage Actual percentage
+    //! @param percentageDisplay percentage to display (needed to calculate because of roundings)
+    //! @param middleDegree the middle of the arc to position flags
+    //! @param isOther if other, then no flag is necessary
     private function drawFlagAndPercentage(dc as Dc, languageNo as Integer, percentage as Float, percentageDisplay as Float, middleDegree as Float, isOther as Boolean) as Void {
         // Draw the flags and percents
         var shiftDistance = dc.getWidth() / 2;
@@ -138,6 +149,11 @@ class StatisticsView extends WatchUi.View {
         }       
     }
 
+    //! reposition the x and y for flags
+    //! @param degree current middle degree
+    //! @param distance the distance from middle
+    //! @param xShift the shift from x
+    //! @param yShift the shift from y
     private function calculateXYfromDegree(degree as Float, distance as Float, xShift as Float, yShift as Float) as Array<Integer> {
         var radians = Math.toRadians(degree);
         var x = distance * Math.cos(radians) + xShift;
@@ -145,8 +161,8 @@ class StatisticsView extends WatchUi.View {
         return [x, y];
     }
 
+    //! Sort learned words in Descending order
     function orderLanguages() as Void {
-        // Sort learned words in Descending order
         // Language Order does not matter at this point, it will be searched below
         var languagesKeys = languages.keys();
         for (var i = 0; i < languagesKeys.size(); i++) {
@@ -186,6 +202,9 @@ class StatisticsView extends WatchUi.View {
         }
     }
 
+    //! Merge sort implementation
+    //! @param arrayToSort the array to sort
+    //! @return the sorted array
     function mergesort(arrayToSort) {
         if (arrayToSort.size() == 1) {
             return arrayToSort;
@@ -200,6 +219,10 @@ class StatisticsView extends WatchUi.View {
         return merge(arrayOne, arrayTwo);
     }
 
+    //! merge of the Merge sort implementation
+    //! @param arrayOne the first array
+    //! @param arrayTwo the second array
+    //! @return new sorted array from the 2 of them
     function merge(arrayOne, arrayTwo) {
         var arrayThree = [];
 

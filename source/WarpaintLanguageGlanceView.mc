@@ -10,13 +10,17 @@ class WarpaintLanguageGlanceView extends WatchUi.GlanceView {
     var _selectedLanguageWordsNo as Number;
     var _totalWordsNo as Number;
 
+    //! constructor
+    //! @param selectedLanguageWordsNo the learned words from the selected language
+    //! @param totalWordsNo the total learned words from all languages
     function initialize(selectedLanguageWordsNo, totalWordsNo) {
         GlanceView.initialize();
         _selectedLanguageWordsNo = selectedLanguageWordsNo;
         _totalWordsNo = totalWordsNo;
     }
 
-    // Load your resources here
+    //! Load your resources here
+    //! @param dc as Device Content
     function onLayout(dc as Dc) as Void {
         setLayout(Rez.Layouts.GlanceLayout(dc));
 
@@ -39,7 +43,7 @@ class WarpaintLanguageGlanceView extends WatchUi.GlanceView {
     // Update the view
     function onUpdate(dc as Dc) as Void {
 
-        // Call the parent onUpdate function to redraw the layout
+        // Call the parent onUpdate function to redraw the glance layout
         View.onUpdate(dc);
 
         // Draw flags
@@ -59,6 +63,6 @@ class WarpaintLanguageGlanceView extends WatchUi.GlanceView {
     // state of this View here. This includes freeing resources from
     // memory.
     function onHide() as Void {
-
     }
+    
 }

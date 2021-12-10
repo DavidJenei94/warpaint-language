@@ -1,3 +1,4 @@
+//! global function to load language details into languages dictionary
 (:glance)
 function loadLanguages() as Void {
     languages = {

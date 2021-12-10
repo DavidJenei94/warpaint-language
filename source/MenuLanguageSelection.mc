@@ -9,7 +9,11 @@ class MenuLanguageSelection extends WatchUi.Menu2InputDelegate {
     var _mainView as View;
     var _parentmenu as Menu2;
 	var _parentmenuItemId;
+
     //! Constructor
+    //! @param mainView The mainView
+    //! @param parentMenu The parent menu - the Languages From or Languages To
+    //! @param parentmenuItemId the id of the parent manu
 	function initialize(mainView, parentMenu, parentmenuItemId) {
 		Menu2InputDelegate.initialize();
         _mainView = mainView;
@@ -30,9 +34,10 @@ class MenuLanguageSelection extends WatchUi.Menu2InputDelegate {
         }
         _mainView.loadFlags();
 
-        // Change to other language
+        // Change to other language - on the main view onSettingsChange will be called in onUpdate()
         settingsChanged = true;
         
+        // Set the parent menu sublabel to the new one
         var parent_idx = _parentmenu.findItemById(_parentmenuItemId);
 		var parent_item = _parentmenu.getItem(parent_idx);
 		if (parent_item) {
@@ -46,6 +51,7 @@ class MenuLanguageSelection extends WatchUi.Menu2InputDelegate {
     //! Handle the back key being pressed
     public function onBack() as Void {
         WatchUi.popView(WatchUi.SLIDE_DOWN);
+        return true;
     }
 
     //! Handle the user navigating off the end of the menu

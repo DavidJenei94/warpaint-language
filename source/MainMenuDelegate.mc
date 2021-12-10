@@ -7,9 +7,12 @@ import Toybox.WatchUi;
 class MainMenuDelegate extends WatchUi.Menu2InputDelegate {
 
     var _mainMenu as Menu2;
-    var _mainView as Menu2;
+    var _mainView as View;
 
     //! Constructor
+    //! @param mainView The main view
+    //! @param mainMenu the current main Menu - to pass as a parameter to Language selection 
+    //! to be able to change the sublebel when seelcting a new language
     public function initialize(mainView, mainMenu) {
         Menu2InputDelegate.initialize();
         _mainMenu = mainMenu;
@@ -25,6 +28,7 @@ class MainMenuDelegate extends WatchUi.Menu2InputDelegate {
             var subMenuId = id.equals("languageFrom") ? "languageFrom" : "languageTo";
             var languageMenu = new WatchUi.Menu2({:title=>title});
             
+            // Add all loaded languages to list
             var languagesKeys = languages.keys();
             for (var i = 0; i < languages.size(); i++) {
                 var key = languagesKeys[i];
@@ -45,34 +49,6 @@ class MainMenuDelegate extends WatchUi.Menu2InputDelegate {
     public function onBack() as Void {
         WatchUi.popView(WatchUi.SLIDE_DOWN);
         WatchUi.requestUpdate();
-    }
-}
-
-//! This was ued for categories - may be used for themes later
-//! This is the menu input delegate shared by all the basic sub-menus in the application
-class SubMenuDelegate extends WatchUi.Menu2InputDelegate {
-
-    //! Constructor
-    public function initialize() {
-        Menu2InputDelegate.initialize();
-    }
-
-    //! Handle an item being selected
-    //! @param item The selected menu item
-    public function onSelect(item as MenuItem) as Void {
-        var id = item.getId() as String;
-        Storage.setValue(id, item.isEnabled());
-
-        WatchUi.requestUpdate();
-    }
-
-    //! Handle the back key being pressed
-    public function onBack() as Void {
-        WatchUi.popView(WatchUi.SLIDE_DOWN);
-    }
-
-    //! Handle the done item being selected
-    public function onDone() as Void {
-        WatchUi.popView(WatchUi.SLIDE_DOWN);
+        return true;
     }
 }

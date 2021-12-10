@@ -8,16 +8,22 @@ class StatisticsListDelegate extends WatchUi.BehaviorDelegate {
         BehaviorDelegate.initialize();
     }
 
+    //! Handle on Title
+    //! @return true if handled, false otherwise
     function onTitle() as Boolean {
         WatchUi.popView(WatchUi.SLIDE_DOWN);
         return true;        
     }
 
+    //! Handle on Footer
+    //! @return true if handled, false otherwise
     function onFooter() as Boolean {
         WatchUi.popView(WatchUi.SLIDE_DOWN);
         return true;        
     }
 
+    //! Handle on Done
+    //! @return true if handled, false otherwise
     function onDone() as Boolean {
         WatchUi.popView(WatchUi.SLIDE_DOWN);
         return true;        
@@ -37,6 +43,9 @@ class StatisticsListDelegate extends WatchUi.BehaviorDelegate {
         return true;
     }
 
+    //! Handle wrap
+    //! @param key The key triggering the menu wrap
+    //! @return true - wrapping is allowed
     function onWrap(key as Key) as Boolean {
         return true;        
     }

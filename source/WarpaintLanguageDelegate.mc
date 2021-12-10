@@ -33,7 +33,7 @@ class WarpaintLanguageDelegate extends WatchUi.BehaviorDelegate {
         return true;
     }
 
-    //! Handle key events
+    //! Handle key events - next or reveal on no touchsreen devices
     //! @param keyEvent
     //! @return true if handled, false otherwise
     function onKey(keyEvent) as Boolean {
@@ -51,6 +51,7 @@ class WarpaintLanguageDelegate extends WatchUi.BehaviorDelegate {
     }
 
     //! Handle asking next word
+    //! Restore the RevealHider and get new words within refreshWordsOnView
     //! @return true if handled, false otherwise
     public function onNext() as Boolean {
         // System.println("onNext");
@@ -67,6 +68,8 @@ class WarpaintLanguageDelegate extends WatchUi.BehaviorDelegate {
     }
 
     //! Handle reveal translation
+    //! Make the revealHider transparent and hide its text
+    //! Increase the value of learned words only when revealed
     //! @return true if handled, false otherwise
     public function onReveal() as Boolean {
         // System.println("onReveal");
@@ -109,12 +112,15 @@ class WarpaintLanguageDelegate extends WatchUi.BehaviorDelegate {
     }
 }
 
+//! HiderDrawable class to hide the To word with a white panel and text
 class HiderDrawable extends WatchUi.Drawable {
 
     private var _width as Float;
     private var _height as Float;
     private var _color as Number;
 
+    //! Contructor
+    //! @param params the parameters from the custom drawable from layout
     public function initialize(params as Dictionary) {
         Drawable.initialize(params);
         _width = params[:width];
@@ -122,6 +128,8 @@ class HiderDrawable extends WatchUi.Drawable {
 		_color = params[:color];
     }
 
+    //! draw the panel
+    //! @param dc Device Content
     function draw(dc as Dc) {
         dc.setColor(_color, Graphics.COLOR_BLACK);
         dc.fillRectangle(
@@ -132,11 +140,12 @@ class HiderDrawable extends WatchUi.Drawable {
         );
     }
 
-    // hide the reveal
+    //! hide the reveal panel
     function hide() as Void {
         _color = Graphics.COLOR_BLACK;
     }
 
+    //! show the reveal panel
     function unhide() as Void {
         _color = Graphics.COLOR_TRANSPARENT;
     }

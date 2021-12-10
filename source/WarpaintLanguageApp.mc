@@ -66,11 +66,13 @@ class WarpaintLanguageApp extends Application.AppBase {
         return [glanceView] as View;
     }
 
+    //! Handle when settings are changed
     function onSettingsChanged() as Void {
         _mainView.onSettingsChanged();
     }
 }
 
+//! get the app global function
 function getApp() as WarpaintLanguageApp {
     return Application.getApp() as WarpaintLanguageApp;
 }

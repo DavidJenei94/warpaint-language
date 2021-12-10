@@ -64,6 +64,7 @@ class WarpaintLanguageView extends WatchUi.View {
     }
 
     // Load your resources here
+    //! @param dc Device Content
     function onLayout(dc as Dc) as Void {
         setLayout(Rez.Layouts.MainLayout(dc));
         revealLabel = View.findDrawableById("RevealLabel");
@@ -83,6 +84,7 @@ class WarpaintLanguageView extends WatchUi.View {
         screenSize = dc.getWidth();
     }
 
+    //! Load the flags of the 2 selected languages
     function loadFlags() as Void {
         if (selectedLanguageFrom != null && !selectedLanguageFrom.equals("None")) {
             _fromFlag = WatchUi.loadResource(languages[selectedLanguageFrom]["flags"][0]);
@@ -93,6 +95,8 @@ class WarpaintLanguageView extends WatchUi.View {
         }        
     }
 
+    //! Refresh the words displayed
+    //! @param withViewRefresh if false, it does not update the view
     function refreshWordsOnView(withViewRefresh as Boolean) as Void {
 
         self.downloadWords();
@@ -103,6 +107,7 @@ class WarpaintLanguageView extends WatchUi.View {
             wordTo = words.get("to");
             revealed = false;
         } else if (selectedLanguageFrom.equals("None") || selectedLanguageTo.equals("None")) {
+            // If no languages have been selected yet
             wordFrom = WatchUi.loadResource(Rez.Strings.languageSelection1);
             wordTo = WatchUi.loadResource(Rez.Strings.languageSelection2);
 
@@ -110,6 +115,7 @@ class WarpaintLanguageView extends WatchUi.View {
             revealHider.hide();
             revealed = true;
         } else {
+            // If no internet connection
             wordFrom = WatchUi.loadResource(Rez.Strings.internetConnection1);
             wordTo = WatchUi.loadResource(Rez.Strings.internetConnection2);
 
@@ -130,8 +136,10 @@ class WarpaintLanguageView extends WatchUi.View {
     }
 
     // Update the view
+    //! @param dc as Device Content
     function onUpdate(dc as Dc) as Void {
 
+        // Split the current translation words 
         var splittedTranslationFrom = TranslationText.splitTranslation(dc, wordFrom, true);
         var selectedFontFrom = splittedTranslationFrom[3];
         fromTopText.setTranslationText(splittedTranslationFrom[0], selectedFontFrom);
@@ -150,6 +158,7 @@ class WarpaintLanguageView extends WatchUi.View {
             toBottomText.setTranslationText("", Graphics.FONT_MEDIUM);
         }
 
+        // On settings change empty the words array
         if (settingsChanged) {
             _wordsArray = [];
             Storage.deleteValue("WordsArray");
@@ -162,8 +171,8 @@ class WarpaintLanguageView extends WatchUi.View {
             settingsChanged = false;
         }
 
-        dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_DK_GRAY);
         // Call the parent onUpdate function to redraw the layout
+        dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_DK_GRAY);
         View.onUpdate(dc);
 
         // Draw flags
@@ -189,6 +198,7 @@ class WarpaintLanguageView extends WatchUi.View {
     function onHide() as Void {
     }
 
+    // Get the last words from wordsArray and pop those ones from the end of the list
     function getLastWords() as Dictionary {
         var words = null;
         if (_wordsArray != null && _wordsArray.size() != 0) {
@@ -200,17 +210,20 @@ class WarpaintLanguageView extends WatchUi.View {
         return words;
     }
 
+    //! Download the words according to the selected languages
+    //! Download as much as the "wordsNo" param is equal
     function downloadWords() as Void {
         // try {
             if (selectedLanguageFrom != null && !selectedLanguageFrom.equals("None") && 
                 selectedLanguageTo != null && !selectedLanguageTo.equals("None")) {
 
-                // Downloading starts when wordsArray has <10 words, if it does not finish in time, start a new request
+                // If it does not finish in time, stop current request and start a new one
                 if (_wordsArray == null || _wordsArray.size() < 1) {
                     Communications.cancelAllRequests();
                     downloading = false;
                 }
 
+                // Downloading only starts when wordsArray has <10 words
                 if (!downloading && System.getDeviceSettings().connectionAvailable && (_wordsArray == null || _wordsArray.size() < 10)) {
                     System.println("Start downloading");
                     var params = {
@@ -218,7 +231,7 @@ class WarpaintLanguageView extends WatchUi.View {
                         "lan2" => selectedLanguageTo,
                         "wordsNo" => 25
                     };
-                    // Add actual words to params
+                    // Add actual words to params to upload the to total learned words statistics
                     if (actualLearnedWords != null) {
                         for (var i = 0; i < actualLearnedWords.size(); i++) {
                             var actualLearnedWordsKeys = actualLearnedWords.keys();
@@ -239,7 +252,7 @@ class WarpaintLanguageView extends WatchUi.View {
 
                     downloading = true;
 
-                    // Only show the progressbar if there are no more stores words
+                    // Only show the progressbar if there are no more stored words
                     if (_wordsArray == null || _wordsArray.size() < 1) {
                         var progressBar = new WatchUi.ProgressBar("Download\nwords", null);
                         WatchUi.pushView(progressBar as ProgressBar, new $.ProgressDelegate(method(:stopTimer), revealHider, method(:setRevealed)), WatchUi.SLIDE_IMMEDIATE);
@@ -258,7 +271,7 @@ class WarpaintLanguageView extends WatchUi.View {
         // }
     }
 
-        //! Stop the timer
+    //! Stop the timer
     public function stopTimer() as Void {
         if (_downloadTimer != null) {
             _downloadTimer.stop();
@@ -267,6 +280,7 @@ class WarpaintLanguageView extends WatchUi.View {
 
     //! Update the progress bar every second
     public function timerCallback() as Void {
+        // If wordsArray is filled up stop timer and downloading and go back to main view
         if (_wordsArray != null && _wordsArray.size() > 10) {
             _downloadTimer.stop();
             downloading = false;
@@ -279,7 +293,7 @@ class WarpaintLanguageView extends WatchUi.View {
         // System.println("Response code: " + responseCode);
         // System.println("recieveWords data: " + data);
 
-		// If no HTTP failure:  return data response.
+		// If no HTTP failure: add data to wordsArray
 		var words = null;
 		if (responseCode == 200) {
             words = data.get("results");
@@ -291,6 +305,7 @@ class WarpaintLanguageView extends WatchUi.View {
         }
 
         // Probably the words already uploaded but there was issue in the response
+        // Does not empty the words upload array in these cases:
         if (responseCode != Communications.BLE_CONNECTION_UNAVAILABLE || responseCode != Communications.BLE_QUEUE_FULL) {
             actualLearnedWords = {};
             Storage.setValue("actualLearnedWords", actualLearnedWords);
@@ -309,6 +324,7 @@ class WarpaintLanguageView extends WatchUi.View {
         return _wordsArray;
     }
 
+    //! perform at settings change: get selected languages from storage
     function onSettingsChanged() as Void {
         selectedLanguageFrom = Storage.getValue("languageFrom");
         selectedLanguageTo = Storage.getValue("languageTo");
@@ -324,6 +340,7 @@ class WarpaintLanguageView extends WatchUi.View {
         WatchUi.requestUpdate();
     }
 
+    //! set revealed value
     function setRevealed(value as Boolean) as Void {
         revealed = value;
     }
@@ -337,7 +354,9 @@ class ProgressDelegate extends WatchUi.BehaviorDelegate {
     private var _setRevealed as Method() as Void;
 
     //! Constructor
-    //! @param callback Callback function
+    //! @param stopTimerCallback Callback function
+    //! @param revealHider RevealHider object
+    //! @param setRevealed Callback function
     public function initialize(stopTimerCallback as Method() as Void, revealHider as HiderDrawable, setRevealed as Method() as Void) {
         BehaviorDelegate.initialize();
         _stopTimerCallback = stopTimerCallback;
@@ -346,6 +365,7 @@ class ProgressDelegate extends WatchUi.BehaviorDelegate {
     }
 
     //! Handle back behavior
+    //! if progressbar is cancelled - cancel downloading too
     //! @return true if handled, false otherwise
     public function onBack() as Boolean {
         _stopTimerCallback.invoke();
