@@ -12,7 +12,7 @@ Please leave a review if you like the widget!
 In case of any issues/questions please check the following 'Warpaint Language (WpL) - Garmin widget help' spreadsheet, which includes the settings, FAQ, available features per device and instructions of how to use the app: https://docs.google.com/spreadsheets/d/18EWHCTvGiSRE_q7oDRBywszU02dxI6LBvyxhMYlaXvI/edit?usp=sharing. If your question is not answered there, feel free to send me a message via 'Contact Developer' option.
 
 ### Features:
-- Warpaint Language has 9 available languages: English, German, Hungarian, French, Spanish, Russian, Portuguese, Italian, Norwegian (Bokmal)
+- Warpaint Language has 9 available languages: English, German, Hungarian, French, Spanish, Russian, Portuguese, Italian, Norwegian (Bokmal), Czech
 - All language consist of the 3000 most used words (90% of everyday English conversations) and 1000 phrases
 - The Statistics page shows the distibution of the learned words of languages
 - The Total words page shows the number of learned words of each language, highligting the current one
@@ -42,6 +42,9 @@ Language, Translate, Translation, dictionary, Vocabulary, Learning, Studying, Mo
 
 ## What's New
 
+### 1.0.2
+- Add Czech language
+- Fix glance issue
 ### 1.0.1
 - Optimizing long phrase splitting
 ### 1.0.0

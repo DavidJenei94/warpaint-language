@@ -1,0 +1,19 @@
+<resources>
+
+    <string scope="glance" id="enName">Angličtina</string>
+    <string scope="glance" id="deName">Němec</string>
+    <string scope="glance" id="huName">Maďarský</string>
+    <string scope="glance" id="frName">Francouzština</string>
+    <string scope="glance" id="esName">Španělština</string>
+    <string scope="glance" id="ruName">Ruština</string>
+    <string scope="glance" id="ptName">Portugalština</string>
+    <string scope="glance" id="itName">Italština</string>
+    <string scope="glance" id="nbName">Nnorský</string>
+    <string scope="glance" id="csName">Čeština</string>
+
+    <string id="languageSelection1">Vyberte jazyky</string>
+    <string id="languageSelection2">v nastavení</string>
+    <string id="internetConnection1">Připojení k Internetu</string>
+    <string id="internetConnection2">Poté klikněte na tlačítko Další</string>
+
+</resources>

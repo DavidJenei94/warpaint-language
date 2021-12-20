@@ -9,6 +9,7 @@
     <string scope="glance" id="ptName">Portugais</string>
     <string scope="glance" id="itName">Italien</string>
     <string scope="glance" id="nbName">Norvégien</string>
+    <string scope="glance" id="csName">Tchèque</string>
 
     <string id="languageSelection1">Sélectionner des langues</string>
     <string id="languageSelection2">dans les paramètres</string>

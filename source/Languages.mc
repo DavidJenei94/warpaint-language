@@ -82,6 +82,15 @@ function loadLanguages() as Void {
             ],
             "chartColor" => 0x55FF55,
             "reveal" => "A V S L Ø R E"
+        },
+        "cs" => {
+            "name" => Rez.Strings.csName,
+            "flags" => [
+                Rez.Drawables.csFlag,
+                Rez.Drawables.csFlagS
+            ],
+            "chartColor" => 0x00AAAA,
+            "reveal" => "O D H A L I T"
         }
     };
 }

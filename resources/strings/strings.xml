@@ -1,6 +1,6 @@
 <resources>
 
-    <string id="AppName">Warpaint Language</string>
+    <string scope="glance" id="AppName">Warpaint Language</string>
     <string id="AppVersionTitle">Warpaint Language version</string>
 
     <string scope="glance" id="enName">English</string>
@@ -12,6 +12,7 @@
     <string scope="glance" id="ptName">Portuguese</string>
     <string scope="glance" id="itName">Italian</string>
     <string scope="glance" id="nbName">Norwegian</string>
+    <string scope="glance" id="csName">Czech</string>
 
     <string id="languageSelection1">Select languages</string>
     <string id="languageSelection2">in the settings</string>
