@@ -42,6 +42,9 @@ Language, Translate, Translation, dictionary, Vocabulary, Learning, Studying, Mo
 
 ## What's New
 
+### 1.0.3
+<!-- - Add Polish language -->
+- Add Venu 2 Plus support
 ### 1.0.2
 - Add Czech language
 - Fix glance issue
