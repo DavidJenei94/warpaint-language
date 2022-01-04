@@ -91,6 +91,15 @@ function loadLanguages() as Void {
             ],
             "chartColor" => 0x00AAAA,
             "reveal" => "O D H A L I T"
+        },
+        "pl" => {
+            "name" => Rez.Strings.plName,
+            "flags" => [
+                Rez.Drawables.plFlag,
+                Rez.Drawables.plFlagS
+            ],
+            "chartColor" => 0x0055AA,
+            "reveal" => "U J A W N I Ć"
         }
     };
 }

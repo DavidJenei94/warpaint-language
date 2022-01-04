@@ -10,6 +10,7 @@
     <string scope="glance" id="itName">Italienisch</string>
     <string scope="glance" id="nbName">Norwegisch</string>
     <string scope="glance" id="csName">Tschechisch</string>
+    <string scope="glance" id="plName">Polnisch</string>
 
     <string id="languageSelection1">Sprachen auswählen</string>
     <string id="languageSelection2">In den Einstellungen</string>

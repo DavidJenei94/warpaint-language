@@ -10,6 +10,7 @@
     <string scope="glance" id="itName">Olasz</string>
     <string scope="glance" id="nbName">Norvég</string>
     <string scope="glance" id="csName">Cseh</string>
+    <string scope="glance" id="plName">Lengyel</string>
 
     <string id="languageSelection1">Válasszon nyelveket</string>
     <string id="languageSelection2">A beállításokban</string>
