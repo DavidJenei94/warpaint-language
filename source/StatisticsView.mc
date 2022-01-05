@@ -41,6 +41,18 @@ class StatisticsView extends WatchUi.View {
         // Call the parent onUpdate function to redraw the layout
         View.onUpdate(dc);
 
+        // test
+        languagesWordsNo[0] = 185;
+        languagesWordsNo[1] = 5;
+        languagesWordsNo[2] = 2;
+        languagesKeysDescending[0] = "en";
+        languagesKeysDescending[1] = "de";
+        languagesKeysDescending[2] = "fr";
+        flags[0] = WatchUi.loadResource(languages[languagesKeysDescending[0]]["flags"][0]);
+        flags[1] = WatchUi.loadResource(languages[languagesKeysDescending[1]]["flags"][1]);
+        flags[2] = WatchUi.loadResource(languages[languagesKeysDescending[2]]["flags"][1]);
+        totalWordsNo = 194;
+
         // Calculate and draw the pie chart and percentages
         if (totalWordsNo > 0) {
             var otherColor = 0x555555;
@@ -78,17 +90,17 @@ class StatisticsView extends WatchUi.View {
                 dc.drawArc(dc.getWidth() * 0.50, dc.getHeight() * 0.50, dc.getWidth() * 0.16, Graphics.ARC_CLOCKWISE, 0, firstLanguageArcDegreeEnd);
             }
             // Second most learned language arc and bar
-            if (secondLanguagePercentage > 0.00) {
+            if (secondLanguagePercentage > 0.00 && firstLanguageArcDegreeEnd - secondLanguageArcDegreeEnd > 1) {
                 dc.setColor(languages[languagesKeysDescending[1]]["chartColor"], Graphics.COLOR_BLACK);
                 dc.drawArc(dc.getWidth() * 0.50, dc.getHeight() * 0.50, dc.getWidth() * 0.16, Graphics.ARC_CLOCKWISE, firstLanguageArcDegreeEnd, secondLanguageArcDegreeEnd);
             }
             // Third most learned language arc and bar
-            if (thirdLanguagePercentage > 0.00) {
+            if (thirdLanguagePercentage > 0.00 && secondLanguageArcDegreeEnd - thirdLanguageArcDegreeEnd > 1) {
                 dc.setColor(languages[languagesKeysDescending[2]]["chartColor"], Graphics.COLOR_BLACK);
                 dc.drawArc(dc.getWidth() * 0.50, dc.getHeight() * 0.50, dc.getWidth() * 0.16, Graphics.ARC_CLOCKWISE, secondLanguageArcDegreeEnd, thirdLanguageArcDegreeEnd);
             }
             // Other learned languages arc
-            if (otherLanguagePercentage > 0.00) {
+            if (otherLanguagePercentage > 0.00 && thirdLanguageArcDegreeEnd > 1) {
                 dc.setColor(otherColor, Graphics.COLOR_BLACK);
                 dc.drawArc(dc.getWidth() * 0.50, dc.getHeight() * 0.50, dc.getWidth() * 0.16, Graphics.ARC_CLOCKWISE, thirdLanguageArcDegreeEnd, 0);
             }
@@ -187,7 +199,9 @@ class StatisticsView extends WatchUi.View {
         }
         
         // Store the languages in an array according to the descending order of words
-        languagesKeysDescending = new [totalLearnedWords.size()];
+        //languagesKeysDescending = new [totalLearnedWords.size()];
+        // test
+        languagesKeysDescending = new [4];
         // var languagesKeys = languages.keys();
         for (var j = 0; j < languagesKeys.size(); j++) {
             // If the language is in the total learned words keys
