@@ -78,17 +78,17 @@ class StatisticsView extends WatchUi.View {
                 dc.drawArc(dc.getWidth() * 0.50, dc.getHeight() * 0.50, dc.getWidth() * 0.16, Graphics.ARC_CLOCKWISE, 0, firstLanguageArcDegreeEnd);
             }
             // Second most learned language arc and bar
-            if (secondLanguagePercentage > 0.00) {
+            if (secondLanguagePercentage > 0.00 && firstLanguageArcDegreeEnd - secondLanguageArcDegreeEnd > 1) {
                 dc.setColor(languages[languagesKeysDescending[1]]["chartColor"], Graphics.COLOR_BLACK);
                 dc.drawArc(dc.getWidth() * 0.50, dc.getHeight() * 0.50, dc.getWidth() * 0.16, Graphics.ARC_CLOCKWISE, firstLanguageArcDegreeEnd, secondLanguageArcDegreeEnd);
             }
             // Third most learned language arc and bar
-            if (thirdLanguagePercentage > 0.00) {
+            if (thirdLanguagePercentage > 0.00 && secondLanguageArcDegreeEnd - thirdLanguageArcDegreeEnd > 1) {
                 dc.setColor(languages[languagesKeysDescending[2]]["chartColor"], Graphics.COLOR_BLACK);
                 dc.drawArc(dc.getWidth() * 0.50, dc.getHeight() * 0.50, dc.getWidth() * 0.16, Graphics.ARC_CLOCKWISE, secondLanguageArcDegreeEnd, thirdLanguageArcDegreeEnd);
             }
             // Other learned languages arc
-            if (otherLanguagePercentage > 0.00) {
+            if (otherLanguagePercentage > 0.00 && thirdLanguageArcDegreeEnd > 1) {
                 dc.setColor(otherColor, Graphics.COLOR_BLACK);
                 dc.drawArc(dc.getWidth() * 0.50, dc.getHeight() * 0.50, dc.getWidth() * 0.16, Graphics.ARC_CLOCKWISE, thirdLanguageArcDegreeEnd, 0);
             }
