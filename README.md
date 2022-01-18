@@ -42,6 +42,8 @@ Language, Translate, Translation, dictionary, Vocabulary, Learning, Studying, Mo
 
 ## What's New
 
+### 1.0.4
+- Add Fenix 7, Fenix 7S, Fenix 7X and Epix™ (Gen 2) support
 ### 1.0.3
 - Add Polish language
 - Add Venu 2 Plus support
