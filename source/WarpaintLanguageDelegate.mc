@@ -35,7 +35,7 @@ class WarpaintLanguageDelegate extends WatchUi.BehaviorDelegate {
 
     //! Handle key events - next or reveal on no touchsreen devices
     //! @param keyEvent
-    //! @return true if handled, false otherwise
+    //! @return true if handled, false otherwise: false handles the system's default action
     function onKey(keyEvent) as Boolean {
         // System.println(keyEvent.getKey());
         if (keyEvent.getKey() == KEY_ENTER){
@@ -46,6 +46,8 @@ class WarpaintLanguageDelegate extends WatchUi.BehaviorDelegate {
             }
         } else if (keyEvent.getKey() == KEY_CLOCK) {
             onStats();
+        } else {
+            return false;
         }
         return true;
     }
