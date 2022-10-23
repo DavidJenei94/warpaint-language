@@ -42,6 +42,8 @@ Language, Translate, Translation, dictionary, Vocabulary, Learning, Studying, Mo
 
 ## What's New
 
+### 1.0.6
+- Fix minor issue
 ### 1.0.5
 - Add D2™ Air X10, D2™ Mach 1, Forerunner® 255, Forerunner® 255 Music, Forerunner® 255s, Forerunner® 255s Music, Forerunner® 955 / Solar, Venu® Sq 2, Venu® Sq 2 Music support
 - Fix exit from the app on devices with buttons
