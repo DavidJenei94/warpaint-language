@@ -180,6 +180,8 @@ class WarpaintLanguageView extends WatchUi.View {
         if (selectedLanguageFrom != null && !selectedLanguageFrom.equals("None")) {
             if (_screenShape == System.SCREEN_SHAPE_RECTANGLE) {
                 dc.drawBitmap(dc.getWidth() * 0.27, dc.getHeight() * 0.08, _fromFlag);
+            } else if (_screenShape == System.SCREEN_SHAPE_SEMI_OCTAGON) {
+                dc.drawBitmap(dc.getWidth() * 0.27, dc.getHeight() * 0.06, _fromFlag);
             } else {
                 dc.drawBitmap(dc.getWidth() * 0.27, dc.getHeight() * 0.10, _fromFlag);
             }
@@ -187,6 +189,8 @@ class WarpaintLanguageView extends WatchUi.View {
         if (selectedLanguageTo != null && !selectedLanguageTo.equals("None")) {
             if (_screenShape == System.SCREEN_SHAPE_RECTANGLE) {
                 dc.drawBitmap(dc.getWidth() * 0.56, dc.getHeight() * 0.08, _toFlag);
+            } else if (_screenShape == System.SCREEN_SHAPE_SEMI_OCTAGON) {
+                dc.drawBitmap(dc.getWidth() * 0.27, dc.getHeight() * 0.26, _toFlag);
             } else {
                 dc.drawBitmap(dc.getWidth() * 0.56, dc.getHeight() * 0.10, _toFlag);
             }

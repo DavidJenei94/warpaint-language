@@ -42,6 +42,8 @@ Language, Translate, Translation, dictionary, Vocabulary, Learning, Studying, Mo
 
 ## What's New
 
+### 1.0.7
+- Add Instinct® 2, Instinct® 2S, Descent™ G1 support
 ### 1.0.6
 - Fix minor issue
 ### 1.0.5
