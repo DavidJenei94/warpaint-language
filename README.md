@@ -2,7 +2,7 @@
 A Garmin Connect IQ widget with translations of 2 selected languages.
 
 ## Development
-Create flags in different sizes for new watch sizes  -with python script.
+Create flags in different sizes for new watch sizes - with python script.
 
 ## Description
 
@@ -47,7 +47,7 @@ Language, Translate, Translation, dictionary, Vocabulary, Learning, Studying, Mo
 
 ### 2.0.0
 - Update to new Connect SDK
-- Add Approach® S70 42mm, Approach® S70 47mm, Descent™ Mk3 43mm / Mk3i 43mm, Descent™ Mk3i 51mm, epix™ Pro (Gen 2) 42mm, epix™ Pro (Gen 2) 47mm / quatix® 7 Pro, epix™ Pro (Gen 2) 51mm / D2™ Mach 1 Pro / tactix® 7 – AMOLED Edition, fēnix® 7 Pro, fēnix® 7 Pro - Solar Edition (no Wi-Fi), fēnix® 7S Pro, fēnix® 7X Pro, fēnix® 7X Pro - Solar Edition (no Wi-Fi), Forerunner® 165, Forerunner® 165 Music, Forerunner® 265, Forerunner® 265s, Forerunner® 965, MARQ® (Gen 2) Athlete / Adventurer / Captain / Golfer / Carbon Edition / Commander - Carbon Edition, MARQ® (Gen 2) Aviator, Venu® 3, Venu® 3S, vívoactive® 5, Enduro™ 3, fēnix® 8 43mm, fēnix® 8 47mm / 51mm, fēnix® 8 Solar 47mm, fēnix® 8 Solar 51mm, fēnix® E, Instinct® 2X Solar, Instinct® Crossover support
+- Add Approach® S70 42mm, Approach® S70 47mm, Descent™ Mk3 43mm / Mk3i 43mm, Descent™ Mk3i 51mm, epix™ Pro (Gen 2) 42mm, epix™ Pro (Gen 2) 47mm / quatix® 7 Pro, epix™ Pro (Gen 2) 51mm / D2™ Mach 1 Pro / tactix® 7 – AMOLED Edition, fēnix® 7 Pro, fēnix® 7 Pro - Solar Edition (no Wi-Fi), fēnix® 7S Pro, fēnix® 7X Pro, fēnix® 7X Pro - Solar Edition (no Wi-Fi), Forerunner® 165, Forerunner® 165 Music, Forerunner® 265, Forerunner® 265s, Forerunner® 965, MARQ® (Gen 2) Athlete / Adventurer / Captain / Golfer / Carbon Edition / Commander - Carbon Edition, MARQ® (Gen 2) Aviator, Venu® 3, Venu® 3S, vívoactive® 5, Enduro™ 3, fēnix® 8 43mm, fēnix® 8 47mm / 51mm, fēnix® 8 Solar 47mm, fēnix® 8 Solar 51mm, fēnix® E, Instinct® 2X Solar, Instinct® Crossover, Approach® S50, Instinct® 3 AMOLED 45mm, Instinct® 3 AMOLED 50mm, Instinct® 3 Solar 45mm / 50mm, Instinct® E 40mm, Instinct® E 45mm support
 ### 1.0.7
 - Add Instinct® 2, Instinct® 2S, Descent™ G1 support
 ### 1.0.6
