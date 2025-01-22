@@ -1,11 +1,12 @@
 import Toybox.Graphics;
 import Toybox.WatchUi;
+import Toybox.Lang;
 
 (:glance)
 class WarpaintLanguageGlanceView extends WatchUi.GlanceView {
 
-    private var _fromFlag as BitmapResource;
-    private var _toFlag as BitmapResource;
+    private var _fromFlag as BitmapResource or Null = null;
+    private var _toFlag as BitmapResource or Null = null;
 
     var _selectedLanguageWordsNo as Number;
     var _totalWordsNo as Number;
@@ -55,7 +56,7 @@ class WarpaintLanguageGlanceView extends WatchUi.GlanceView {
         }
 
         var displayStats = selectedLanguageTo + " " + _selectedLanguageWordsNo + " / Σ " + _totalWordsNo;
-        dc.setColor(Graphics.COLOR_WHITE, dc.COLOR_TRANSPARENT);
+        dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
         dc.drawText(dc.getWidth() * 0.50, dc.getHeight() * 0.78, Graphics.FONT_XTINY, displayStats, Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
     }
 

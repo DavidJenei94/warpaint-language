@@ -1,6 +1,7 @@
 import Toybox.Graphics;
 import Toybox.WatchUi;
 import Toybox.System;
+import Toybox.Lang;
 
 //! This is the custom drawable used for the main menu title
 class StatisticsListMenuTitle extends WatchUi.Drawable {

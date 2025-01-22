@@ -1,11 +1,12 @@
 import Toybox.WatchUi;
 import Toybox.Graphics;
 import Toybox.Math;
+import Toybox.Lang;
 
 class TranslationText extends WatchUi.Text {
 
-    private var _translationText as String;
-    private var _font as Number;
+    private var _translationText as String = "";
+    private var _font as Graphics.FontDefinition = Graphics.FONT_XTINY;
 
     //! Contructor
     //! @params params as in the custom drawable in layouts
@@ -25,7 +26,7 @@ class TranslationText extends WatchUi.Text {
     //! Set the translation text and font
     //! @param translationText the text to show
     //! @param font the font to show the text with
-    function setTranslationText(translationText as String, font as Number) as Void {
+    function setTranslationText(translationText as String, font as Graphics.FontDefinition) as Void {
         _translationText = translationText;
         _font = font;
     }
@@ -35,7 +36,7 @@ class TranslationText extends WatchUi.Text {
     //! @param translation the text to split
     //! @param isFrom a little different layout if from or to (because the round watch)
     //! @return array of splitted text and selected font
-    static function splitTranslation(dc as DC, translation as String, isFrom as Boolean) as Array<String or Number> {
+    static function splitTranslation(dc as Dc, translation as String, isFrom as Boolean) as Array<String or Number or Graphics.FontDefinition> {
         var screenWidth = dc.getWidth();
         var screenHeight = dc.getHeight();
 

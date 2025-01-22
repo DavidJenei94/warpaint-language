@@ -2,6 +2,7 @@ import Toybox.Application;
 import Toybox.Application.Storage;
 import Toybox.Graphics;
 import Toybox.WatchUi;
+import Toybox.Lang;
 
 //! This is the menu input delegate for the main menu of the application
 class MainMenuDelegate extends WatchUi.Menu2InputDelegate {
@@ -49,6 +50,5 @@ class MainMenuDelegate extends WatchUi.Menu2InputDelegate {
     public function onBack() as Void {
         WatchUi.popView(WatchUi.SLIDE_DOWN);
         WatchUi.requestUpdate();
-        return true;
     }
 }

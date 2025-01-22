@@ -3,45 +3,46 @@ import Toybox.Application.Storage;
 import Toybox.Graphics;
 import Toybox.WatchUi;
 import Toybox.Timer;
+import Toybox.Lang;
 
 // Gobals
 var languages = {};
 var totalLearnedWords = {};
 var actualLearnedWords = {};
 
-var selectedLanguageFrom as String;
-var selectedLanguageTo as String;
+var selectedLanguageFrom as String = "";
+var selectedLanguageTo as String = "";
 
-var downloading as Boolean;
-var settingsChanged as Boolean;
+var downloading as Boolean = false;
+var settingsChanged as Boolean = false;
 
-var screenSize as Number;
+var screenSize as Number = 0;
 
 class WarpaintLanguageView extends WatchUi.View {
 
-    private var wordFrom as String;
-    private var wordTo as String;
+    private var wordFrom;
+    private var wordTo;
 
-    private var fromTopText as Text;
-    private var fromMiddleText as Text;
-    private var fromBottomText as Text;
-    private var toTopText as Text;
-    private var toMiddleText as Text;
-    private var toBottomText as Text;
+    private var fromTopText as TranslationText?;
+    private var fromMiddleText as TranslationText?;
+    private var fromBottomText as TranslationText?;
+    private var toTopText as TranslationText?;
+    private var toMiddleText as TranslationText?;
+    private var toBottomText as TranslationText?;
 
-    var revealText as String;
-    var revealLabel as label;
-    var revealHider as Drawable;
-    var revealed as Boolean;
+    var revealText as String = "";
+    var revealLabel; // Label
+    var revealHider; // Drawable
+    var revealed as Boolean = false;
 
     private var _screenShape as Number;
-    private var _fromFlag as BitmapResource;
-    private var _toFlag as BitmapResource;
+    private var _fromFlag as BitmapResource?;
+    private var _toFlag as BitmapResource?;
 
     private var _wordsArray = [];
 
-    private var _downloadTimer as Timer.Timer;
-    private var _progressBarCounter as Integer;
+    private var _downloadTimer as Timer.Timer?;
+    var progressBarCounter as Integer = 0;
 
     function initialize() {
         View.initialize();
@@ -53,7 +54,7 @@ class WarpaintLanguageView extends WatchUi.View {
         downloading = false;
         revealed = false;
         settingsChanged = false;
-        _progressBarCounter = 0;
+        progressBarCounter = 0;
 
         _screenShape = System.getDeviceSettings().screenShape;
 
@@ -226,7 +227,7 @@ class WarpaintLanguageView extends WatchUi.View {
                 if (_wordsArray == null || _wordsArray.size() < 1) {
                     Communications.cancelAllRequests();
                     downloading = false;
-                    _progressBarCounter = 0;
+                    progressBarCounter = 0;
                 }
 
                 // Downloading only starts when wordsArray has <10 words
@@ -263,7 +264,7 @@ class WarpaintLanguageView extends WatchUi.View {
                     // Only show the progressbar if there are no more stored words
                     if (_wordsArray == null || _wordsArray.size() < 1) {
                         var progressBar = new WatchUi.ProgressBar("Download\nwords", null);
-                        WatchUi.pushView(progressBar as ProgressBar, new $.ProgressDelegate(method(:stopTimer), revealHider, method(:setRevealed)), WatchUi.SLIDE_IMMEDIATE);
+                        WatchUi.pushView(progressBar as ProgressBar, new $.ProgressDelegate(self, method(:stopTimer), revealHider, method(:setRevealed)), WatchUi.SLIDE_IMMEDIATE);
 
                         _downloadTimer = new Timer.Timer();
                         _downloadTimer.start(method(:timerCallback), 200, true);
@@ -288,14 +289,14 @@ class WarpaintLanguageView extends WatchUi.View {
 
     //! Update the progress bar every second
     public function timerCallback() as Void {
-        _progressBarCounter++;
+        progressBarCounter++;
 
         // If 30 seconds passed, exit downloading
-        if (_progressBarCounter > 150) {
+        if (progressBarCounter > 150) {
             Communications.cancelAllRequests();
             _downloadTimer.stop();
             downloading = false;
-            _progressBarCounter = 0;
+            progressBarCounter = 0;
 
             WatchUi.popView(WatchUi.SLIDE_IMMEDIATE);
 
@@ -309,14 +310,14 @@ class WarpaintLanguageView extends WatchUi.View {
         if (_wordsArray != null && _wordsArray.size() > 10) {
             _downloadTimer.stop();
             downloading = false;
-            _progressBarCounter = 0;
+            progressBarCounter = 0;
 
             WatchUi.popView(WatchUi.SLIDE_IMMEDIATE);
             self.refreshWordsOnView(true);
         }
     }
 
-	function recieveWords(responseCode, data) as Void {
+	function recieveWords(responseCode as Number, data as Dictionary) as Void {
         // System.println("Response code: " + responseCode);
         // System.println("recieveWords data: " + data);
 
@@ -339,7 +340,7 @@ class WarpaintLanguageView extends WatchUi.View {
         }
 
         downloading = false;
-        _progressBarCounter = 0;
+        progressBarCounter = 0;
 
         self.revealLabel.setText(revealText);
         self.revealHider.unhide();
@@ -379,13 +380,13 @@ class WarpaintLanguageView extends WatchUi.View {
 class ProgressDelegate extends WatchUi.BehaviorDelegate {
     private var _stopTimerCallback as Method() as Void;
     private var _revealHider as HiderDrawable;
-    private var _setRevealed as Method() as Void;
+    private var _setRevealed as Method(value as Boolean) as Void;
 
     //! Constructor
     //! @param stopTimerCallback Callback function
     //! @param revealHider RevealHider object
     //! @param setRevealed Callback function
-    public function initialize(stopTimerCallback as Method() as Void, revealHider as HiderDrawable, setRevealed as Method() as Void) {
+    public function initialize(view as View, stopTimerCallback as Method() as Void, revealHider as HiderDrawable, setRevealed as Method(value as Boolean) as Void) {
         BehaviorDelegate.initialize();
         _stopTimerCallback = stopTimerCallback;
         _revealHider = revealHider;
@@ -400,7 +401,7 @@ class ProgressDelegate extends WatchUi.BehaviorDelegate {
 
         Communications.cancelAllRequests();
         downloading = false;
-        _progressBarCounter = 0;
+        view.progressBarCounter = 0;
 
         _revealHider.hide();
         _setRevealed.invoke(true);

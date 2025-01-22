@@ -1,10 +1,11 @@
 import Toybox.WatchUi;
+import Toybox.Lang;
 
 //! Handle button view behavior
 class StatisticsDelegate extends WatchUi.BehaviorDelegate {
 
-    private var _statisticsView as View;
-    private var _menuTitleHeight as Number;
+    private var _statisticsView;
+    private var _menuTitleHeight as Float;
 
     //! Constructor
     //! @param view Statistics view

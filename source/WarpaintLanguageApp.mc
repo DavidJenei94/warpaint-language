@@ -4,10 +4,11 @@ import Toybox.Lang;
 import Toybox.WatchUi;
 import Toybox.Timer;
 import Toybox.Communications;
+import Toybox.Lang;
 
 class WarpaintLanguageApp extends Application.AppBase {
 
-    var _mainView as View;
+    var _mainView;
 
     function initialize() {
         AppBase.initialize();
@@ -26,17 +27,17 @@ class WarpaintLanguageApp extends Application.AppBase {
     }
 
     // Return the initial view of your application here
-    function getInitialView() as Array<Views or InputDelegates>? {
+    function getInitialView() as [Views] or [Views, InputDelegates] {
         loadLanguages();
 
         _mainView = new WarpaintLanguageView();
         var delegate = new WarpaintLanguageDelegate(_mainView);
-        return [_mainView, delegate] as Array<Views or InputDelegates>;
+        return [_mainView, delegate];
     }
 
     // Return the glance view of your application here
     (:glance)
-    function getGlanceView() as Array<Views or InputDelegates>? {
+    function getGlanceView() as [GlanceView] or [GlanceView, GlanceViewDelegate] or Null {
         loadLanguages();
 
         selectedLanguageFrom = Storage.getValue("languageFrom");
@@ -65,7 +66,7 @@ class WarpaintLanguageApp extends Application.AppBase {
         }
 
         var glanceView = new WarpaintLanguageGlanceView(selectedLanguageWordsNo, totalWordsNo);
-        return [glanceView] as View;
+        return [glanceView];
     }
 
     //! Handle when settings are changed

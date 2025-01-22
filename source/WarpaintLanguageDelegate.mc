@@ -1,6 +1,8 @@
 import Toybox.Application;
 import Toybox.Application.Storage;
 import Toybox.WatchUi;
+import Toybox.Graphics;
+import Toybox.Lang;
 
 //! Handle button view behavior
 class WarpaintLanguageDelegate extends WatchUi.BehaviorDelegate {
@@ -36,7 +38,7 @@ class WarpaintLanguageDelegate extends WatchUi.BehaviorDelegate {
     //! Handle key events - next or reveal on no touchsreen devices
     //! @param keyEvent
     //! @return true if handled, false otherwise: false handles the system's default action
-    function onKey(keyEvent) as Boolean {
+    public function onKey(keyEvent) as Boolean {
         // System.println(keyEvent.getKey());
         if (keyEvent.getKey() == KEY_ENTER){
             if (_view.revealed) {
@@ -55,8 +57,7 @@ class WarpaintLanguageDelegate extends WatchUi.BehaviorDelegate {
     //! Handle asking next word
     //! Restore the RevealHider and get new words within refreshWordsOnView
     //! @return true if handled, false otherwise
-    public function onNext() as Boolean {
-        // System.println("onNext");
+    public function onNext() as Void {
         if (selectedLanguageFrom != null && !selectedLanguageFrom.equals("None") && 
             selectedLanguageTo != null && !selectedLanguageTo.equals("None")) {
 
@@ -66,6 +67,22 @@ class WarpaintLanguageDelegate extends WatchUi.BehaviorDelegate {
             _view.revealed = false;
             _view.refreshWordsOnView(true);
         }
+        WatchUi.requestUpdate();
+    }
+
+    //! Handle tap events - instead of buttons in layout
+    //! @param clickEvent
+    //! @return true if handled, false otherwise
+    public function onTap(clickEvent as WatchUi.ClickEvent) as Lang.Boolean {
+        var coordinateY = clickEvent.getCoordinates()[1];
+        var screenHeight = System.getDeviceSettings().screenHeight;
+        if (coordinateY < screenHeight * 0.25) {
+            onStats();
+        } else if (coordinateY >= screenHeight * 0.50 && coordinateY < screenHeight * 0.75) {
+            onReveal();
+        } else if (coordinateY >= screenHeight * 0.75) {
+            onNext();
+        }
         return true;
     }
 
@@ -73,8 +90,7 @@ class WarpaintLanguageDelegate extends WatchUi.BehaviorDelegate {
     //! Make the revealHider transparent and hide its text
     //! Increase the value of learned words only when revealed
     //! @return true if handled, false otherwise
-    public function onReveal() as Boolean {
-        // System.println("onReveal");
+    public function onReveal() as Void {
         _view.revealLabel.setText("");
         _view.revealHider.hide();
 
@@ -101,13 +117,11 @@ class WarpaintLanguageDelegate extends WatchUi.BehaviorDelegate {
         }
         _view.revealed = true;
         WatchUi.requestUpdate();
-        return true;
     }
 
     //! Handle Statistics translation
     //! @return true if handled, false otherwise
-    public function onStats() as Boolean {
-        // System.println("onStats");
+    public function onStats() as Void {
         var view = new $.StatisticsView();
         var delegate = new $.StatisticsDelegate(view);
         WatchUi.pushView(view, delegate, WatchUi.SLIDE_LEFT);

@@ -2,14 +2,15 @@ import Toybox.Application;
 import Toybox.Application.Storage;
 import Toybox.Graphics;
 import Toybox.WatchUi;
+import Toybox.Lang;
 
 class StatisticsView extends WatchUi.View {
 
     var flags = new [3];
 
     private var languagesWordsNo = []; // words number sorted in this in descending
-    var languagesKeysDescending;
-    var totalWordsNo as Number;
+    var languagesKeysDescending = [];
+    var totalWordsNo as Integer = 0;
 
     function initialize() {
         View.initialize();
@@ -110,7 +111,7 @@ class StatisticsView extends WatchUi.View {
     //! @param isOther if other, then no flag is necessary
     private function drawFlagAndPercentage(dc as Dc, languageNo as Integer, percentage as Float, percentageDisplay as Float, middleDegree as Float, isOther as Boolean) as Void {
         // Draw the flags and percents
-        var shiftDistance = dc.getWidth() / 2;
+        var shiftDistance = dc.getWidth() / 2.00;
         var xShift = shiftDistance - dc.getWidth() * 0.08;
         var yShift = shiftDistance - dc.getWidth() * 0.05;
         var xShiftSmall = shiftDistance - dc.getWidth() * 0.04;
@@ -154,7 +155,7 @@ class StatisticsView extends WatchUi.View {
     //! @param distance the distance from middle
     //! @param xShift the shift from x
     //! @param yShift the shift from y
-    private function calculateXYfromDegree(degree as Float, distance as Float, xShift as Float, yShift as Float) as Array<Integer> {
+    private function calculateXYfromDegree(degree as Float, distance as Float, xShift as Float, yShift as Float) as Array<Float> {
         var radians = Math.toRadians(degree);
         var x = distance * Math.cos(radians) + xShift;
         var y = -1 * distance * Math.sin(radians) + yShift;
