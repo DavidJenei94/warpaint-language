@@ -11,6 +11,7 @@
     <string scope="glance" id="nbName">Noruego</string>
     <string scope="glance" id="csName">Checo</string>
     <string scope="glance" id="plName">Polaco</string>
+    <string scope="glance" id="svName">Sueco</string>
 
     <string id="languageSelection1">Seleccionar idiomas</string>
     <string id="languageSelection2">en la configuración</string>

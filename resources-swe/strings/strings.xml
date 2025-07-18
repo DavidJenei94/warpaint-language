@@ -1,0 +1,21 @@
+<resources>
+
+    <string scope="glance" id="enName">Engelska</string>
+    <string scope="glance" id="deName">Tyska</string>
+    <string scope="glance" id="huName">Ungerska</string>
+    <string scope="glance" id="frName">Franska</string>
+    <string scope="glance" id="esName">Spanska</string>
+    <string scope="glance" id="ruName">Ryska</string>
+    <string scope="glance" id="ptName">Portugisiska</string>
+    <string scope="glance" id="itName">Italienska</string>
+    <string scope="glance" id="nbName">Norska</string>
+    <string scope="glance" id="csName">Tjeckiska</string>
+    <string scope="glance" id="plName">Polska</string>
+    <string scope="glance" id="svName">Svenska</string>
+
+    <string id="languageSelection1">Välj språk</string>
+    <string id="languageSelection2">i inställningarna</string>
+    <string id="internetConnection1">Anslut till Internet</string>
+    <string id="internetConnection2">Klicka sedan på 'Nästa'</string>
+
+</resources>

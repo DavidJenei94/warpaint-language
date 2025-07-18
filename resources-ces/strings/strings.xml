@@ -11,6 +11,7 @@
     <string scope="glance" id="nbName">Nnorský</string>
     <string scope="glance" id="csName">Čeština</string>
     <string scope="glance" id="plName">Polština</string>
+    <string scope="glance" id="svName">Švédština</string>
 
     <string id="languageSelection1">Vyberte jazyky</string>
     <string id="languageSelection2">v nastavení</string>

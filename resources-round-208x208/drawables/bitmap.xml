@@ -22,5 +22,7 @@
     <bitmap scope="glance" id="csFlagS" filename="../images/cs-flagS.png" dithering="none" />
     <bitmap scope="glance" id="plFlag" filename="../images/pl-flag.png" dithering="none" />
     <bitmap scope="glance" id="plFlagS" filename="../images/pl-flagS.png" dithering="none" />
+    <bitmap scope="glance" id="svFlag" filename="../images/sv-flag.png" dithering="none" />
+    <bitmap scope="glance" id="svFlagS" filename="../images/sv-flagS.png" dithering="none" />
 
 </resources>

@@ -378,6 +378,7 @@ class WarpaintLanguageView extends WatchUi.View {
 
 //! Input handler for the progress bar
 class ProgressDelegate extends WatchUi.BehaviorDelegate {
+    private var _view as WarpaintLanguageView;
     private var _stopTimerCallback as Method() as Void;
     private var _revealHider as HiderDrawable;
     private var _setRevealed as Method(value as Boolean) as Void;
@@ -386,8 +387,9 @@ class ProgressDelegate extends WatchUi.BehaviorDelegate {
     //! @param stopTimerCallback Callback function
     //! @param revealHider RevealHider object
     //! @param setRevealed Callback function
-    public function initialize(view as View, stopTimerCallback as Method() as Void, revealHider as HiderDrawable, setRevealed as Method(value as Boolean) as Void) {
+    public function initialize(view as WarpaintLanguageView, stopTimerCallback as Method() as Void, revealHider as HiderDrawable, setRevealed as Method(value as Boolean) as Void) {
         BehaviorDelegate.initialize();
+        _view = view;
         _stopTimerCallback = stopTimerCallback;
         _revealHider = revealHider;
         _setRevealed = setRevealed;
@@ -401,7 +403,7 @@ class ProgressDelegate extends WatchUi.BehaviorDelegate {
 
         Communications.cancelAllRequests();
         downloading = false;
-        view.progressBarCounter = 0;
+        _view.progressBarCounter = 0;
 
         _revealHider.hide();
         _setRevealed.invoke(true);

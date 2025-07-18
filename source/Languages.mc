@@ -100,6 +100,15 @@ function loadLanguages() as Void {
             ],
             "chartColor" => 0x0055AA,
             "reveal" => "U J A W N I Ć"
+        },
+        "sv" => {
+            "name" => Rez.Strings.svName,
+            "flags" => [
+                Rez.Drawables.svFlag,
+                Rez.Drawables.svFlagS
+            ],
+            "chartColor" => 0xFF0000,
+            "reveal" => "A V S L Ö J A"
         }
     };
 }

@@ -22,7 +22,7 @@ class WarpaintLanguageDelegate extends WatchUi.BehaviorDelegate {
         // Generate a new Menu with a drawable Title
         var menu = new WatchUi.Menu2({:title=>"Settings"});
 
-        var languageFromSublabel = Storage.getValue("languageFrom"); // gets the iso code
+        var languageFromSublabel = Storage.getValue("languageFrom"); // gets the iso code (ISO 639-1)
         var languageToSublabel = Storage.getValue("languageTo");
         languageFromSublabel = languageFromSublabel.equals("None") ? languageFromSublabel : WatchUi.loadResource(languages[languageFromSublabel]["name"]);
         languageToSublabel = languageToSublabel.equals("None") ? languageToSublabel : WatchUi.loadResource(languages[languageToSublabel]["name"]);
