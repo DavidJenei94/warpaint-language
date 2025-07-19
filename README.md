@@ -56,6 +56,7 @@ Language, Translate, Translation, dictionary, Vocabulary, Learning, Studying, Mo
 
 - Add Swedish language
 - Add Descent™ G2, Forerunner® 570 42mm, Forerunner® 570 47mm, Forerunner® 970, vívoactive® 6 support
+- 400+ new phrases
 
 ### 2.0.1
 
