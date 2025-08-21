@@ -78,11 +78,25 @@ class WarpaintLanguageDelegate extends WatchUi.BehaviorDelegate {
         var screenHeight = System.getDeviceSettings().screenHeight;
         if (coordinateY < screenHeight * 0.25) {
             onStats();
+        } else if (coordinateY >= screenHeight * 0.25 && coordinateY < screenHeight * 0.50) {
+            onMenu();
         } else if (coordinateY >= screenHeight * 0.50 && coordinateY < screenHeight * 0.75) {
-            onReveal();
+            if (selectedLanguageFrom.equals("None") || selectedLanguageTo.equals("None")) {
+                onMenu();
+            } else {
+                onReveal();
+            }
         } else if (coordinateY >= screenHeight * 0.75) {
             onNext();
         }
+        return true;
+    }
+
+    //! Handle hold events on touchscreen
+    //! @param keyEvent
+    //! @return true if handled, false otherwise
+    public function onHold(keyEvent) as Boolean {
+        onMenu();
         return true;
     }
 

@@ -52,6 +52,11 @@ Language, Translate, Translation, dictionary, Vocabulary, Learning, Studying, Mo
 
 ## What's New
 
+### 2.0.3
+
+- Add option to open settings with press and hold on the main screen
+- Fix showing statistics bug
+
 ### 2.0.2
 
 - Add Swedish language

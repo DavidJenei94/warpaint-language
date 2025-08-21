@@ -24,14 +24,13 @@ class StatisticsView extends WatchUi.View {
         orderLanguages();
 
         // load flags of the 3 most learned languages
-        for (var i = 0; i < 3; i++) {
+        var flagsToLoad = languagesKeysDescending.size() > 3 ? 3 : languagesKeysDescending.size();
+        for (var i = 0; i < flagsToLoad; i++) {
             if (languagesWordsNo[i] > totalWordsNo * 0.12) {
                 flags[i] = WatchUi.loadResource(languages[languagesKeysDescending[i]]["flags"][0]);
-            } else if (languagesWordsNo[i] > totalWordsNo * 0.01) {
-                flags[i] = WatchUi.loadResource(languages[languagesKeysDescending[i]]["flags"][1]);
             } else {
-                break;
-            }        
+                flags[i] = WatchUi.loadResource(languages[languagesKeysDescending[i]]["flags"][1]);
+            }
         }
     }
 
