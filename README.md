@@ -18,8 +18,8 @@ In case of any issues/questions please check the following 'Warpaint Language (W
 
 ### Features:
 
-- Warpaint Language has 9 available languages: English, German, Hungarian, French, Spanish, Russian, Portuguese, Italian, Norwegian (Bokmal), Czech
-- All language consist of the 3000 most used words (90% of everyday English conversations) and 1000 phrases
+- Warpaint Language has 12 available languages: English, German, Hungarian, French, Spanish, Russian, Portuguese, Italian, Norwegian (Bokmal), Czech, Polish, Swedish
+- All language consist of the 3000 most used words (90% of everyday English conversations) and 1400 phrases
 - The Statistics page shows the distibution of the learned words of languages
 - The Total words page shows the number of learned words of each language, highligting the current one
 
@@ -30,7 +30,7 @@ In case of any issues/questions please check the following 'Warpaint Language (W
 
 ### Notes/FAQ:
 
-- You can reach the settings menu by pressing and holding on the main page on the words on touchscreens, or by pressing and holding the menu button on devices with dedicated menu button.
+- You can reach the settings menu by pressing and holding on the main page on the words on touchscreens, or by pressing and holding the menu/back button on devices with dedicated menu/back button.
 - The Warpaint Language needs bluetooth connection to a phone which connects to the internet in order to download words. It downloads 25 words/phrases at once and usually takes 1-5 seconds. After connection is established, press the Warpaint Vision logo at the bottom on touchscreens or press the 'next' button.
 - To reveal a translation you need to touch the 'REVEAL' text (white background) on touchscreens or press the 'next' button.
 - To get the next translation you need to press the Warpaint Vision logo at the bottom on touchscreens or press the 'next' button.
