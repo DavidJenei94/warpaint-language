@@ -30,7 +30,7 @@ In case of any issues/questions please check the following 'Warpaint Language (W
 
 ### Notes/FAQ:
 
-- You can reach the settings menu by pressing and holding on the main page on the words on touchscreens, or by pressing and holding the menu button on devices with dedicated menu button.
+- You can reach the settings menu by pressing and holding on the main page on the words on touchscreens, or by pressing and holding the menu/back button on devices with dedicated menu/back button.
 - The Warpaint Language needs bluetooth connection to a phone which connects to the internet in order to download words. It downloads 25 words/phrases at once and usually takes 1-5 seconds. After connection is established, press the Warpaint Vision logo at the bottom on touchscreens or press the 'next' button.
 - To reveal a translation you need to touch the 'REVEAL' text (white background) on touchscreens or press the 'next' button.
 - To get the next translation you need to press the Warpaint Vision logo at the bottom on touchscreens or press the 'next' button.
