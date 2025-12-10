@@ -52,6 +52,10 @@ Language, Translate, Translation, dictionary, Vocabulary, Learning, Studying, Mo
 
 ## What's New
 
+### 2.0.4
+
+- Add D2™ Mach 2, fēnix® 8 Pro 47mm / 51mm / MicroLED, Instinct® Crossover AMOLED, Venu® 4 41mm, Venu® 4 45mm / D2™ Air X15, Venu® X1 support
+
 ### 2.0.3
 
 - Add option to open settings with press and hold on the main screen
