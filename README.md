@@ -6,6 +6,16 @@ A Garmin Connect IQ widget with translations of 2 selected languages.
 
 Create flags in different sizes for new watch sizes - with python script.
 
+### Release export
+
+1. Update the Garmin Connect IQ SDK and download/update all Watches/Wearables profiles in SDK Manager.
+2. Keep the original signing key at `../developer_key` (or pass `-DeveloperKey` explicitly).
+3. Run `powershell -NoProfile -File scripts/build-release.ps1` from this project.
+
+The script uses the locally downloaded SDK 9.2.0 in `build/tooling/sdk-9.2.0` when present, otherwise the active SDK from Garmin's configuration. Override it with `-SdkPath` if needed. Java 17 or newer is required. It checks that every manifest device profile is installed, then exports a signed release package for every product in `manifest.xml` to `dist/warpaint-language-<version>.iq`, with a build log and SHA-256 checksum. It uses the SDK's bundled archive and signing libraries to verify the manifest signature, every binary's developer signature, the application ID and exact firmware/regional variant coverage. A failed export or verification does not replace the versioned release file. Unused `Rez.Styles` generation is disabled; the app uses its existing XML layouts and drawables.
+
+For the 466 x 466 round display, `resources-round-466x466` provides 78 x 47 flags, 39 x 23 small flags, a 109 x 109 logo, and the existing percentage-based layouts.
+
 ## Description
 
 The Warpaint Language is a unique widget that was created to help Garmin users learn the most used words and phrases in different languages for free. I used many translators but as I don't speak most of the available languages it may contain mistakes (especially with genders and with words which have noun and verb forms too). It is much appreciated if you report any issues with the translations or apply to proofread any languages. In these cases please send me a message via 'Contact Developer' option.
@@ -51,6 +61,13 @@ Phrases are from: https://www.englishspeak.com/
 Language, Translate, Translation, dictionary, Vocabulary, Learning, Studying, Motivation, Motivational, Inspirational, Information, Original, Creative, Special, Cool, Awesome
 
 ## What's New
+
+### 2.0.5
+
+- Add the complete fēnix 9 family: 43mm, 47mm / 51mm, Pro 43mm, Pro 47mm, Pro 51mm, Pro Solar 47mm and Pro Solar 51mm.
+- Add Approach S72 43mm / 47mm, D2 Mach 2 Pro, Enduro 4, Forerunner 70, Forerunner 170 and Forerunner 170 Music support.
+- Add dedicated resources for the fēnix 9 Pro 51mm's 466 x 466 display.
+- Add a repeatable signed release export script.
 
 ### 2.0.4
 
@@ -117,3 +134,7 @@ Language, Translate, Translation, dictionary, Vocabulary, Learning, Studying, Mo
 This app requires access to:
 
 - Send/receive information to/from the Internet
+
+## Local help workbook and releases
+
+Maintain the local `.xlsx` Description and device support sheets alongside the manifest and public release notes. Shared maintenance rules are in `../AGENTS.md`. Keep the Forerunner 55 stability exclusion. The linked Google Sheet is a publication copy; local updates do not change it automatically.
